@@ -1,0 +1,37 @@
+aid: amberflo
+name: Amberflo
+description: >-
+  Amberflo is a cloud metering and usage-based billing platform providing
+  real-time usage tracking and cost management for APIs and cloud services.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - FinOps
+  - Usage-Based Billing
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: amberflo:amberflo
+    name: Amberflo
+    description: >-
+      Amberflo is a cloud metering and usage-based billing platform providing
+      real-time usage tracking and cost management for APIs and cloud services.
+    humanURL: https://www.amberflo.io/
+    tags:
+      - FinOps
+    properties:
+      - type: Documentation
+        url: https://docs.amberflo.io/
+      - type: Getting Started
+        url: https://docs.amberflo.io/
+common:
+  - type: Website
+    url: https://www.amberflo.io/
+  - type: Documentation
+    url: https://docs.amberflo.io/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
