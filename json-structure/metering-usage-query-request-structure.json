@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-structure/metering-usage-query-request-structure.json",
+  "name": "UsageQueryRequest",
+  "description": "Request body for querying usage data",
+  "type": "object",
+  "properties": {
+    "meterApiName": {
+      "type": "string",
+      "description": "Name of the meter to query",
+      "example": "api-calls"
+    },
+    "startTimeInSeconds": {
+      "type": "int32",
+      "description": "Query start time in Unix seconds",
+      "example": 1718100000
+    },
+    "endTimeInSeconds": {
+      "type": "int32",
+      "description": "Query end time in Unix seconds",
+      "example": 1718186400
+    },
+    "aggregation": {
+      "type": "string",
+      "description": "Aggregation function to apply",
+      "enum": [
+        "SUM",
+        "MAX",
+        "COUNT"
+      ],
+      "example": "SUM"
+    },
+    "timeGroupingInterval": {
+      "type": "string",
+      "description": "Time interval for grouping results",
+      "enum": [
+        "HOUR",
+        "DAY",
+        "WEEK",
+        "MONTH"
+      ],
+      "example": "DAY"
+    },
+    "groupBy": {
+      "type": "array",
+      "description": "Dimensions to group results by",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "customerId"
+      ]
+    },
+    "customerFilter": {
+      "type": "array",
+      "description": "List of customer IDs to filter by",
+      "items": {
+        "type": "string"
+      }
+    },
+    "filter": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Key-value filter for dimension-based filtering"
+    }
+  },
+  "required": [
+    "meterApiName",
+    "startTimeInSeconds",
+    "endTimeInSeconds",
+    "aggregation",
+    "timeGroupingInterval"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "invoiceId": "inv-500123",
+  "customerId": "customer-123456",
+  "startTime": 1718100000,
+  "endTime": 1718186400,
+  "totalAmount": 99.5,
+  "currency": "USD",
+  "status": "PAID"
+}

@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amberflo": "https://amberflo.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "UsageRecord": "amberflo:UsageRecord",
+    "groupInfo": {
+      "@id": "amberflo:groupInfo",
+      "@type": "@id"
+    },
+    "records": {
+      "@id": "amberflo:records",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "UsageQueryResponse": "amberflo:UsageQueryResponse",
+    "clientMeters": {
+      "@id": "amberflo:clientMeters",
+      "@type": "@id"
+    },
+    "UsageQueryRequest": "amberflo:UsageQueryRequest",
+    "meterApiName": {
+      "@id": "amberflo:meterApiName",
+      "@type": "xsd:string"
+    },
+    "startTimeInSeconds": {
+      "@id": "amberflo:startTimeInSeconds",
+      "@type": "xsd:integer"
+    },
+    "endTimeInSeconds": {
+      "@id": "amberflo:endTimeInSeconds",
+      "@type": "xsd:integer"
+    },
+    "aggregation": {
+      "@id": "amberflo:aggregation",
+      "@type": "xsd:string"
+    },
+    "timeGroupingInterval": {
+      "@id": "amberflo:timeGroupingInterval",
+      "@type": "xsd:string"
+    },
+    "groupBy": {
+      "@id": "amberflo:groupBy",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "customerFilter": {
+      "@id": "amberflo:customerFilter",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "filter": {
+      "@id": "amberflo:filter",
+      "@type": "@id"
+    }
+  }
+}

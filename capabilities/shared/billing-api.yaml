@@ -1,0 +1,207 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Amberflo Billing API
+  description: Customer management, pricing plans, invoices, and prepaid orders for usage-based billing.
+  tags:
+    - Amberflo
+    - Billing
+    - Customers
+    - Invoicing
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AMBERFLO_API_KEY: AMBERFLO_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: amberflo-billing
+      baseUri: https://app.amberflo.io
+      description: Amberflo Billing API for customer and subscription management.
+      authentication:
+        type: apikey
+        key: X-API-KEY
+        value: "{{AMBERFLO_API_KEY}}"
+        placement: header
+      resources:
+        - name: customers
+          path: /customers
+          description: Customer account management
+          operations:
+            - name: list-customers
+              method: GET
+              description: List all customers
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-customer
+              method: POST
+              description: Create a new customer
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  customerId: "{{tools.customerId}}"
+                  customerName: "{{tools.customerName}}"
+                  customerEmail: "{{tools.customerEmail}}"
+                  lifecycleStage: "{{tools.lifecycleStage}}"
+            - name: update-customer
+              method: PUT
+              description: Update an existing customer
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: invoices
+          path: /payments-billing-customer-product-invoice
+          description: Customer invoice management
+          operations:
+            - name: list-invoices
+              method: GET
+              description: List invoices for a customer
+              inputParameters:
+                - name: customerId
+                  in: query
+                  type: string
+                  required: true
+                  description: Customer ID to list invoices for
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: prepaid-orders
+          path: /payments-pricing-amberflo-customer-prepaid
+          description: Prepaid credit order management
+          operations:
+            - name: create-prepaid-order
+              method: POST
+              description: Create a prepaid order for a customer
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  customerId: "{{tools.customerId}}"
+                  amount: "{{tools.amount}}"
+                  currency: "{{tools.currency}}"
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: amberflo-billing-rest
+      resources:
+        - path: /v1/customers
+          name: customers
+          description: Manage customer accounts
+          operations:
+            - method: GET
+              name: list-customers
+              description: List all customers
+              call: "amberflo-billing.list-customers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-customer
+              description: Create a new customer
+              call: "amberflo-billing.create-customer"
+              with:
+                customerId: "rest.customerId"
+                customerName: "rest.customerName"
+                customerEmail: "rest.customerEmail"
+                lifecycleStage: "rest.lifecycleStage"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/invoices
+          name: invoices
+          description: Retrieve customer invoices
+          operations:
+            - method: GET
+              name: list-invoices
+              description: List invoices for a customer
+              call: "amberflo-billing.list-invoices"
+              with:
+                customerId: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/prepaid-orders
+          name: prepaid-orders
+          description: Manage prepaid orders
+          operations:
+            - method: POST
+              name: create-prepaid-order
+              description: Create a prepaid order
+              call: "amberflo-billing.create-prepaid-order"
+              with:
+                customerId: "rest.customerId"
+                amount: "rest.amount"
+                currency: "rest.currency"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: amberflo-billing-mcp
+      transport: http
+      tools:
+        - name: list-customers
+          description: List all customer accounts in Amberflo
+          hints:
+            readOnly: true
+          call: "amberflo-billing.list-customers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-customer
+          description: Create a new customer account in Amberflo
+          hints:
+            readOnly: false
+          call: "amberflo-billing.create-customer"
+          with:
+            customerId: "tools.customerId"
+            customerName: "tools.customerName"
+            customerEmail: "tools.customerEmail"
+            lifecycleStage: "tools.lifecycleStage"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-invoices
+          description: List invoices for a specific customer
+          hints:
+            readOnly: true
+          call: "amberflo-billing.list-invoices"
+          with:
+            customerId: "tools.customerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-prepaid-order
+          description: Create a prepaid credit order for a customer
+          hints:
+            readOnly: false
+          call: "amberflo-billing.create-prepaid-order"
+          with:
+            customerId: "tools.customerId"
+            amount: "tools.amount"
+            currency: "tools.currency"
+          outputParameters:
+            - type: object
+              mapping: "$."

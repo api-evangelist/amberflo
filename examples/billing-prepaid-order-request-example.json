@@ -1,0 +1,6 @@
+{
+  "customerId": "customer-123456",
+  "amount": 500.0,
+  "currency": "USD",
+  "expirationTime": 1749686400000
+}

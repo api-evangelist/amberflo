@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-schema/metering-meter-event-schema.json",
+  "title": "MeterEvent",
+  "description": "A single meter event representing a unit of usage",
+  "type": "object",
+  "properties": {
+    "meterApiName": {
+      "type": "string",
+      "description": "The API name of the meter to ingest to",
+      "example": "api-calls"
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Unique identifier for the customer",
+      "example": "customer-123456"
+    },
+    "meterValue": {
+      "type": "number",
+      "description": "The usage amount for this event",
+      "example": 1.0
+    },
+    "meterTimeInMillis": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Event timestamp in Unix time (milliseconds)",
+      "example": 1718153645993
+    },
+    "uniqueId": {
+      "type": "string",
+      "description": "Custom identifier for event deduplication",
+      "example": "evt-a1b2c3d4"
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs for event categorization",
+      "example": {
+        "region": "us-east-1",
+        "tier": "premium"
+      }
+    },
+    "values": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "description": "Map of meterApiName to meterValue for multi-meter ingestion"
+    }
+  },
+  "required": [
+    "meterTimeInMillis"
+  ]
+}

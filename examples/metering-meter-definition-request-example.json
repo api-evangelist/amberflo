@@ -1,0 +1,8 @@
+{
+  "meterApiName": "api-calls",
+  "displayName": "API Calls",
+  "type": "SUM_OF_ALL_USAGE",
+  "dimensions": [
+    "sample-value"
+  ]
+}

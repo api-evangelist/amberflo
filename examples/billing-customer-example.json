@@ -1,0 +1,15 @@
+{
+  "createTime": 1718153645993,
+  "updateTime": 1718153645993,
+  "deleteTime": 1718153645993,
+  "customerId": "customer-123456",
+  "customerName": "Acme Corp",
+  "customerEmail": "billing@acme.com",
+  "description": "Enterprise customer account for Acme Corporation",
+  "enabled": false,
+  "test": false,
+  "lifecycleStage": "ACTIVE",
+  "deactivateTimeStamp": 1718153645993,
+  "traits": {},
+  "address": "sample-value"
+}

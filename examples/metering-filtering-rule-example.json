@@ -1,0 +1,10 @@
+{
+  "meterApiName": "api-calls",
+  "ruleId": "rule-a1b2c3",
+  "dimensionName": "region",
+  "dimensionValues": [
+    "us-east-1",
+    "eu-west-1"
+  ],
+  "action": "INCLUDE"
+}

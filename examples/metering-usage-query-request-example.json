@@ -1,0 +1,14 @@
+{
+  "meterApiName": "api-calls",
+  "startTimeInSeconds": 1718100000,
+  "endTimeInSeconds": 1718186400,
+  "aggregation": "SUM",
+  "timeGroupingInterval": "DAY",
+  "groupBy": [
+    "customerId"
+  ],
+  "customerFilter": [
+    "sample-value"
+  ],
+  "filter": {}
+}

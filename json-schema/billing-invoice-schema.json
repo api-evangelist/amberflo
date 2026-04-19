@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-schema/billing-invoice-schema.json",
+  "title": "Invoice",
+  "description": "A customer invoice",
+  "type": "object",
+  "properties": {
+    "invoiceId": {
+      "type": "string",
+      "description": "Unique invoice identifier",
+      "example": "inv-500123"
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Customer identifier",
+      "example": "customer-123456"
+    },
+    "startTime": {
+      "type": "integer",
+      "description": "Invoice period start in Unix seconds",
+      "example": 1718100000
+    },
+    "endTime": {
+      "type": "integer",
+      "description": "Invoice period end in Unix seconds",
+      "example": 1718186400
+    },
+    "totalAmount": {
+      "type": "number",
+      "description": "Total invoice amount",
+      "example": 99.5
+    },
+    "currency": {
+      "type": "string",
+      "description": "Invoice currency code",
+      "example": "USD"
+    },
+    "status": {
+      "type": "string",
+      "description": "Invoice payment status",
+      "enum": [
+        "DRAFT",
+        "PENDING",
+        "PAID",
+        "VOID"
+      ],
+      "example": "PAID"
+    }
+  }
+}

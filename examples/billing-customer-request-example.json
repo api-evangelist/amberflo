@@ -1,0 +1,10 @@
+{
+  "customerId": "customer-123456",
+  "customerName": "Acme Corp",
+  "customerEmail": "billing@acme.com",
+  "description": "Usage tracking for production workloads",
+  "test": false,
+  "lifecycleStage": "ACTIVE",
+  "traits": {},
+  "address": "sample-value"
+}

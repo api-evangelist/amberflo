@@ -1,0 +1,38 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amberflo": "https://amberflo.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Invoice": "amberflo:Invoice",
+    "invoiceId": {
+      "@id": "amberflo:invoiceId",
+      "@type": "xsd:string"
+    },
+    "customerId": {
+      "@id": "amberflo:customerId",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "amberflo:startTime",
+      "@type": "xsd:integer"
+    },
+    "endTime": {
+      "@id": "amberflo:endTime",
+      "@type": "xsd:integer"
+    },
+    "totalAmount": {
+      "@id": "amberflo:totalAmount",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "amberflo:currency",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "amberflo:status",
+      "@type": "xsd:string"
+    }
+  }
+}

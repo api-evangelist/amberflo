@@ -1,0 +1,10 @@
+{
+  "meterApiName": "api-calls",
+  "displayName": "API Calls",
+  "label": "api-calls",
+  "type": "SUM_OF_ALL_USAGE",
+  "meterTimeInMillis": 1718153645993,
+  "dimensions": [
+    "sample-value"
+  ]
+}

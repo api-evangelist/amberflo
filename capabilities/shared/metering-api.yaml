@@ -1,0 +1,217 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Amberflo Metering API
+  description: Meter definition management, event ingestion, and usage queries for usage-based billing.
+  tags:
+    - Amberflo
+    - Metering
+    - Event Ingestion
+    - Usage Tracking
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AMBERFLO_API_KEY: AMBERFLO_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: amberflo-metering
+      baseUri: https://app.amberflo.io
+      description: Amberflo Metering API for event ingestion and usage queries.
+      authentication:
+        type: apikey
+        key: X-API-KEY
+        value: "{{AMBERFLO_API_KEY}}"
+        placement: header
+      resources:
+        - name: meter-definitions
+          path: /meter-definition
+          description: Meter definition management
+          operations:
+            - name: list-meter-definitions
+              method: GET
+              description: List all meter definitions
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-meter-definition
+              method: POST
+              description: Create a new meter definition
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  meterApiName: "{{tools.meterApiName}}"
+                  displayName: "{{tools.displayName}}"
+                  type: "{{tools.type}}"
+            - name: update-meter-definition
+              method: PUT
+              description: Update an existing meter definition
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: event-ingestion
+          path: /ingest
+          description: Meter event ingestion endpoint
+          operations:
+            - name: ingest-meter-events
+              method: POST
+              description: Ingest one or more meter events
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  meterApiName: "{{tools.meterApiName}}"
+                  customerId: "{{tools.customerId}}"
+                  meterValue: "{{tools.meterValue}}"
+                  meterTimeInMillis: "{{tools.meterTimeInMillis}}"
+        - name: usage-queries
+          path: /usage
+          description: Usage data query endpoint
+          operations:
+            - name: query-usage
+              method: POST
+              description: Query aggregated usage data
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  meterApiName: "{{tools.meterApiName}}"
+                  startTimeInSeconds: "{{tools.startTimeInSeconds}}"
+                  endTimeInSeconds: "{{tools.endTimeInSeconds}}"
+                  aggregation: "{{tools.aggregation}}"
+                  timeGroupingInterval: "{{tools.timeGroupingInterval}}"
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: amberflo-metering-rest
+      resources:
+        - path: /v1/meter-definitions
+          name: meter-definitions
+          description: Manage meter definitions
+          operations:
+            - method: GET
+              name: list-meter-definitions
+              description: List all meter definitions
+              call: "amberflo-metering.list-meter-definitions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-meter-definition
+              description: Create a new meter definition
+              call: "amberflo-metering.create-meter-definition"
+              with:
+                meterApiName: "rest.meterApiName"
+                displayName: "rest.displayName"
+                type: "rest.type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/events
+          name: event-ingestion
+          description: Ingest meter events
+          operations:
+            - method: POST
+              name: ingest-meter-events
+              description: Ingest meter events
+              call: "amberflo-metering.ingest-meter-events"
+              with:
+                meterApiName: "rest.meterApiName"
+                customerId: "rest.customerId"
+                meterValue: "rest.meterValue"
+                meterTimeInMillis: "rest.meterTimeInMillis"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/usage
+          name: usage-queries
+          description: Query usage data
+          operations:
+            - method: POST
+              name: query-usage
+              description: Query aggregated usage data
+              call: "amberflo-metering.query-usage"
+              with:
+                meterApiName: "rest.meterApiName"
+                startTimeInSeconds: "rest.startTimeInSeconds"
+                endTimeInSeconds: "rest.endTimeInSeconds"
+                aggregation: "rest.aggregation"
+                timeGroupingInterval: "rest.timeGroupingInterval"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: amberflo-metering-mcp
+      transport: http
+      tools:
+        - name: list-meter-definitions
+          description: List all meter definitions configured in the account
+          hints:
+            readOnly: true
+          call: "amberflo-metering.list-meter-definitions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-meter-definition
+          description: Create a new meter definition for usage tracking
+          hints:
+            readOnly: false
+          call: "amberflo-metering.create-meter-definition"
+          with:
+            meterApiName: "tools.meterApiName"
+            displayName: "tools.displayName"
+            type: "tools.type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: ingest-meter-events
+          description: Ingest one or more meter events for usage tracking
+          hints:
+            readOnly: false
+          call: "amberflo-metering.ingest-meter-events"
+          with:
+            meterApiName: "tools.meterApiName"
+            customerId: "tools.customerId"
+            meterValue: "tools.meterValue"
+            meterTimeInMillis: "tools.meterTimeInMillis"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: query-usage
+          description: Query aggregated usage data for meters
+          hints:
+            readOnly: true
+          call: "amberflo-metering.query-usage"
+          with:
+            meterApiName: "tools.meterApiName"
+            startTimeInSeconds: "tools.startTimeInSeconds"
+            endTimeInSeconds: "tools.endTimeInSeconds"
+            aggregation: "tools.aggregation"
+            timeGroupingInterval: "tools.timeGroupingInterval"
+          outputParameters:
+            - type: object
+              mapping: "$."

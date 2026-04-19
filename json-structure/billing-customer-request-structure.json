@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-structure/billing-customer-request-structure.json",
+  "name": "CustomerRequest",
+  "description": "Request body for creating or updating a customer",
+  "type": "object",
+  "properties": {
+    "customerId": {
+      "type": "string",
+      "description": "Unique customer identifier",
+      "example": "customer-123456"
+    },
+    "customerName": {
+      "type": "string",
+      "description": "Customer display name",
+      "example": "Acme Corp"
+    },
+    "customerEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "Customer email address",
+      "example": "billing@acme.com"
+    },
+    "description": {
+      "type": "string",
+      "description": "Customer description"
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Marks customer as test",
+      "example": false
+    },
+    "lifecycleStage": {
+      "type": "string",
+      "description": "Lifecycle stage",
+      "enum": [
+        "ONBOARDING",
+        "TRAIL",
+        "ACTIVE",
+        "OFFBOARDED"
+      ],
+      "example": "ACTIVE"
+    },
+    "traits": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Custom metadata"
+    },
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    }
+  },
+  "required": [
+    "customerId",
+    "customerName"
+  ]
+}

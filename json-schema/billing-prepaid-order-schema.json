@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-schema/billing-prepaid-order-schema.json",
+  "title": "PrepaidOrder",
+  "description": "A prepaid credit order for a customer",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Unique prepaid order identifier",
+      "example": "order-a1b2c3d4"
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Customer identifier",
+      "example": "customer-123456"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Prepaid credit amount",
+      "example": 500.0
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency code",
+      "example": "USD"
+    },
+    "createTime": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Creation timestamp",
+      "example": 1718153645993
+    },
+    "expirationTime": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Expiration timestamp in Unix milliseconds",
+      "example": 1749686400000
+    }
+  }
+}

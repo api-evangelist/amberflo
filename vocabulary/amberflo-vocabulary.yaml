@@ -1,0 +1,338 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: Amberflo
+  description: >-
+    Vocabulary mapping operational (OpenAPI) and capability (Naftiko) dimensions
+    for the Amberflo metering, billing, and AI cost management platform.
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: amberflo-metering
+      name: Amberflo Metering API
+      version: "1.0.0"
+      baseUrl: https://app.amberflo.io
+      status: active
+    - namespace: amberflo-billing
+      name: Amberflo Billing API
+      version: "1.0.0"
+      baseUrl: https://app.amberflo.io
+      status: active
+    - namespace: amberflo-cost-tracking
+      name: Amberflo Cost Tracking API
+      version: "1.0.0"
+      baseUrl: https://app.amberflo.io
+      status: active
+    - namespace: amberflo-ai-gateway
+      name: Amberflo AI Gateway API
+      version: "1.0.0"
+      baseUrl: https://app.amberflo.io
+      status: active
+
+  resources:
+    - name: meter-definitions
+      apis:
+        - amberflo-metering
+      actions:
+        - list
+        - create
+        - update
+        - get
+        - delete
+    - name: events
+      apis:
+        - amberflo-metering
+      actions:
+        - ingest
+    - name: usage
+      apis:
+        - amberflo-metering
+      actions:
+        - query
+    - name: filtering-rules
+      apis:
+        - amberflo-metering
+      actions:
+        - list
+        - create
+    - name: customers
+      apis:
+        - amberflo-billing
+      actions:
+        - list
+        - create
+        - update
+        - get
+        - delete
+        - search
+    - name: pricing-plans
+      apis:
+        - amberflo-billing
+      actions:
+        - create
+        - assign
+        - cancel
+    - name: invoices
+      apis:
+        - amberflo-billing
+      actions:
+        - list
+        - get
+    - name: prepaid-orders
+      apis:
+        - amberflo-billing
+      actions:
+        - create
+        - extend
+    - name: budgets
+      apis:
+        - amberflo-cost-tracking
+      actions:
+        - create
+        - list
+        - update
+
+  actions:
+    - name: ingest
+      httpMethod: POST
+      pattern: write
+      description: Ingest usage events into the metering system
+    - name: query
+      httpMethod: POST
+      pattern: query
+      description: Query aggregated usage or cost data
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: List resources in a collection
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: Retrieve a single resource by identifier
+    - name: create
+      httpMethod: POST
+      pattern: write
+      description: Create a new resource
+    - name: update
+      httpMethod: PUT
+      pattern: write
+      description: Update an existing resource
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+      description: Delete a resource
+    - name: assign
+      httpMethod: POST
+      pattern: write
+      description: Assign a plan or configuration to a resource
+    - name: search
+      httpMethod: GET
+      pattern: query
+      description: Search and page through resources
+
+  schemas:
+    core:
+      - name: MeterEvent
+        description: A single meter event for usage tracking
+        keyProperties:
+          - meterApiName
+          - customerId
+          - meterValue
+          - meterTimeInMillis
+      - name: MeterDefinition
+        description: Defines how usage events are tracked and aggregated
+        keyProperties:
+          - meterApiName
+          - displayName
+          - type
+    billing:
+      - name: Customer
+        description: A customer account in Amberflo
+        keyProperties:
+          - customerId
+          - customerName
+          - lifecycleStage
+      - name: Invoice
+        description: A customer billing invoice
+        keyProperties:
+          - invoiceId
+          - customerId
+          - totalAmount
+          - status
+      - name: PrepaidOrder
+        description: A prepaid credit order for a customer
+        keyProperties:
+          - orderId
+          - customerId
+          - amount
+
+  parameters:
+    pagination:
+      - name: page
+        description: Page number for paginated results
+      - name: limit
+        description: Number of results per page
+    identifiers:
+      - name: customerId
+        description: Unique customer identifier
+      - name: meterApiName
+        description: Unique meter API name
+    filters:
+      - name: customerFilter
+        description: Filter usage results by customer IDs
+      - name: filter
+        description: Dimension-based event filter
+    time:
+      - name: startTimeInSeconds
+        description: Query start time in Unix seconds
+      - name: endTimeInSeconds
+        description: Query end time in Unix seconds
+      - name: meterTimeInMillis
+        description: Event timestamp in Unix milliseconds
+
+  enums:
+    meter-types:
+      - SUM_OF_ALL_USAGE
+      - MAX_IN_PERIOD
+      - UNIQUE_CUSTOMERS_COUNT
+    time-grouping:
+      - HOUR
+      - DAY
+      - WEEK
+      - MONTH
+    aggregations:
+      - SUM
+      - MAX
+      - COUNT
+    lifecycle-stages:
+      - ONBOARDING
+      - TRAIL
+      - ACTIVE
+      - OFFBOARDED
+    filtering-actions:
+      - INCLUDE
+      - EXCLUDE
+
+  authentication:
+    schemes:
+      - type: apiKey
+        name: X-API-KEY
+        in: header
+        description: API key from Amberflo Settings > Account Configuration > API Keys
+    notes: Each environment (production, staging) has its own API key
+
+capability:
+  workflows:
+    - name: Usage-Based Monetization
+      file: capabilities/usage-based-monetization.yaml
+      description: End-to-end workflow combining metering and billing APIs
+      apisCombined:
+        - amberflo-metering
+        - amberflo-billing
+      toolCount: 8
+      personas:
+        - Product Manager
+        - Finance Team
+        - API Developer
+
+  personas:
+    - id: product-manager
+      name: Product Manager
+      description: Manages pricing models and billing configuration
+      workflows:
+        - Usage-Based Monetization
+    - id: finance-team
+      name: Finance Team
+      description: Monitors revenue, invoices, and billing analytics
+      workflows:
+        - Usage-Based Monetization
+    - id: api-developer
+      name: API Developer
+      description: Integrates metering SDK and ingests usage events
+      workflows:
+        - Usage-Based Monetization
+
+  domains:
+    - name: Metering
+      description: Usage event tracking and aggregation
+      resources:
+        - meter-definitions
+        - events
+        - usage
+        - filtering-rules
+    - name: Billing
+      description: Customer billing and subscription management
+      resources:
+        - customers
+        - pricing-plans
+        - invoices
+        - prepaid-orders
+    - name: Cost Management
+      description: AI and cloud cost governance
+      resources:
+        - budgets
+
+  namespaces:
+    consumed:
+      - amberflo-metering
+      - amberflo-billing
+    restExposed:
+      - name: amberflo-monetization-api
+        port: 8080
+    mcpExposed:
+      - name: amberflo-monetization-mcp
+        port: 9090
+
+  binds:
+    - name: AMBERFLO_API_KEY
+      description: Amberflo API key for authentication
+      workflows:
+        - Usage-Based Monetization
+
+crossReference:
+  - resource: meter-definitions
+    operations:
+      - listMeterDefinitions
+      - createMeterDefinition
+      - updateMeterDefinition
+      - getMeterDefinitionById
+      - deleteMeterDefinition
+    workflows:
+      - Usage-Based Monetization
+    personas:
+      - API Developer
+  - resource: events
+    operations:
+      - ingestMeterEvents
+    workflows:
+      - Usage-Based Monetization
+    personas:
+      - API Developer
+  - resource: usage
+    operations:
+      - queryUsage
+    workflows:
+      - Usage-Based Monetization
+    personas:
+      - Product Manager
+      - Finance Team
+  - resource: customers
+    operations:
+      - listCustomers
+      - createCustomer
+      - updateCustomer
+      - getCustomerById
+      - deleteCustomer
+    workflows:
+      - Usage-Based Monetization
+    personas:
+      - Finance Team
+  - resource: invoices
+    operations:
+      - listInvoices
+    workflows:
+      - Usage-Based Monetization
+    personas:
+      - Finance Team

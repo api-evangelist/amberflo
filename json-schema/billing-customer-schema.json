@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-schema/billing-customer-schema.json",
+  "title": "Customer",
+  "description": "A customer account in Amberflo",
+  "type": "object",
+  "properties": {
+    "createTime": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Creation timestamp in Unix milliseconds",
+      "example": 1718153645993
+    },
+    "updateTime": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Last update timestamp in Unix milliseconds",
+      "example": 1718153645993
+    },
+    "deleteTime": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Deletion timestamp in Unix milliseconds",
+      "example": 1718153645993
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Unique customer identifier from your system",
+      "example": "customer-123456"
+    },
+    "customerName": {
+      "type": "string",
+      "description": "Customer display name",
+      "example": "Acme Corp"
+    },
+    "customerEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "Customer contact email",
+      "example": "billing@acme.com"
+    },
+    "description": {
+      "type": "string",
+      "description": "Customer description",
+      "example": "Enterprise customer account for Acme Corporation"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Deprecated \u2014 use lifecycleStage instead",
+      "deprecated": true
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Whether this is a test customer account",
+      "example": false
+    },
+    "lifecycleStage": {
+      "type": "string",
+      "description": "Customer lifecycle stage",
+      "enum": [
+        "ONBOARDING",
+        "TRAIL",
+        "ACTIVE",
+        "OFFBOARDED"
+      ],
+      "example": "ACTIVE"
+    },
+    "deactivateTimeStamp": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Last deactivation timestamp in Unix milliseconds"
+    },
+    "traits": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Custom metadata for external system integration"
+    },
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    }
+  },
+  "required": [
+    "customerId",
+    "customerName"
+  ]
+}

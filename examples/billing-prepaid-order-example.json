@@ -1,0 +1,8 @@
+{
+  "orderId": "order-a1b2c3d4",
+  "customerId": "customer-123456",
+  "amount": 500.0,
+  "currency": "USD",
+  "createTime": 1718153645993,
+  "expirationTime": 1749686400000
+}

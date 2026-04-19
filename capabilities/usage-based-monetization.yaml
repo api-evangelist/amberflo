@@ -1,0 +1,242 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Amberflo Usage-Based Monetization
+  description: >-
+    Unified workflow for API monetization teams combining metering and billing APIs.
+    Enables end-to-end usage tracking, customer management, and billing automation
+    for product and finance teams.
+  tags:
+    - Amberflo
+    - Usage-Based Billing
+    - Metering
+    - Monetization
+    - FinOps
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AMBERFLO_API_KEY: AMBERFLO_API_KEY
+
+capability:
+  consumes:
+    - import: amberflo-metering
+      location: ./shared/metering-api.yaml
+    - import: amberflo-billing
+      location: ./shared/billing-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: amberflo-monetization-api
+      description: Unified REST API for usage-based monetization workflows.
+      resources:
+        - path: /v1/meter-definitions
+          name: meter-definitions
+          description: Manage meter definitions for tracking usage
+          operations:
+            - method: GET
+              name: list-meter-definitions
+              description: List all meter definitions
+              call: "amberflo-metering.list-meter-definitions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-meter-definition
+              description: Create a new meter definition
+              call: "amberflo-metering.create-meter-definition"
+              with:
+                meterApiName: "rest.meterApiName"
+                displayName: "rest.displayName"
+                type: "rest.type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/events
+          name: events
+          description: Ingest meter events
+          operations:
+            - method: POST
+              name: ingest-events
+              description: Ingest usage events for metering
+              call: "amberflo-metering.ingest-meter-events"
+              with:
+                meterApiName: "rest.meterApiName"
+                customerId: "rest.customerId"
+                meterValue: "rest.meterValue"
+                meterTimeInMillis: "rest.meterTimeInMillis"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/usage
+          name: usage
+          description: Query usage data
+          operations:
+            - method: POST
+              name: query-usage
+              description: Query aggregated usage data
+              call: "amberflo-metering.query-usage"
+              with:
+                meterApiName: "rest.meterApiName"
+                startTimeInSeconds: "rest.startTimeInSeconds"
+                endTimeInSeconds: "rest.endTimeInSeconds"
+                aggregation: "rest.aggregation"
+                timeGroupingInterval: "rest.timeGroupingInterval"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers
+          name: customers
+          description: Manage customer accounts
+          operations:
+            - method: GET
+              name: list-customers
+              description: List all customers
+              call: "amberflo-billing.list-customers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-customer
+              description: Create a new customer account
+              call: "amberflo-billing.create-customer"
+              with:
+                customerId: "rest.customerId"
+                customerName: "rest.customerName"
+                customerEmail: "rest.customerEmail"
+                lifecycleStage: "rest.lifecycleStage"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/invoices
+          name: invoices
+          description: Retrieve customer invoices
+          operations:
+            - method: GET
+              name: list-invoices
+              description: List invoices for a customer
+              call: "amberflo-billing.list-invoices"
+              with:
+                customerId: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/prepaid-orders
+          name: prepaid-orders
+          description: Manage prepaid credit orders
+          operations:
+            - method: POST
+              name: create-prepaid-order
+              description: Create a prepaid order for a customer
+              call: "amberflo-billing.create-prepaid-order"
+              with:
+                customerId: "rest.customerId"
+                amount: "rest.amount"
+                currency: "rest.currency"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: amberflo-monetization-mcp
+      transport: http
+      description: MCP server for AI-assisted usage-based monetization and billing automation.
+      tools:
+        - name: list-meter-definitions
+          description: List all meter definitions for usage tracking
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amberflo-metering.list-meter-definitions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-meter-definition
+          description: Create a new meter definition to track usage events
+          hints:
+            readOnly: false
+          call: "amberflo-metering.create-meter-definition"
+          with:
+            meterApiName: "tools.meterApiName"
+            displayName: "tools.displayName"
+            type: "tools.type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: ingest-events
+          description: Ingest meter events to track usage
+          hints:
+            readOnly: false
+          call: "amberflo-metering.ingest-meter-events"
+          with:
+            meterApiName: "tools.meterApiName"
+            customerId: "tools.customerId"
+            meterValue: "tools.meterValue"
+            meterTimeInMillis: "tools.meterTimeInMillis"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: query-usage
+          description: Query aggregated usage data for a meter
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amberflo-metering.query-usage"
+          with:
+            meterApiName: "tools.meterApiName"
+            startTimeInSeconds: "tools.startTimeInSeconds"
+            endTimeInSeconds: "tools.endTimeInSeconds"
+            aggregation: "tools.aggregation"
+            timeGroupingInterval: "tools.timeGroupingInterval"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-customers
+          description: List all customer accounts in Amberflo
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amberflo-billing.list-customers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-customer
+          description: Create a new customer account in Amberflo
+          hints:
+            readOnly: false
+          call: "amberflo-billing.create-customer"
+          with:
+            customerId: "tools.customerId"
+            customerName: "tools.customerName"
+            customerEmail: "tools.customerEmail"
+            lifecycleStage: "tools.lifecycleStage"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-invoices
+          description: List invoices for a specific customer
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amberflo-billing.list-invoices"
+          with:
+            customerId: "tools.customerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-prepaid-order
+          description: Create a prepaid credit order for a customer
+          hints:
+            readOnly: false
+          call: "amberflo-billing.create-prepaid-order"
+          with:
+            customerId: "tools.customerId"
+            amount: "tools.amount"
+            currency: "tools.currency"
+          outputParameters:
+            - type: object
+              mapping: "$."

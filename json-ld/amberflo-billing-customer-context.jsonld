@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amberflo": "https://amberflo.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Customer": "amberflo:Customer",
+    "createTime": "schema:dateCreated",
+    "updateTime": "schema:dateModified",
+    "deleteTime": {
+      "@id": "amberflo:deleteTime",
+      "@type": "xsd:integer"
+    },
+    "customerId": {
+      "@id": "amberflo:customerId",
+      "@type": "xsd:string"
+    },
+    "customerName": {
+      "@id": "amberflo:customerName",
+      "@type": "xsd:string"
+    },
+    "customerEmail": {
+      "@id": "amberflo:customerEmail",
+      "@type": "xsd:string"
+    },
+    "description": "schema:description",
+    "enabled": {
+      "@id": "amberflo:enabled",
+      "@type": "xsd:boolean"
+    },
+    "test": {
+      "@id": "amberflo:test",
+      "@type": "xsd:boolean"
+    },
+    "lifecycleStage": {
+      "@id": "amberflo:lifecycleStage",
+      "@type": "xsd:string"
+    },
+    "deactivateTimeStamp": {
+      "@id": "amberflo:deactivateTimeStamp",
+      "@type": "xsd:integer"
+    },
+    "traits": {
+      "@id": "amberflo:traits",
+      "@type": "@id"
+    },
+    "address": {
+      "@id": "amberflo:address",
+      "@type": "xsd:string"
+    },
+    "CustomerRequest": "amberflo:CustomerRequest"
+  }
+}

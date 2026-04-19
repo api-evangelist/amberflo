@@ -1,0 +1,32 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amberflo": "https://amberflo.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "PrepaidOrderRequest": "amberflo:PrepaidOrderRequest",
+    "customerId": {
+      "@id": "amberflo:customerId",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "amberflo:amount",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "amberflo:currency",
+      "@type": "xsd:string"
+    },
+    "expirationTime": {
+      "@id": "amberflo:expirationTime",
+      "@type": "xsd:integer"
+    },
+    "PrepaidOrder": "amberflo:PrepaidOrder",
+    "orderId": {
+      "@id": "amberflo:orderId",
+      "@type": "xsd:string"
+    },
+    "createTime": "schema:dateCreated"
+  }
+}

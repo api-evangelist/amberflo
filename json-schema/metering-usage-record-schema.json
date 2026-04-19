@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-schema/metering-usage-record-schema.json",
+  "title": "UsageRecord",
+  "description": "A usage record grouped by dimension values",
+  "type": "object",
+  "properties": {
+    "groupInfo": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Group dimension values for this record"
+    },
+    "records": {
+      "type": "array",
+      "description": "Time-series usage data points",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

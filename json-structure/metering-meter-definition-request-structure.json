@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-structure/metering-meter-definition-request-structure.json",
+  "name": "MeterDefinitionRequest",
+  "description": "Request body for creating a meter definition",
+  "type": "object",
+  "properties": {
+    "meterApiName": {
+      "type": "string",
+      "description": "Unique API name for the meter",
+      "example": "api-calls"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name",
+      "example": "API Calls"
+    },
+    "type": {
+      "type": "string",
+      "description": "Aggregation type for the meter",
+      "enum": [
+        "SUM_OF_ALL_USAGE",
+        "MAX_IN_PERIOD",
+        "UNIQUE_CUSTOMERS_COUNT"
+      ],
+      "example": "SUM_OF_ALL_USAGE"
+    },
+    "dimensions": {
+      "type": "array",
+      "description": "Dimension names for this meter",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "meterApiName",
+    "displayName",
+    "type"
+  ]
+}

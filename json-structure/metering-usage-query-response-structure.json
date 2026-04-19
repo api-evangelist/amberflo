@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-structure/metering-usage-query-response-structure.json",
+  "name": "UsageQueryResponse",
+  "description": "Response from a usage data query",
+  "type": "object",
+  "properties": {
+    "clientMeters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/UsageRecord"
+        }
+      },
+      "description": "Map of meter API name to usage records"
+    }
+  }
+}

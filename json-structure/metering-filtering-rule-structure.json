@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/json-structure/metering-filtering-rule-structure.json",
+  "name": "FilteringRule",
+  "description": "A rule for filtering meter events before ingestion",
+  "type": "object",
+  "properties": {
+    "meterApiName": {
+      "type": "string",
+      "description": "The meter API name this rule applies to",
+      "example": "api-calls"
+    },
+    "ruleId": {
+      "type": "string",
+      "description": "Unique identifier for this filtering rule",
+      "example": "rule-a1b2c3"
+    },
+    "dimensionName": {
+      "type": "string",
+      "description": "The dimension to filter on",
+      "example": "region"
+    },
+    "dimensionValues": {
+      "type": "array",
+      "description": "Values to include or exclude",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "us-east-1",
+        "eu-west-1"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "description": "Whether to include or exclude matching events",
+      "enum": [
+        "INCLUDE",
+        "EXCLUDE"
+      ],
+      "example": "INCLUDE"
+    }
+  },
+  "required": [
+    "meterApiName"
+  ]
+}

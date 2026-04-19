@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amberflo": "https://amberflo.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "PricingPlanAssignment": "amberflo:PricingPlanAssignment",
+    "customerId": {
+      "@id": "amberflo:customerId",
+      "@type": "xsd:string"
+    },
+    "productId": {
+      "@id": "amberflo:productId",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "amberflo:startTime",
+      "@type": "xsd:integer"
+    }
+  }
+}

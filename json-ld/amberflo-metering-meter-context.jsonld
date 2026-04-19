@@ -1,0 +1,53 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amberflo": "https://amberflo.io/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "MeterEvent": "amberflo:MeterEvent",
+    "meterApiName": {
+      "@id": "amberflo:meterApiName",
+      "@type": "xsd:string"
+    },
+    "customerId": {
+      "@id": "amberflo:customerId",
+      "@type": "xsd:string"
+    },
+    "meterValue": {
+      "@id": "amberflo:meterValue",
+      "@type": "xsd:decimal"
+    },
+    "meterTimeInMillis": {
+      "@id": "amberflo:meterTimeInMillis",
+      "@type": "xsd:integer"
+    },
+    "uniqueId": {
+      "@id": "amberflo:uniqueId",
+      "@type": "xsd:string"
+    },
+    "dimensions": {
+      "@id": "amberflo:dimensions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "values": {
+      "@id": "amberflo:values",
+      "@type": "@id"
+    },
+    "MeterDefinition": "amberflo:MeterDefinition",
+    "displayName": {
+      "@id": "amberflo:displayName",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "amberflo:label",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "amberflo:type",
+      "@type": "xsd:string"
+    },
+    "MeterDefinitionRequest": "amberflo:MeterDefinitionRequest"
+  }
+}

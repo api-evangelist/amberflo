@@ -1,0 +1,12 @@
+{
+  "meterApiName": "api-calls",
+  "customerId": "customer-123456",
+  "meterValue": 1.0,
+  "meterTimeInMillis": 1718153645993,
+  "uniqueId": "evt-a1b2c3d4",
+  "dimensions": {
+    "region": "us-east-1",
+    "tier": "premium"
+  },
+  "values": {}
+}
