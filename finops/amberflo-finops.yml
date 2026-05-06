@@ -1,160 +1,96 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Amberflo
+providerId: amberflo
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - FinOps
+  - FOCUS
+  - Usage-Based Billing
+  - Metering
+  - Amberflo
+  - Cost Management
+description: 'FOCUS-aligned FinOps for Amberflo: tiered monthly subscription (Startups, Growth, Enterprise)
+  with included pools of billing volume and meter events plus overage at 0.54% on additional billing
+  volume and $5 per additional 10,000 meter events. Amberflo itself is a metering-and-billing platform,
+  so its FinOps posture mirrors the SaaS subscription archetype.'
+sources:
+  - https://www.amberflo.io/pricing
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Amberflo
-providerId: amberflo
-publisherName: Amberflo
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Usage-Based Billing
-  - Metering
-  - FinOps
-  - AI Cost Management
-  - Billing
-  - Monetization
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Amberflo API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Amberflo.io, Inc.
+serviceCategory: FinOps / Metering and Billing
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Tiered Subscription + Overage
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Credit
 focusColumns:
   ServiceName: Amberflo
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Business Applications
+  ServiceSubcategory: Metering and Billing
   ProviderName: Amberflo
-  PublisherName: Amberflo
-  InvoiceIssuerName: Amberflo
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Amberflo.io, Inc.
+  InvoiceIssuerName: Amberflo.io, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: subscription_months
+    unit: month
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
       - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+  - name: meter_events_ingested
+    unit: event
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - account
+      - meter_name
+  - name: billing_volume_processed
+    unit: USD
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Amberflo Metering API
-    baseURL: https://app.amberflo.io
-    tags:
-      - Metering
-      - Event Ingestion
-      - Usage Tracking
-    serviceName: Amberflo Metering API
-    serviceCategory: API
-  - name: Amberflo Billing API
-    baseURL: https://app.amberflo.io
-    tags:
-      - Billing
-      - Customers
-      - Invoicing
-      - Pricing Plans
-    serviceName: Amberflo Billing API
-    serviceCategory: API
-  - name: Amberflo Cost Tracking API
-    baseURL: https://app.amberflo.io
-    tags:
-      - Cost Tracking
-      - FinOps
-      - Cloud Cost Management
-      - Budgets
-    serviceName: Amberflo Cost Tracking API
-    serviceCategory: API
-  - name: Amberflo AI Gateway API
-    baseURL: https://app.amberflo.io
-    tags:
-      - AI Gateway
-      - LLM
-      - Model Routing
-      - AI Cost Management
-    serviceName: Amberflo AI Gateway API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - account
+      - product
+  - name: overage_events
+    unit: event
+    aggregation: sum
+    dimensions:
+      - account
+  - name: overage_billing_volume
+    unit: USD
+    aggregation: sum
+    dimensions:
+      - account
+principles:
+  - name: Visibility
+    description: Use Amberflo's own usage and revenue dashboards (eat-your-own-dogfood); export billable
+      events to your data warehouse and reconcile against the Amberflo invoice.
+  - name: Allocation
+    description: Tag meters and customers with product, environment, and team; chargeback subscription
+      cost via meter-event share.
+  - name: Optimization
+    description: Right-size the Growth tier (250K vs 500K vs 1M request bracket) to your actual ingest
+      volume; batch meter events to minimize request count; consolidate redundant meters.
+  - name: Accountability
+    description: Owner of monetization/finance team owns the Amberflo subscription; alert on overage thresholds
+      and review monthly billing-volume utilization against tier inclusions.
 maintainers:
-  - FN: Kin Lane
+  - name: Kin Lane
     email: kin@apievangelist.com
+    url: https://apievangelist.com
+  - name: Amberflo
+    email: support@amberflo.io
+    url: https://www.amberflo.io

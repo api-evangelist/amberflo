@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Amberflo
 providerId: amberflo
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Usage-Based Billing
   - Metering
@@ -12,147 +13,188 @@ tags:
   - AI Cost Management
   - Billing
   - Monetization
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Amberflo prices its usage-based billing platform on a tiered subscription that scales with
+  monthly billing volume processed and metered events ingested. Free 30-day trial; paid tiers from $99/mo
+  Startups to $599+/mo Growth, with $1M+ billing volume requiring custom Enterprise pricing. Overage
+  applies to billing volume and meter events beyond the included pool.
+sources:
+  - https://www.amberflo.io/pricing
 plans:
-  - id: amberflo-free
-    name: Free
+  - id: amberflo-trial
+    name: Free Trial
     type: freemium
-    description: Free entry tier for the Amberflo API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: 30-day evaluation across the platform.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Trial duration
+        name: trial_days
         type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
+        metric: day
+        limit: 30
+        timeFrame: usage
         geo: global
-        domains:
-          - https://app.amberflo.io
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://app.amberflo.io
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Amberflo Metering API
-      - name: Amberflo Billing API
-      - name: Amberflo Cost Tracking API
-      - name: Amberflo AI Gateway API
-  - id: amberflo-pro
-    name: Professional
-    type: paid
-    description: Production tier for Amberflo. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: Full platform access
+      - name: Time-limited evaluation
+  - id: amberflo-startups
+    name: Startups
+    type: subscription
+    description: Entry paid plan for early-stage usage-based billing customers.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
+      - label: Monthly subscription
+        name: startups_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '99.00'
+        userMultiplied: false
+      - label: Billing volume included
+        name: startups_volume
         type: quota
-        metric: requests
+        metric: usd
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Meter events included
+        name: startups_events
+        type: quota
+        metric: event
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Up to $10,000 monthly billing volume
+      - name: Up to 10,000 meter events / month
+      - name: Standard support
+  - id: amberflo-growth
+    name: Growth
+    type: tiered
+    description: Mid-market plan with tiered request volumes and meter-event pools. Monthly fee scales
+      with included request count.
+    entries:
+      - label: Growth base (250K requests)
+        name: growth_base
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '599.00'
+        userMultiplied: false
+      - label: Growth 500K requests
+        name: growth_500k
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '699.00'
+        userMultiplied: false
+      - label: Growth 1M requests
+        name: growth_1m
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '999.00'
+        userMultiplied: false
+      - label: Growth custom higher tier
+        name: growth_custom
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '1499.00'
+        userMultiplied: false
+      - label: Billing volume included
+        name: growth_volume
+        type: quota
+        metric: usd
         limit: 100000
         timeFrame: month
         geo: global
-        domains:
-          - https://app.amberflo.io
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://app.amberflo.io
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
+      - label: Meter events included
+        name: growth_events
+        type: quota
+        metric: event
+        limit: 500000
         timeFrame: month
         geo: global
-        domains:
-          - https://app.amberflo.io
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Additional billing volume %
+        name: growth_overage_volume
+        type: metered
+        metric: usd_billed
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 0.54%
+        userMultiplied: false
+      - label: Additional meter events
+        name: growth_overage_events
+        type: metered
+        metric: event
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 10000
+        price: '5.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Amberflo Metering API
-      - name: Amberflo Billing API
-      - name: Amberflo Cost Tracking API
-      - name: Amberflo AI Gateway API
+      - name: Up to $100,000 monthly billing volume
+      - name: Up to 500,000 meter events / month
+      - name: 0.54% on billing-volume overage
+      - name: $5 per additional 10,000 meter events
   - id: amberflo-enterprise
     name: Enterprise
     type: enterprise
-    description: Custom-negotiated tier for Amberflo. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: For $1M+ monthly billing volume; unlimited workflows, SSO, RBAC, bulk discounts. Custom
+      pricing.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Custom contract
+        name: enterprise_contract
+        type: subscription
+        metric: contract
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://app.amberflo.io
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://app.amberflo.io
+        timeFrame: year
+        geo: global
         unit: 1
         price: custom
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Amberflo Metering API
-      - name: Amberflo Billing API
-      - name: Amberflo Cost Tracking API
-      - name: Amberflo AI Gateway API
+      - name: $1M+ billing volume
+      - name: Unlimited meter events
+      - name: Bulk discounts
+      - name: Unlimited workflows
+      - name: SSO and role-based access
+      - name: Premium support
 maintainers:
-  - FN: Kin Lane
+  - name: Kin Lane
     email: kin@apievangelist.com
+    url: https://apievangelist.com
+  - name: Amberflo
+    email: support@amberflo.io
+    url: https://www.amberflo.io
