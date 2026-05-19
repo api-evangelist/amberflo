@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amberflo Billing API — Invoices
+  description: 'Amberflo Billing API — Invoices. 1 operations. Lead operation: Amberflo List Customer Invoices. Self-contained
+    Naftiko capability covering one Amberflo business surface.'
+  tags:
+  - Amberflo
+  - Invoices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMBERFLO_API_KEY: AMBERFLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: billing-invoices
+    baseUri: https://app.amberflo.io
+    description: Amberflo Billing API — Invoices business capability. Self-contained, no shared references.
+    resources:
+    - name: payments-billing-customer-product-invoice
+      path: /payments-billing-customer-product-invoice
+      operations:
+      - name: listinvoices
+        method: GET
+        description: Amberflo List Customer Invoices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: customerId
+          in: query
+          type: string
+          description: Customer ID to retrieve invoices for
+          required: true
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.AMBERFLO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: billing-invoices-rest
+    port: 8080
+    description: REST adapter for Amberflo Billing API — Invoices. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/payments-billing-customer-product-invoice
+      name: payments-billing-customer-product-invoice
+      description: REST surface for payments-billing-customer-product-invoice.
+      operations:
+      - method: GET
+        name: listinvoices
+        description: Amberflo List Customer Invoices
+        call: billing-invoices.listinvoices
+        with:
+          customerId: rest.customerId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: billing-invoices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amberflo Billing API — Invoices. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amberflo-list-customer-invoices
+      description: Amberflo List Customer Invoices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: billing-invoices.listinvoices
+      with:
+        customerId: tools.customerId
+      outputParameters:
+      - type: object
+        mapping: $.

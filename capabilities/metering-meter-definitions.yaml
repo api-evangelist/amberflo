@@ -1,0 +1,219 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amberflo Metering API — Meter Definitions
+  description: 'Amberflo Metering API — Meter Definitions. 5 operations. Lead operation: Amberflo List Meter Definitions.
+    Self-contained Naftiko capability covering one Amberflo business surface.'
+  tags:
+  - Amberflo
+  - Meter Definitions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMBERFLO_API_KEY: AMBERFLO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: metering-meter-definitions
+    baseUri: https://app.amberflo.io
+    description: Amberflo Metering API — Meter Definitions business capability. Self-contained, no shared references.
+    resources:
+    - name: meter-definition
+      path: /meter-definition
+      operations:
+      - name: listmeterdefinitions
+        method: GET
+        description: Amberflo List Meter Definitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createmeterdefinition
+        method: POST
+        description: Amberflo Create Meter Definition
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: updatemeterdefinition
+        method: PUT
+        description: Amberflo Update Meter Definition
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: meter-definition-meterApiName
+      path: /meter-definition/{meterApiName}
+      operations:
+      - name: getmeterdefinitionbyid
+        method: GET
+        description: Amberflo Get Meter Definition by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: meterApiName
+          in: path
+          type: string
+          description: The API name of the meter definition
+          required: true
+      - name: deletemeterdefinition
+        method: DELETE
+        description: Amberflo Delete Meter Definition
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: meterApiName
+          in: path
+          type: string
+          description: The API name of the meter definition to delete
+          required: true
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.AMBERFLO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: metering-meter-definitions-rest
+    port: 8080
+    description: REST adapter for Amberflo Metering API — Meter Definitions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/meter-definition
+      name: meter-definition
+      description: REST surface for meter-definition.
+      operations:
+      - method: GET
+        name: listmeterdefinitions
+        description: Amberflo List Meter Definitions
+        call: metering-meter-definitions.listmeterdefinitions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createmeterdefinition
+        description: Amberflo Create Meter Definition
+        call: metering-meter-definitions.createmeterdefinition
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatemeterdefinition
+        description: Amberflo Update Meter Definition
+        call: metering-meter-definitions.updatemeterdefinition
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/meter-definition/{meterapiname}
+      name: meter-definition-meterapiname
+      description: REST surface for meter-definition-meterApiName.
+      operations:
+      - method: GET
+        name: getmeterdefinitionbyid
+        description: Amberflo Get Meter Definition by ID
+        call: metering-meter-definitions.getmeterdefinitionbyid
+        with:
+          meterApiName: rest.meterApiName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletemeterdefinition
+        description: Amberflo Delete Meter Definition
+        call: metering-meter-definitions.deletemeterdefinition
+        with:
+          meterApiName: rest.meterApiName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: metering-meter-definitions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amberflo Metering API — Meter Definitions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amberflo-list-meter-definitions
+      description: Amberflo List Meter Definitions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metering-meter-definitions.listmeterdefinitions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amberflo-create-meter-definition
+      description: Amberflo Create Meter Definition
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: metering-meter-definitions.createmeterdefinition
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amberflo-update-meter-definition
+      description: Amberflo Update Meter Definition
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: metering-meter-definitions.updatemeterdefinition
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amberflo-get-meter-definition-id
+      description: Amberflo Get Meter Definition by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: metering-meter-definitions.getmeterdefinitionbyid
+      with:
+        meterApiName: tools.meterApiName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amberflo-delete-meter-definition
+      description: Amberflo Delete Meter Definition
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: metering-meter-definitions.deletemeterdefinition
+      with:
+        meterApiName: tools.meterApiName
+      outputParameters:
+      - type: object
+        mapping: $.
