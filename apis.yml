@@ -203,6 +203,8 @@ common:
     description: Logging callback for LiteLLM to meter LLM usage and monitor AI costs.
   - name: AWS Lambda
     description: Examples and utilities for metering AWS Lambda function invocations.
+- type: LLMsTxt
+  url: https://docs.amberflo.io/llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
