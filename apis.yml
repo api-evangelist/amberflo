@@ -104,6 +104,45 @@ apis:
   - type: Documentation
     url: https://docs.amberflo.io/docs/ai-gateway
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amberflo-create-customer-and-assign-plan-workflow.yml
+    name: Amberflo Create Customer and Assign Plan
+    summary: Create a customer account then assign a pricing plan to them.
+  - url: arazzo/amberflo-create-meter-and-ingest-event-workflow.yml
+    name: Amberflo Create Meter and Ingest Event
+    summary: Create a meter definition and immediately ingest a usage event against it.
+  - url: arazzo/amberflo-discover-meter-and-query-usage-workflow.yml
+    name: Amberflo Discover Meter and Query Usage
+    summary: List meter definitions then query aggregated usage for a selected meter.
+  - url: arazzo/amberflo-get-customer-invoices-workflow.yml
+    name: Amberflo Get Customer Invoices
+    summary: Look up a customer by ID then list their invoices.
+  - url: arazzo/amberflo-ingest-and-query-usage-workflow.yml
+    name: Amberflo Ingest and Query Usage
+    summary: Ingest a meter event for a customer then query aggregated usage for that meter.
+  - url: arazzo/amberflo-launch-usage-based-product-workflow.yml
+    name: Amberflo Launch Usage Based Product
+    summary: Create a meter, onboard a customer, assign a plan, then ingest first usage.
+  - url: arazzo/amberflo-meter-usage-and-topup-prepaid-workflow.yml
+    name: Amberflo Meter Usage and Top Up Prepaid
+    summary: Ingest a usage event for a customer then fund a prepaid credit top-up.
+  - url: arazzo/amberflo-meter-with-filtering-rule-workflow.yml
+    name: Amberflo Meter with Filtering Rule
+    summary: Create a meter, attach a dimension filtering rule, then ingest an event.
+  - url: arazzo/amberflo-offboard-customer-if-no-invoices-workflow.yml
+    name: Amberflo Offboard Customer If No Invoices
+    summary: Look up a customer, check for invoices, and delete them only when none exist.
+  - url: arazzo/amberflo-onboard-customer-and-meter-usage-workflow.yml
+    name: Amberflo Onboard Customer and Meter Usage
+    summary: Create a customer, ingest a usage event for them, then query their aggregated usage.
+  - url: arazzo/amberflo-provision-customer-billing-workflow.yml
+    name: Amberflo Provision Customer Billing
+    summary: Create a customer, assign a pricing plan, then fund a prepaid credit order.
+  - url: arazzo/amberflo-upsert-customer-workflow.yml
+    name: Amberflo Upsert Customer
+    summary: Find a customer by ID and update it if it exists, otherwise create it.
 - type: LinkedIn
   url: https://www.linkedin.com/company/amberflo
 - type: Website

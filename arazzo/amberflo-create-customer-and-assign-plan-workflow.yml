@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Create Customer and Assign Plan
+  summary: Create a customer account then assign a pricing plan to them.
+  description: >-
+    The monetization setup flow for a new account. It creates a customer in the
+    Billing API and then assigns a pricing plan (product) to that customer so
+    their usage will be priced. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: create-customer-and-assign-plan
+  summary: Create a customer then assign a pricing plan to them.
+  description: >-
+    Creates a customer account and assigns the supplied pricing plan product to
+    that customer with an optional start time.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerId
+    - customerName
+    - productId
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      customerId:
+        type: string
+        description: Unique customer identifier from your system.
+      customerName:
+        type: string
+        description: Customer display name.
+      customerEmail:
+        type: string
+        description: Optional customer contact email.
+      productId:
+        type: string
+        description: Product or pricing plan identifier to assign.
+      startTime:
+        type: integer
+        description: Optional plan start time in Unix milliseconds.
+  steps:
+  - stepId: createCustomer
+    description: >-
+      Create the customer account that the pricing plan will be assigned to.
+    operationId: createCustomer
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        lifecycleStage: ACTIVE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+  - stepId: assignPlan
+    description: >-
+      Assign the pricing plan product to the newly created customer.
+    operationId: assignPricingPlan
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $steps.createCustomer.outputs.customerId
+        productId: $inputs.productId
+        startTime: $inputs.startTime
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignedCustomerId: $response.body#/customerId
+      assignedProductId: $response.body#/productId
+  outputs:
+    customerId: $steps.createCustomer.outputs.customerId
+    assignedProductId: $steps.assignPlan.outputs.assignedProductId

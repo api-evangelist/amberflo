@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Offboard Customer If No Invoices
+  summary: Look up a customer, check for invoices, and delete them only when none exist.
+  description: >-
+    A safe offboarding flow that prevents deleting customers that still have
+    billing history. It resolves the customer, lists their invoices, and branches:
+    when no invoices are present it deletes the customer, otherwise it stops and
+    leaves the customer in place. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: offboard-customer-if-no-invoices
+  summary: Delete a customer only when they have no invoices.
+  description: >-
+    Resolves a customer, lists their invoices, and deletes the customer when the
+    invoice list is empty; otherwise it ends without deleting.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerId
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      customerId:
+        type: string
+        description: Unique identifier of the customer to evaluate for offboarding.
+  steps:
+  - stepId: getCustomer
+    description: >-
+      Retrieve the customer by ID to confirm it exists before evaluating.
+    operationId: getCustomerById
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    - name: customerId
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+  - stepId: listInvoices
+    description: >-
+      List the customer's invoices, branching on whether any exist.
+    operationId: listInvoices
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    - name: customerId
+      in: query
+      value: $steps.getCustomer.outputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      invoices: $response.body
+    onSuccess:
+    - name: noInvoices
+      type: goto
+      stepId: deleteCustomer
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+    - name: hasInvoices
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+  - stepId: deleteCustomer
+    description: >-
+      Delete the customer because they have no invoices on record.
+    operationId: deleteCustomer
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    - name: customerId
+      in: path
+      value: $steps.getCustomer.outputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletedCustomerId: $steps.getCustomer.outputs.customerId
+  outputs:
+    customerId: $steps.getCustomer.outputs.customerId
+    deletedCustomerId: $steps.deleteCustomer.outputs.deletedCustomerId

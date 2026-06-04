@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Provision Customer Billing
+  summary: Create a customer, assign a pricing plan, then fund a prepaid credit order.
+  description: >-
+    The complete billing provisioning flow for a prepaid customer. It creates the
+    customer account, assigns a pricing plan product, and then opens a prepaid
+    credit order so the customer has a balance to draw usage against. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: provision-customer-billing
+  summary: Create a customer, assign a plan, and fund a prepaid order.
+  description: >-
+    Creates a customer account, assigns the supplied pricing plan product, and
+    creates a prepaid credit order for the customer.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerId
+    - customerName
+    - productId
+    - amount
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      customerId:
+        type: string
+        description: Unique customer identifier from your system.
+      customerName:
+        type: string
+        description: Customer display name.
+      customerEmail:
+        type: string
+        description: Optional customer contact email.
+      productId:
+        type: string
+        description: Product or pricing plan identifier to assign.
+      amount:
+        type: number
+        description: Prepaid credit amount to fund.
+      currency:
+        type: string
+        description: Currency code for the prepaid order (e.g. USD).
+      expirationTime:
+        type: integer
+        description: Optional prepaid order expiration in Unix milliseconds.
+  steps:
+  - stepId: createCustomer
+    description: >-
+      Create the customer account that will be provisioned for billing.
+    operationId: createCustomer
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        lifecycleStage: ACTIVE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+  - stepId: assignPlan
+    description: >-
+      Assign the pricing plan product to the customer.
+    operationId: assignPricingPlan
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $steps.createCustomer.outputs.customerId
+        productId: $inputs.productId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignedProductId: $response.body#/productId
+  - stepId: createPrepaid
+    description: >-
+      Fund a prepaid credit order for the customer.
+    operationId: createPrepaidOrder
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $steps.createCustomer.outputs.customerId
+        amount: $inputs.amount
+        currency: $inputs.currency
+        expirationTime: $inputs.expirationTime
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/orderId
+  outputs:
+    customerId: $steps.createCustomer.outputs.customerId
+    assignedProductId: $steps.assignPlan.outputs.assignedProductId
+    orderId: $steps.createPrepaid.outputs.orderId

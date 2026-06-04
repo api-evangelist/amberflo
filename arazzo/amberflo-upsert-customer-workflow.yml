@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Upsert Customer
+  summary: Find a customer by ID and update it if it exists, otherwise create it.
+  description: >-
+    A common billing integration pattern. The workflow attempts to fetch a
+    customer by their unique identifier and then branches: when the customer is
+    found it updates the existing record, and when it is not found it creates a
+    new customer. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: upsert-customer
+  summary: Upsert a customer account by its unique customer ID.
+  description: >-
+    Looks for an existing customer by ID and either updates the matched customer
+    or creates a new one with the supplied details.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerId
+    - customerName
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      customerId:
+        type: string
+        description: Unique customer identifier to upsert.
+      customerName:
+        type: string
+        description: Customer display name to write.
+      customerEmail:
+        type: string
+        description: Optional customer contact email to write.
+      lifecycleStage:
+        type: string
+        description: Lifecycle stage (ONBOARDING, TRAIL, ACTIVE, OFFBOARDED).
+  steps:
+  - stepId: findCustomer
+    description: >-
+      Try to fetch the customer by ID, branching on whether it already exists.
+    operationId: getCustomerById
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    - name: customerId
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 404
+    outputs:
+      matchedCustomerId: $response.body#/customerId
+    onSuccess:
+    - name: customerExists
+      type: goto
+      stepId: updateExisting
+      criteria:
+      - condition: $statusCode == 200
+    - name: customerMissing
+      type: goto
+      stepId: createNew
+      criteria:
+      - condition: $statusCode == 404
+  - stepId: updateExisting
+    description: >-
+      Update the existing customer with the supplied details.
+    operationId: updateCustomer
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        lifecycleStage: $inputs.lifecycleStage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createNew
+    description: >-
+      Create a new customer when no existing record matched the ID.
+    operationId: createCustomer
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        lifecycleStage: $inputs.lifecycleStage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+  outputs:
+    updatedCustomerId: $steps.updateExisting.outputs.customerId
+    createdCustomerId: $steps.createNew.outputs.customerId

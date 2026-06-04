@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Create Meter and Ingest Event
+  summary: Create a meter definition and immediately ingest a usage event against it.
+  description: >-
+    The foundational metering setup flow. It creates a new meter definition for
+    a given aggregation type, then ingests a first meter event against that meter
+    for a customer so that downstream usage queries have data to report. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: meteringApi
+  url: ../openapi/amberflo-metering-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: create-meter-and-ingest-event
+  summary: Define a meter then ingest a usage event for a customer.
+  description: >-
+    Creates a meter definition with the supplied API name and aggregation type,
+    then ingests one meter event for the given customer against the newly
+    created meter.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - meterApiName
+    - displayName
+    - type
+    - customerId
+    - meterValue
+    - meterTimeInMillis
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      meterApiName:
+        type: string
+        description: Unique API name for the meter (e.g. "api-calls").
+      displayName:
+        type: string
+        description: Human-readable display name for the meter.
+      type:
+        type: string
+        description: Aggregation type (SUM_OF_ALL_USAGE, MAX_IN_PERIOD, UNIQUE_CUSTOMERS_COUNT).
+      customerId:
+        type: string
+        description: Customer the usage event is attributed to.
+      meterValue:
+        type: number
+        description: The usage amount for the ingested event.
+      meterTimeInMillis:
+        type: integer
+        description: Event timestamp in Unix milliseconds.
+      uniqueId:
+        type: string
+        description: Optional idempotency identifier for the event.
+  steps:
+  - stepId: createMeter
+    description: >-
+      Create the meter definition so events can be aggregated against it.
+    operationId: createMeterDefinition
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        displayName: $inputs.displayName
+        type: $inputs.type
+        dimensions: []
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      meterApiName: $response.body#/meterApiName
+  - stepId: ingestEvent
+    description: >-
+      Ingest a single meter event for the customer against the new meter.
+    operationId: ingestMeterEvents
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $steps.createMeter.outputs.meterApiName
+        customerId: $inputs.customerId
+        meterValue: $inputs.meterValue
+        meterTimeInMillis: $inputs.meterTimeInMillis
+        uniqueId: $inputs.uniqueId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ingestResult: $response.body
+  outputs:
+    meterApiName: $steps.createMeter.outputs.meterApiName
+    ingestResult: $steps.ingestEvent.outputs.ingestResult

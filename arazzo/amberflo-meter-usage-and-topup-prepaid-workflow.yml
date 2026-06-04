@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Meter Usage and Top Up Prepaid
+  summary: Ingest a usage event for a customer then fund a prepaid credit top-up.
+  description: >-
+    Spans the Metering and Billing APIs to record consumption and replenish the
+    customer's prepaid balance. It ingests a meter event for the customer and
+    then creates a prepaid credit order so the customer can keep drawing usage.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: meteringApi
+  url: ../openapi/amberflo-metering-openapi.yaml
+  type: openapi
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: meter-usage-and-topup-prepaid
+  summary: Record usage then replenish the customer's prepaid balance.
+  description: >-
+    Ingests a meter event for the customer and then creates a prepaid credit
+    order to top up their balance.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - meterApiName
+    - customerId
+    - meterValue
+    - meterTimeInMillis
+    - amount
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      meterApiName:
+        type: string
+        description: The meter to ingest usage to.
+      customerId:
+        type: string
+        description: Customer the usage and prepaid order apply to.
+      meterValue:
+        type: number
+        description: The usage amount for the ingested event.
+      meterTimeInMillis:
+        type: integer
+        description: Event timestamp in Unix milliseconds.
+      uniqueId:
+        type: string
+        description: Optional idempotency identifier for the event.
+      amount:
+        type: number
+        description: Prepaid credit amount to add.
+      currency:
+        type: string
+        description: Currency code for the prepaid order (e.g. USD).
+      expirationTime:
+        type: integer
+        description: Optional prepaid order expiration in Unix milliseconds.
+  steps:
+  - stepId: ingestEvent
+    description: >-
+      Ingest a meter event recording the customer's consumption.
+    operationId: ingestMeterEvents
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        customerId: $inputs.customerId
+        meterValue: $inputs.meterValue
+        meterTimeInMillis: $inputs.meterTimeInMillis
+        uniqueId: $inputs.uniqueId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ingestResult: $response.body
+  - stepId: topUpPrepaid
+    description: >-
+      Create a prepaid credit order to replenish the customer's balance.
+    operationId: createPrepaidOrder
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        amount: $inputs.amount
+        currency: $inputs.currency
+        expirationTime: $inputs.expirationTime
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/orderId
+  outputs:
+    ingestResult: $steps.ingestEvent.outputs.ingestResult
+    orderId: $steps.topUpPrepaid.outputs.orderId

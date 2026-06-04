@@ -1,0 +1,135 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Onboard Customer and Meter Usage
+  summary: Create a customer, ingest a usage event for them, then query their aggregated usage.
+  description: >-
+    The full onboarding-to-usage flow that spans the Billing and Metering APIs.
+    It creates a customer account, ingests a meter event attributed to that
+    customer, and then queries aggregated usage for the meter filtered to the new
+    customer so the result can be verified. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+- name: meteringApi
+  url: ../openapi/amberflo-metering-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: onboard-customer-and-meter-usage
+  summary: Create a customer, ingest usage for them, then read back their usage.
+  description: >-
+    Creates a customer in the Billing API, ingests a meter event for that
+    customer in the Metering API, then queries aggregated usage for the meter
+    filtered to the customer.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerId
+    - customerName
+    - meterApiName
+    - meterValue
+    - meterTimeInMillis
+    - startTimeInSeconds
+    - endTimeInSeconds
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      customerId:
+        type: string
+        description: Unique customer identifier from your system.
+      customerName:
+        type: string
+        description: Customer display name.
+      customerEmail:
+        type: string
+        description: Optional customer contact email.
+      meterApiName:
+        type: string
+        description: The meter to ingest to and query.
+      meterValue:
+        type: number
+        description: The usage amount for the ingested event.
+      meterTimeInMillis:
+        type: integer
+        description: Event timestamp in Unix milliseconds.
+      uniqueId:
+        type: string
+        description: Optional idempotency identifier for the event.
+      startTimeInSeconds:
+        type: integer
+        description: Usage query start time in Unix seconds.
+      endTimeInSeconds:
+        type: integer
+        description: Usage query end time in Unix seconds.
+  steps:
+  - stepId: createCustomer
+    description: >-
+      Create the customer account that usage will be attributed to.
+    operationId: createCustomer
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        lifecycleStage: ACTIVE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+  - stepId: ingestEvent
+    description: >-
+      Ingest a meter event attributed to the newly created customer.
+    operationId: ingestMeterEvents
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        customerId: $steps.createCustomer.outputs.customerId
+        meterValue: $inputs.meterValue
+        meterTimeInMillis: $inputs.meterTimeInMillis
+        uniqueId: $inputs.uniqueId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ingestResult: $response.body
+  - stepId: queryUsage
+    description: >-
+      Query aggregated usage for the meter filtered to the new customer.
+    operationId: queryUsage
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        startTimeInSeconds: $inputs.startTimeInSeconds
+        endTimeInSeconds: $inputs.endTimeInSeconds
+        aggregation: SUM
+        timeGroupingInterval: DAY
+        groupBy:
+        - customerId
+        customerFilter:
+        - $steps.createCustomer.outputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clientMeters: $response.body#/clientMeters
+  outputs:
+    customerId: $steps.createCustomer.outputs.customerId
+    clientMeters: $steps.queryUsage.outputs.clientMeters

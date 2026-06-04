@@ -1,0 +1,78 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Discover Meter and Query Usage
+  summary: List meter definitions then query aggregated usage for a selected meter.
+  description: >-
+    A reporting flow that discovers the configured meters and then reads usage
+    against one of them. It lists all meter definitions, confirms the requested
+    meter is present, and queries aggregated usage for it over a time window.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: meteringApi
+  url: ../openapi/amberflo-metering-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: discover-meter-and-query-usage
+  summary: List meters then query usage for a chosen meter.
+  description: >-
+    Retrieves all meter definitions and queries aggregated usage for the
+    requested meter over the supplied window.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - meterApiName
+    - startTimeInSeconds
+    - endTimeInSeconds
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      meterApiName:
+        type: string
+        description: The meter to query usage for.
+      startTimeInSeconds:
+        type: integer
+        description: Usage query start time in Unix seconds.
+      endTimeInSeconds:
+        type: integer
+        description: Usage query end time in Unix seconds.
+  steps:
+  - stepId: listMeters
+    description: >-
+      List all configured meter definitions in the account.
+    operationId: listMeterDefinitions
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      meters: $response.body
+      firstMeterApiName: $response.body#/0/meterApiName
+  - stepId: queryUsage
+    description: >-
+      Query aggregated usage for the requested meter over the supplied window.
+    operationId: queryUsage
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        startTimeInSeconds: $inputs.startTimeInSeconds
+        endTimeInSeconds: $inputs.endTimeInSeconds
+        aggregation: SUM
+        timeGroupingInterval: DAY
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clientMeters: $response.body#/clientMeters
+  outputs:
+    meters: $steps.listMeters.outputs.meters
+    clientMeters: $steps.queryUsage.outputs.clientMeters

@@ -1,0 +1,149 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Launch Usage Based Product
+  summary: Create a meter, onboard a customer, assign a plan, then ingest first usage.
+  description: >-
+    The end-to-end launch flow for a usage-based product, spanning the Metering
+    and Billing APIs. It defines the meter that tracks consumption, creates the
+    customer, assigns the pricing plan product, and ingests the first usage event
+    so the customer's metered billing is live. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: meteringApi
+  url: ../openapi/amberflo-metering-openapi.yaml
+  type: openapi
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: launch-usage-based-product
+  summary: Define a meter, onboard a customer, assign a plan, and ingest first usage.
+  description: >-
+    Creates a meter definition, creates a customer, assigns a pricing plan
+    product to that customer, and ingests the first usage event against the
+    meter.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - meterApiName
+    - displayName
+    - type
+    - customerId
+    - customerName
+    - productId
+    - meterValue
+    - meterTimeInMillis
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      meterApiName:
+        type: string
+        description: Unique API name for the meter that tracks consumption.
+      displayName:
+        type: string
+        description: Human-readable display name for the meter.
+      type:
+        type: string
+        description: Aggregation type (SUM_OF_ALL_USAGE, MAX_IN_PERIOD, UNIQUE_CUSTOMERS_COUNT).
+      customerId:
+        type: string
+        description: Unique customer identifier from your system.
+      customerName:
+        type: string
+        description: Customer display name.
+      customerEmail:
+        type: string
+        description: Optional customer contact email.
+      productId:
+        type: string
+        description: Product or pricing plan identifier to assign.
+      meterValue:
+        type: number
+        description: The usage amount for the first ingested event.
+      meterTimeInMillis:
+        type: integer
+        description: Event timestamp in Unix milliseconds.
+  steps:
+  - stepId: createMeter
+    description: >-
+      Define the meter that will track the product's consumption.
+    operationId: createMeterDefinition
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        displayName: $inputs.displayName
+        type: $inputs.type
+        dimensions: []
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      meterApiName: $response.body#/meterApiName
+  - stepId: createCustomer
+    description: >-
+      Create the customer that will be billed for metered usage.
+    operationId: createCustomer
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        lifecycleStage: ACTIVE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+  - stepId: assignPlan
+    description: >-
+      Assign the pricing plan product to the new customer.
+    operationId: assignPricingPlan
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $steps.createCustomer.outputs.customerId
+        productId: $inputs.productId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignedProductId: $response.body#/productId
+  - stepId: ingestFirstUsage
+    description: >-
+      Ingest the first usage event against the meter for the customer.
+    operationId: ingestMeterEvents
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $steps.createMeter.outputs.meterApiName
+        customerId: $steps.createCustomer.outputs.customerId
+        meterValue: $inputs.meterValue
+        meterTimeInMillis: $inputs.meterTimeInMillis
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ingestResult: $response.body
+  outputs:
+    meterApiName: $steps.createMeter.outputs.meterApiName
+    customerId: $steps.createCustomer.outputs.customerId
+    assignedProductId: $steps.assignPlan.outputs.assignedProductId
+    ingestResult: $steps.ingestFirstUsage.outputs.ingestResult

@@ -1,0 +1,127 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Meter with Filtering Rule
+  summary: Create a meter, attach a dimension filtering rule, then ingest an event.
+  description: >-
+    Sets up a meter that only counts events matching a dimension filter. It
+    creates the meter definition, registers a filtering rule that includes or
+    excludes events by a dimension value, and then ingests an event carrying that
+    dimension. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: meteringApi
+  url: ../openapi/amberflo-metering-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: meter-with-filtering-rule
+  summary: Create a meter, add a filtering rule, then ingest a matching event.
+  description: >-
+    Creates a meter definition, registers a dimension-based filtering rule for
+    that meter, and ingests an event carrying the filtered dimension.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - meterApiName
+    - displayName
+    - type
+    - dimensionName
+    - dimensionValue
+    - customerId
+    - meterValue
+    - meterTimeInMillis
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      meterApiName:
+        type: string
+        description: Unique API name for the meter.
+      displayName:
+        type: string
+        description: Human-readable display name for the meter.
+      type:
+        type: string
+        description: Aggregation type (SUM_OF_ALL_USAGE, MAX_IN_PERIOD, UNIQUE_CUSTOMERS_COUNT).
+      dimensionName:
+        type: string
+        description: The dimension the filtering rule applies to (e.g. region).
+      dimensionValue:
+        type: string
+        description: The dimension value to include or exclude.
+      customerId:
+        type: string
+        description: Customer the ingested event is attributed to.
+      meterValue:
+        type: number
+        description: The usage amount for the ingested event.
+      meterTimeInMillis:
+        type: integer
+        description: Event timestamp in Unix milliseconds.
+  steps:
+  - stepId: createMeter
+    description: >-
+      Create the meter definition with the supplied dimension declared.
+    operationId: createMeterDefinition
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        displayName: $inputs.displayName
+        type: $inputs.type
+        dimensions:
+        - $inputs.dimensionName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      meterApiName: $response.body#/meterApiName
+  - stepId: createRule
+    description: >-
+      Register a filtering rule that includes events matching the dimension value.
+    operationId: createFilteringRule
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $steps.createMeter.outputs.meterApiName
+        dimensionName: $inputs.dimensionName
+        dimensionValues:
+        - $inputs.dimensionValue
+        action: INCLUDE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleId: $response.body#/ruleId
+  - stepId: ingestEvent
+    description: >-
+      Ingest an event carrying the filtered dimension so the rule is exercised.
+    operationId: ingestMeterEvents
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $steps.createMeter.outputs.meterApiName
+        customerId: $inputs.customerId
+        meterValue: $inputs.meterValue
+        meterTimeInMillis: $inputs.meterTimeInMillis
+        dimensions:
+          dimensionName: $inputs.dimensionValue
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ingestResult: $response.body
+  outputs:
+    meterApiName: $steps.createMeter.outputs.meterApiName
+    ruleId: $steps.createRule.outputs.ruleId
+    ingestResult: $steps.ingestEvent.outputs.ingestResult

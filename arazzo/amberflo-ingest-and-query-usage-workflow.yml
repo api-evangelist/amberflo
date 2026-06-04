@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Ingest and Query Usage
+  summary: Ingest a meter event for a customer then query aggregated usage for that meter.
+  description: >-
+    Verifies the end-to-end metering pipeline by ingesting a usage event for a
+    customer and then querying aggregated usage for the same meter over a time
+    window, grouped by customer. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: meteringApi
+  url: ../openapi/amberflo-metering-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: ingest-and-query-usage
+  summary: Ingest a usage event and then read back aggregated usage.
+  description: >-
+    Ingests a meter event for the supplied meter and customer, then runs a usage
+    query over the requested time window aggregated and grouped by customer.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - meterApiName
+    - customerId
+    - meterValue
+    - meterTimeInMillis
+    - startTimeInSeconds
+    - endTimeInSeconds
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      meterApiName:
+        type: string
+        description: The meter to ingest to and query.
+      customerId:
+        type: string
+        description: Customer the event is attributed to and grouped by.
+      meterValue:
+        type: number
+        description: The usage amount for the ingested event.
+      meterTimeInMillis:
+        type: integer
+        description: Event timestamp in Unix milliseconds.
+      uniqueId:
+        type: string
+        description: Optional idempotency identifier for the event.
+      startTimeInSeconds:
+        type: integer
+        description: Usage query start time in Unix seconds.
+      endTimeInSeconds:
+        type: integer
+        description: Usage query end time in Unix seconds.
+  steps:
+  - stepId: ingestEvent
+    description: >-
+      Ingest a single meter event for the customer against the meter.
+    operationId: ingestMeterEvents
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        customerId: $inputs.customerId
+        meterValue: $inputs.meterValue
+        meterTimeInMillis: $inputs.meterTimeInMillis
+        uniqueId: $inputs.uniqueId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ingestResult: $response.body
+  - stepId: queryUsage
+    description: >-
+      Query aggregated usage for the meter over the supplied window, summed and
+      grouped by customer.
+    operationId: queryUsage
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        meterApiName: $inputs.meterApiName
+        startTimeInSeconds: $inputs.startTimeInSeconds
+        endTimeInSeconds: $inputs.endTimeInSeconds
+        aggregation: SUM
+        timeGroupingInterval: DAY
+        groupBy:
+        - customerId
+        customerFilter:
+        - $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clientMeters: $response.body#/clientMeters
+  outputs:
+    ingestResult: $steps.ingestEvent.outputs.ingestResult
+    clientMeters: $steps.queryUsage.outputs.clientMeters

@@ -1,0 +1,69 @@
+arazzo: 1.0.1
+info:
+  title: Amberflo Get Customer Invoices
+  summary: Look up a customer by ID then list their invoices.
+  description: >-
+    A billing read flow that resolves a customer by their unique identifier and
+    then retrieves the invoices issued to that customer. The lookup confirms the
+    customer exists before invoices are fetched. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billingApi
+  url: ../openapi/amberflo-billing-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: get-customer-invoices
+  summary: Resolve a customer then list their invoices.
+  description: >-
+    Fetches a customer by ID to confirm it exists, then lists the invoices for
+    that customer.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerId
+    properties:
+      apiKey:
+        type: string
+        description: Amberflo API key supplied in the X-API-KEY header.
+      customerId:
+        type: string
+        description: Unique identifier of the customer to look up.
+  steps:
+  - stepId: getCustomer
+    description: >-
+      Retrieve the customer by ID to confirm it exists before listing invoices.
+    operationId: getCustomerById
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    - name: customerId
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/customerId
+      lifecycleStage: $response.body#/lifecycleStage
+  - stepId: listInvoices
+    description: >-
+      List the invoices issued to the resolved customer.
+    operationId: listInvoices
+    parameters:
+    - name: X-API-KEY
+      in: header
+      value: $inputs.apiKey
+    - name: customerId
+      in: query
+      value: $steps.getCustomer.outputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      invoices: $response.body
+      firstInvoiceId: $response.body#/0/invoiceId
+  outputs:
+    customerId: $steps.getCustomer.outputs.customerId
+    invoices: $steps.listInvoices.outputs.invoices
