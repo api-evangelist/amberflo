@@ -5,7 +5,7 @@ description: Amberflo is a cloud metering, usage-based billing, and AI cost mana
   The platform supports usage-based, token-based, seat-based, and outcome-based pricing models with automated invoicing and
   embeddable billing dashboards.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Usage-Based Billing
 - Metering
