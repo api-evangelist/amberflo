@@ -36,13 +36,13 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: OpenAPI
     url: https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/openapi/amberflo-metering-openapi.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/metering-event-ingestion.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/metering-filtering-rules.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/metering-meter-definitions.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/metering-usage-queries.yaml
 - aid: amberflo:billing-api
   name: Amberflo Billing API
@@ -63,13 +63,13 @@ apis:
     url: https://docs.amberflo.io/reference/customers
   - type: OpenAPI
     url: https://raw.githubusercontent.com/api-evangelist/amberflo/refs/heads/main/openapi/amberflo-billing-openapi.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/billing-customers.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/billing-invoices.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/billing-prepaid-orders.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:cost-tracking-api
   name: Amberflo Cost Tracking API
@@ -104,45 +104,42 @@ apis:
   - type: Documentation
     url: https://docs.amberflo.io/docs/ai-gateway
 common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/amberflo-create-customer-and-assign-plan-workflow.yml
-    name: Amberflo Create Customer and Assign Plan
-    summary: Create a customer account then assign a pricing plan to them.
-  - url: arazzo/amberflo-create-meter-and-ingest-event-workflow.yml
-    name: Amberflo Create Meter and Ingest Event
-    summary: Create a meter definition and immediately ingest a usage event against it.
-  - url: arazzo/amberflo-discover-meter-and-query-usage-workflow.yml
-    name: Amberflo Discover Meter and Query Usage
-    summary: List meter definitions then query aggregated usage for a selected meter.
-  - url: arazzo/amberflo-get-customer-invoices-workflow.yml
-    name: Amberflo Get Customer Invoices
-    summary: Look up a customer by ID then list their invoices.
-  - url: arazzo/amberflo-ingest-and-query-usage-workflow.yml
-    name: Amberflo Ingest and Query Usage
-    summary: Ingest a meter event for a customer then query aggregated usage for that meter.
-  - url: arazzo/amberflo-launch-usage-based-product-workflow.yml
-    name: Amberflo Launch Usage Based Product
-    summary: Create a meter, onboard a customer, assign a plan, then ingest first usage.
-  - url: arazzo/amberflo-meter-usage-and-topup-prepaid-workflow.yml
-    name: Amberflo Meter Usage and Top Up Prepaid
-    summary: Ingest a usage event for a customer then fund a prepaid credit top-up.
-  - url: arazzo/amberflo-meter-with-filtering-rule-workflow.yml
-    name: Amberflo Meter with Filtering Rule
-    summary: Create a meter, attach a dimension filtering rule, then ingest an event.
-  - url: arazzo/amberflo-offboard-customer-if-no-invoices-workflow.yml
-    name: Amberflo Offboard Customer If No Invoices
-    summary: Look up a customer, check for invoices, and delete them only when none exist.
-  - url: arazzo/amberflo-onboard-customer-and-meter-usage-workflow.yml
-    name: Amberflo Onboard Customer and Meter Usage
-    summary: Create a customer, ingest a usage event for them, then query their aggregated usage.
-  - url: arazzo/amberflo-provision-customer-billing-workflow.yml
-    name: Amberflo Provision Customer Billing
-    summary: Create a customer, assign a pricing plan, then fund a prepaid credit order.
-  - url: arazzo/amberflo-upsert-customer-workflow.yml
-    name: Amberflo Upsert Customer
-    summary: Find a customer by ID and update it if it exists, otherwise create it.
+- type: Arazzo
+  url: arazzo/amberflo-create-customer-and-assign-plan-workflow.yml
+  name: Amberflo Create Customer and Assign Plan
+- type: Arazzo
+  url: arazzo/amberflo-create-meter-and-ingest-event-workflow.yml
+  name: Amberflo Create Meter and Ingest Event
+- type: Arazzo
+  url: arazzo/amberflo-discover-meter-and-query-usage-workflow.yml
+  name: Amberflo Discover Meter and Query Usage
+- type: Arazzo
+  url: arazzo/amberflo-get-customer-invoices-workflow.yml
+  name: Amberflo Get Customer Invoices
+- type: Arazzo
+  url: arazzo/amberflo-ingest-and-query-usage-workflow.yml
+  name: Amberflo Ingest and Query Usage
+- type: Arazzo
+  url: arazzo/amberflo-launch-usage-based-product-workflow.yml
+  name: Amberflo Launch Usage Based Product
+- type: Arazzo
+  url: arazzo/amberflo-meter-usage-and-topup-prepaid-workflow.yml
+  name: Amberflo Meter Usage and Top Up Prepaid
+- type: Arazzo
+  url: arazzo/amberflo-meter-with-filtering-rule-workflow.yml
+  name: Amberflo Meter with Filtering Rule
+- type: Arazzo
+  url: arazzo/amberflo-offboard-customer-if-no-invoices-workflow.yml
+  name: Amberflo Offboard Customer If No Invoices
+- type: Arazzo
+  url: arazzo/amberflo-onboard-customer-and-meter-usage-workflow.yml
+  name: Amberflo Onboard Customer and Meter Usage
+- type: Arazzo
+  url: arazzo/amberflo-provision-customer-billing-workflow.yml
+  name: Amberflo Provision Customer Billing
+- type: Arazzo
+  url: arazzo/amberflo-upsert-customer-workflow.yml
+  name: Amberflo Upsert Customer
 - type: LinkedIn
   url: https://www.linkedin.com/company/amberflo
 - type: Website
@@ -155,7 +152,7 @@ common:
   url: https://docs.amberflo.io/docs/quick-start
 - type: APIReference
   url: https://docs.amberflo.io/reference/
-- type: SignUp
+- type: Signup
   url: https://ui.amberflo.io/cGxnLXNpZ251cA==
 - type: Login
   url: https://ui.amberflo.io/login
@@ -173,13 +170,13 @@ common:
   url: https://trust.amberflo.io/
 - type: GitHubOrganization
   url: https://github.com/amberflo
-- type: SDK
+- type: SDKs
   url: https://pypi.org/project/amberflo-metering-python/
   title: Python SDK
-- type: SDK
+- type: SDKs
   url: https://github.com/amberflo/metering-typescript
   title: TypeScript SDK
-- type: SDK
+- type: SDKs
   url: https://github.com/amberflo/metering-go
   title: Go SDK
 - type: SpectralRules
@@ -242,7 +239,7 @@ common:
     description: Logging callback for LiteLLM to meter LLM usage and monitor AI costs.
   - name: AWS Lambda
     description: Examples and utilities for metering AWS Lambda function invocations.
-- type: LLMsTxt
+- type: LlmsText
   url: https://docs.amberflo.io/llms.txt
 maintainers:
 - FN: Kin Lane
