@@ -104,6 +104,12 @@ apis:
   - type: Documentation
     url: https://docs.amberflo.io/docs/ai-gateway
 common:
+- type: TrustCenter
+  url: security/amberflo-trust-center.yml
+- type: DomainSecurity
+  url: security/amberflo-domain-security.yml
+- type: Authentication
+  url: authentication/amberflo-authentication.yml
 - type: Arazzo
   url: arazzo/amberflo-create-customer-and-assign-plan-workflow.yml
   name: Amberflo Create Customer and Assign Plan
