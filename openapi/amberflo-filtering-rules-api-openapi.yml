@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: Amberflo Billing Customers Filtering Rules API
+  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  version: 1.0.0
+  contact:
+    name: Amberflo Support
+    url: https://www.amberflo.io/company/contact
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://app.amberflo.io
+  description: Amberflo Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Filtering Rules
+  description: Manage meter event filtering rules
+paths:
+  /meter-event-filtering-rules:
+    post:
+      operationId: createFilteringRule
+      summary: Amberflo Create or Update Filtering Rule
+      description: Create or update a filtering rule for meter events.
+      tags:
+      - Filtering Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilteringRule'
+      responses:
+        '200':
+          description: Filtering rule created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteringRule'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listFilteringRules
+      summary: Amberflo List Filtering Rules
+      description: List existing filtering rules for a meter.
+      tags:
+      - Filtering Rules
+      parameters:
+      - name: meterApiName
+        in: query
+        required: true
+        description: The meter API name to list filtering rules for
+        schema:
+          type: string
+        example: api-calls
+      responses:
+        '200':
+          description: Array of filtering rules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FilteringRule'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FilteringRule:
+      type: object
+      description: A rule for filtering meter events before ingestion
+      required:
+      - meterApiName
+      properties:
+        meterApiName:
+          type: string
+          description: The meter API name this rule applies to
+          example: api-calls
+        ruleId:
+          type: string
+          description: Unique identifier for this filtering rule
+          example: rule-a1b2c3
+        dimensionName:
+          type: string
+          description: The dimension to filter on
+          example: region
+        dimensionValues:
+          type: array
+          description: Values to include or exclude
+          items:
+            type: string
+          example:
+          - us-east-1
+          - eu-west-1
+        action:
+          type: string
+          description: Whether to include or exclude matching events
+          enum:
+          - INCLUDE
+          - EXCLUDE
+          example: INCLUDE
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication

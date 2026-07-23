@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Amberflo Billing Customers Invoices API
+  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  version: 1.0.0
+  contact:
+    name: Amberflo Support
+    url: https://www.amberflo.io/company/contact
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://app.amberflo.io
+  description: Amberflo Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Invoices
+  description: Retrieve customer invoices
+paths:
+  /payments-billing-customer-product-invoice:
+    get:
+      operationId: listInvoices
+      summary: Amberflo List Customer Invoices
+      description: Retrieve a list of invoices for a specific customer.
+      tags:
+      - Invoices
+      parameters:
+      - name: customerId
+        in: query
+        required: true
+        description: Customer ID to retrieve invoices for
+        schema:
+          type: string
+        example: customer-123456
+      responses:
+        '200':
+          description: Array of invoices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+              examples:
+                ListInvoices200Example:
+                  summary: Default listInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                  - invoiceId: inv-500123
+                    customerId: customer-123456
+                    startTime: 1718100000
+                    endTime: 1718186400
+                    totalAmount: 99.5
+                    currency: USD
+                    status: PAID
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Invoice:
+      type: object
+      description: A customer invoice
+      properties:
+        invoiceId:
+          type: string
+          description: Unique invoice identifier
+          example: inv-500123
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        startTime:
+          type: integer
+          description: Invoice period start in Unix seconds
+          example: 1718100000
+        endTime:
+          type: integer
+          description: Invoice period end in Unix seconds
+          example: 1718186400
+        totalAmount:
+          type: number
+          description: Total invoice amount
+          example: 99.5
+        currency:
+          type: string
+          description: Invoice currency code
+          example: USD
+        status:
+          type: string
+          description: Invoice payment status
+          enum:
+          - DRAFT
+          - PENDING
+          - PAID
+          - VOID
+          example: PAID
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Customer not found
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication

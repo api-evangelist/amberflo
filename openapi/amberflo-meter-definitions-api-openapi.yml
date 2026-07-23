@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  title: Amberflo Billing Customers Meter Definitions API
+  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  version: 1.0.0
+  contact:
+    name: Amberflo Support
+    url: https://www.amberflo.io/company/contact
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://app.amberflo.io
+  description: Amberflo Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Meter Definitions
+  description: Create, read, update, and delete meter definitions
+paths:
+  /meter-definition:
+    get:
+      operationId: listMeterDefinitions
+      summary: Amberflo List Meter Definitions
+      description: List all meter definitions configured in the account.
+      tags:
+      - Meter Definitions
+      responses:
+        '200':
+          description: Array of meter definitions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeterDefinition'
+              examples:
+                ListMeterDefinitions200Example:
+                  summary: Default listMeterDefinitions 200 response
+                  x-microcks-default: true
+                  value:
+                  - meterApiName: api-calls
+                    displayName: API Calls
+                    label: api-calls
+                    type: SUM_OF_ALL_USAGE
+                    meterTimeInMillis: 1718153645993
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createMeterDefinition
+      summary: Amberflo Create Meter Definition
+      description: Create a new meter definition for tracking usage events.
+      tags:
+      - Meter Definitions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeterDefinitionRequest'
+            examples:
+              CreateMeterDefinitionRequestExample:
+                summary: Default createMeterDefinition request
+                x-microcks-default: true
+                value:
+                  meterApiName: api-calls
+                  displayName: API Calls
+                  type: SUM_OF_ALL_USAGE
+                  dimensions: []
+      responses:
+        '200':
+          description: Created meter definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeterDefinition'
+              examples:
+                CreateMeterDefinition200Example:
+                  summary: Default createMeterDefinition 200 response
+                  x-microcks-default: true
+                  value:
+                    meterApiName: api-calls
+                    displayName: API Calls
+                    label: api-calls
+                    type: SUM_OF_ALL_USAGE
+                    meterTimeInMillis: 1718153645993
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateMeterDefinition
+      summary: Amberflo Update Meter Definition
+      description: Update an existing meter definition.
+      tags:
+      - Meter Definitions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeterDefinition'
+      responses:
+        '200':
+          description: Updated meter definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeterDefinition'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /meter-definition/{meterApiName}:
+    get:
+      operationId: getMeterDefinitionById
+      summary: Amberflo Get Meter Definition by ID
+      description: Retrieve a specific meter definition by its API name.
+      tags:
+      - Meter Definitions
+      parameters:
+      - name: meterApiName
+        in: path
+        required: true
+        description: The API name of the meter definition
+        schema:
+          type: string
+        example: api-calls
+      responses:
+        '200':
+          description: Meter definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeterDefinition'
+        '404':
+          description: Meter definition not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteMeterDefinition
+      summary: Amberflo Delete Meter Definition
+      description: Delete a meter definition by its API name.
+      tags:
+      - Meter Definitions
+      parameters:
+      - name: meterApiName
+        in: path
+        required: true
+        description: The API name of the meter definition to delete
+        schema:
+          type: string
+        example: api-calls
+      responses:
+        '200':
+          description: Meter definition deleted successfully
+        '404':
+          description: Meter definition not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    MeterDefinitionRequest:
+      type: object
+      description: Request body for creating a meter definition
+      required:
+      - meterApiName
+      - displayName
+      - type
+      properties:
+        meterApiName:
+          type: string
+          description: Unique API name for the meter
+          example: api-calls
+        displayName:
+          type: string
+          description: Human-readable display name
+          example: API Calls
+        type:
+          type: string
+          description: Aggregation type for the meter
+          enum:
+          - SUM_OF_ALL_USAGE
+          - MAX_IN_PERIOD
+          - UNIQUE_CUSTOMERS_COUNT
+          example: SUM_OF_ALL_USAGE
+        dimensions:
+          type: array
+          description: Dimension names for this meter
+          items:
+            type: string
+    MeterDefinition:
+      type: object
+      description: A meter definition that specifies how usage events are tracked and aggregated
+      required:
+      - meterApiName
+      - displayName
+      - type
+      properties:
+        meterApiName:
+          type: string
+          description: Unique API name for the meter
+          example: api-calls
+        displayName:
+          type: string
+          description: Human-readable display name for the meter
+          example: API Calls
+        label:
+          type: string
+          description: Label identifier for the meter
+          example: api-calls
+        type:
+          type: string
+          description: Aggregation type for the meter
+          enum:
+          - SUM_OF_ALL_USAGE
+          - MAX_IN_PERIOD
+          - UNIQUE_CUSTOMERS_COUNT
+          example: SUM_OF_ALL_USAGE
+        meterTimeInMillis:
+          type: integer
+          format: int64
+          description: Creation timestamp in Unix milliseconds
+          example: 1718153645993
+        dimensions:
+          type: array
+          description: List of dimension names for this meter
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication

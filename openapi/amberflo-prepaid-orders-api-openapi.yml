@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Amberflo Billing Customers Prepaid Orders API
+  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  version: 1.0.0
+  contact:
+    name: Amberflo Support
+    url: https://www.amberflo.io/company/contact
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://app.amberflo.io
+  description: Amberflo Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Prepaid Orders
+  description: Manage customer prepaid credit orders
+paths:
+  /payments-pricing-amberflo-customer-prepaid:
+    post:
+      operationId: createPrepaidOrder
+      summary: Amberflo Create Prepaid Order
+      description: Create a prepaid credit order for a customer.
+      tags:
+      - Prepaid Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepaidOrderRequest'
+            examples:
+              CreatePrepaidOrderRequestExample:
+                summary: Default createPrepaidOrder request
+                x-microcks-default: true
+                value:
+                  customerId: customer-123456
+                  amount: 500.0
+                  currency: USD
+                  expirationTime: 1749686400000
+      responses:
+        '200':
+          description: Created prepaid order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepaidOrder'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PrepaidOrderRequest:
+      type: object
+      description: Request body for creating a prepaid order
+      required:
+      - customerId
+      - amount
+      properties:
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        amount:
+          type: number
+          description: Prepaid credit amount
+          example: 500.0
+        currency:
+          type: string
+          description: Currency code
+          example: USD
+        expirationTime:
+          type: integer
+          format: int64
+          description: Expiration timestamp in Unix milliseconds
+          example: 1749686400000
+    PrepaidOrder:
+      type: object
+      description: A prepaid credit order for a customer
+      properties:
+        orderId:
+          type: string
+          description: Unique prepaid order identifier
+          example: order-a1b2c3d4
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        amount:
+          type: number
+          description: Prepaid credit amount
+          example: 500.0
+        currency:
+          type: string
+          description: Currency code
+          example: USD
+        createTime:
+          type: integer
+          format: int64
+          description: Creation timestamp
+          example: 1718153645993
+        expirationTime:
+          type: integer
+          format: int64
+          description: Expiration timestamp in Unix milliseconds
+          example: 1749686400000
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Customer not found
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication

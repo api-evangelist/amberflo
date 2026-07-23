@@ -1,0 +1,185 @@
+openapi: 3.0.3
+info:
+  title: Amberflo Billing Customers Usage Queries API
+  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  version: 1.0.0
+  contact:
+    name: Amberflo Support
+    url: https://www.amberflo.io/company/contact
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://app.amberflo.io
+  description: Amberflo Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Usage Queries
+  description: Query aggregated usage data and raw events
+paths:
+  /usage:
+    post:
+      operationId: queryUsage
+      summary: Amberflo Query Usage Data
+      description: Query aggregated usage data for meters with time series, grouping, and filtering options.
+      tags:
+      - Usage Queries
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsageQueryRequest'
+            examples:
+              QueryUsageRequestExample:
+                summary: Default queryUsage request
+                x-microcks-default: true
+                value:
+                  meterApiName: api-calls
+                  startTimeInSeconds: 1718100000
+                  endTimeInSeconds: 1718186400
+                  aggregation: SUM
+                  timeGroupingInterval: DAY
+                  groupBy:
+                  - customerId
+      responses:
+        '200':
+          description: Usage query results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageQueryResponse'
+              examples:
+                QueryUsage200Example:
+                  summary: Default queryUsage 200 response
+                  x-microcks-default: true
+                  value:
+                    clientMeters:
+                      api-calls:
+                      - groupInfo:
+                          customerId: customer-123456
+                        records:
+                        - '1718100000': 42.0
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    UsageQueryRequest:
+      type: object
+      description: Request body for querying usage data
+      required:
+      - meterApiName
+      - startTimeInSeconds
+      - endTimeInSeconds
+      - aggregation
+      - timeGroupingInterval
+      properties:
+        meterApiName:
+          type: string
+          description: Name of the meter to query
+          example: api-calls
+        startTimeInSeconds:
+          type: integer
+          description: Query start time in Unix seconds
+          example: 1718100000
+        endTimeInSeconds:
+          type: integer
+          description: Query end time in Unix seconds
+          example: 1718186400
+        aggregation:
+          type: string
+          description: Aggregation function to apply
+          enum:
+          - SUM
+          - MAX
+          - COUNT
+          example: SUM
+        timeGroupingInterval:
+          type: string
+          description: Time interval for grouping results
+          enum:
+          - HOUR
+          - DAY
+          - WEEK
+          - MONTH
+          example: DAY
+        groupBy:
+          type: array
+          description: Dimensions to group results by
+          items:
+            type: string
+          example:
+          - customerId
+        customerFilter:
+          type: array
+          description: List of customer IDs to filter by
+          items:
+            type: string
+        filter:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Key-value filter for dimension-based filtering
+    UsageRecord:
+      type: object
+      description: A usage record grouped by dimension values
+      properties:
+        groupInfo:
+          type: object
+          additionalProperties:
+            type: string
+          description: Group dimension values for this record
+        records:
+          type: array
+          description: Time-series usage data points
+          items:
+            type: object
+            additionalProperties:
+              type: number
+    UsageQueryResponse:
+      type: object
+      description: Response from a usage data query
+      properties:
+        clientMeters:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/UsageRecord'
+          description: Map of meter API name to usage records
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication
