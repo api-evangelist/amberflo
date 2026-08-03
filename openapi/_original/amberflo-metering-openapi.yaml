@@ -1,0 +1,653 @@
+openapi: 3.0.3
+info:
+  title: Amberflo Metering API
+  description: >-
+    The Amberflo Metering API provides meter definition management,
+    high-throughput event ingestion, usage queries, raw event queries, and
+    filtering rules for usage-based billing and cost management.
+  version: 1.0.0
+  contact:
+    name: Amberflo Support
+    url: https://www.amberflo.io/company/contact
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+  - url: https://app.amberflo.io
+    description: Amberflo Production API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Meter Definitions
+    description: Create, read, update, and delete meter definitions
+  - name: Event Ingestion
+    description: Ingest meter events for usage tracking
+  - name: Usage Queries
+    description: Query aggregated usage data and raw events
+  - name: Filtering Rules
+    description: Manage meter event filtering rules
+paths:
+  /ingest:
+    post:
+      operationId: ingestMeterEvents
+      summary: Amberflo Ingest Meter Events
+      description: >-
+        Ingest one or more meter events for usage tracking. Supports both single
+        event objects and arrays of events with idempotency via uniqueId.
+      tags:
+        - Event Ingestion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/MeterEvent'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/MeterEvent'
+            examples:
+              IngestMeterEventsRequestExample:
+                summary: Default ingestMeterEvents request
+                x-microcks-default: true
+                value:
+                  meterApiName: api-calls
+                  customerId: customer-123456
+                  meterValue: 1
+                  meterTimeInMillis: 1718153645993
+                  uniqueId: evt-a1b2c3d4
+                  dimensions:
+                    region: us-east-1
+                    tier: premium
+      responses:
+        '200':
+          description: Successful request — events accepted for ingestion
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                IngestMeterEvents200Example:
+                  summary: Default ingestMeterEvents 200 response
+                  x-microcks-default: true
+                  value: OK
+        '400':
+          description: Bad request — invalid event data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized — invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /meter-definition:
+    get:
+      operationId: listMeterDefinitions
+      summary: Amberflo List Meter Definitions
+      description: List all meter definitions configured in the account.
+      tags:
+        - Meter Definitions
+      responses:
+        '200':
+          description: Array of meter definitions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MeterDefinition'
+              examples:
+                ListMeterDefinitions200Example:
+                  summary: Default listMeterDefinitions 200 response
+                  x-microcks-default: true
+                  value:
+                    - meterApiName: api-calls
+                      displayName: API Calls
+                      label: api-calls
+                      type: SUM_OF_ALL_USAGE
+                      meterTimeInMillis: 1718153645993
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createMeterDefinition
+      summary: Amberflo Create Meter Definition
+      description: Create a new meter definition for tracking usage events.
+      tags:
+        - Meter Definitions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeterDefinitionRequest'
+            examples:
+              CreateMeterDefinitionRequestExample:
+                summary: Default createMeterDefinition request
+                x-microcks-default: true
+                value:
+                  meterApiName: api-calls
+                  displayName: API Calls
+                  type: SUM_OF_ALL_USAGE
+                  dimensions: []
+      responses:
+        '200':
+          description: Created meter definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeterDefinition'
+              examples:
+                CreateMeterDefinition200Example:
+                  summary: Default createMeterDefinition 200 response
+                  x-microcks-default: true
+                  value:
+                    meterApiName: api-calls
+                    displayName: API Calls
+                    label: api-calls
+                    type: SUM_OF_ALL_USAGE
+                    meterTimeInMillis: 1718153645993
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateMeterDefinition
+      summary: Amberflo Update Meter Definition
+      description: Update an existing meter definition.
+      tags:
+        - Meter Definitions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeterDefinition'
+      responses:
+        '200':
+          description: Updated meter definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeterDefinition'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /meter-definition/{meterApiName}:
+    get:
+      operationId: getMeterDefinitionById
+      summary: Amberflo Get Meter Definition by ID
+      description: Retrieve a specific meter definition by its API name.
+      tags:
+        - Meter Definitions
+      parameters:
+        - name: meterApiName
+          in: path
+          required: true
+          description: The API name of the meter definition
+          schema:
+            type: string
+          example: api-calls
+      responses:
+        '200':
+          description: Meter definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeterDefinition'
+        '404':
+          description: Meter definition not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteMeterDefinition
+      summary: Amberflo Delete Meter Definition
+      description: Delete a meter definition by its API name.
+      tags:
+        - Meter Definitions
+      parameters:
+        - name: meterApiName
+          in: path
+          required: true
+          description: The API name of the meter definition to delete
+          schema:
+            type: string
+          example: api-calls
+      responses:
+        '200':
+          description: Meter definition deleted successfully
+        '404':
+          description: Meter definition not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /usage:
+    post:
+      operationId: queryUsage
+      summary: Amberflo Query Usage Data
+      description: >-
+        Query aggregated usage data for meters with time series, grouping, and
+        filtering options.
+      tags:
+        - Usage Queries
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsageQueryRequest'
+            examples:
+              QueryUsageRequestExample:
+                summary: Default queryUsage request
+                x-microcks-default: true
+                value:
+                  meterApiName: api-calls
+                  startTimeInSeconds: 1718100000
+                  endTimeInSeconds: 1718186400
+                  aggregation: SUM
+                  timeGroupingInterval: DAY
+                  groupBy:
+                    - customerId
+      responses:
+        '200':
+          description: Usage query results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageQueryResponse'
+              examples:
+                QueryUsage200Example:
+                  summary: Default queryUsage 200 response
+                  x-microcks-default: true
+                  value:
+                    clientMeters:
+                      api-calls:
+                        - groupInfo:
+                            customerId: customer-123456
+                          records:
+                            - '1718100000': 42.0
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /meter-event-filtering-rules:
+    post:
+      operationId: createFilteringRule
+      summary: Amberflo Create or Update Filtering Rule
+      description: Create or update a filtering rule for meter events.
+      tags:
+        - Filtering Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilteringRule'
+      responses:
+        '200':
+          description: Filtering rule created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilteringRule'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: listFilteringRules
+      summary: Amberflo List Filtering Rules
+      description: List existing filtering rules for a meter.
+      tags:
+        - Filtering Rules
+      parameters:
+        - name: meterApiName
+          in: query
+          required: true
+          description: The meter API name to list filtering rules for
+          schema:
+            type: string
+          example: api-calls
+      responses:
+        '200':
+          description: Array of filtering rules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FilteringRule'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication, accessible from Amberflo Settings > Account Configuration > API Keys
+  schemas:
+    MeterEvent:
+      type: object
+      description: A single meter event representing a unit of usage
+      required:
+        - meterTimeInMillis
+      properties:
+        meterApiName:
+          type: string
+          description: The API name of the meter to ingest to
+          example: api-calls
+        customerId:
+          type: string
+          description: Unique identifier for the customer
+          example: customer-123456
+        meterValue:
+          type: number
+          description: The usage amount for this event
+          example: 1.0
+        meterTimeInMillis:
+          type: integer
+          format: int64
+          description: Event timestamp in Unix time (milliseconds)
+          example: 1718153645993
+        uniqueId:
+          type: string
+          description: Custom identifier for event deduplication
+          example: evt-a1b2c3d4
+        dimensions:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for event categorization
+          example:
+            region: us-east-1
+            tier: premium
+        values:
+          type: object
+          additionalProperties:
+            type: number
+          description: Map of meterApiName to meterValue for multi-meter ingestion
+    MeterDefinition:
+      type: object
+      description: A meter definition that specifies how usage events are tracked and aggregated
+      required:
+        - meterApiName
+        - displayName
+        - type
+      properties:
+        meterApiName:
+          type: string
+          description: Unique API name for the meter
+          example: api-calls
+        displayName:
+          type: string
+          description: Human-readable display name for the meter
+          example: API Calls
+        label:
+          type: string
+          description: Label identifier for the meter
+          example: api-calls
+        type:
+          type: string
+          description: Aggregation type for the meter
+          enum:
+            - SUM_OF_ALL_USAGE
+            - MAX_IN_PERIOD
+            - UNIQUE_CUSTOMERS_COUNT
+          example: SUM_OF_ALL_USAGE
+        meterTimeInMillis:
+          type: integer
+          format: int64
+          description: Creation timestamp in Unix milliseconds
+          example: 1718153645993
+        dimensions:
+          type: array
+          description: List of dimension names for this meter
+          items:
+            type: string
+    MeterDefinitionRequest:
+      type: object
+      description: Request body for creating a meter definition
+      required:
+        - meterApiName
+        - displayName
+        - type
+      properties:
+        meterApiName:
+          type: string
+          description: Unique API name for the meter
+          example: api-calls
+        displayName:
+          type: string
+          description: Human-readable display name
+          example: API Calls
+        type:
+          type: string
+          description: Aggregation type for the meter
+          enum:
+            - SUM_OF_ALL_USAGE
+            - MAX_IN_PERIOD
+            - UNIQUE_CUSTOMERS_COUNT
+          example: SUM_OF_ALL_USAGE
+        dimensions:
+          type: array
+          description: Dimension names for this meter
+          items:
+            type: string
+    UsageQueryRequest:
+      type: object
+      description: Request body for querying usage data
+      required:
+        - meterApiName
+        - startTimeInSeconds
+        - endTimeInSeconds
+        - aggregation
+        - timeGroupingInterval
+      properties:
+        meterApiName:
+          type: string
+          description: Name of the meter to query
+          example: api-calls
+        startTimeInSeconds:
+          type: integer
+          description: Query start time in Unix seconds
+          example: 1718100000
+        endTimeInSeconds:
+          type: integer
+          description: Query end time in Unix seconds
+          example: 1718186400
+        aggregation:
+          type: string
+          description: Aggregation function to apply
+          enum:
+            - SUM
+            - MAX
+            - COUNT
+          example: SUM
+        timeGroupingInterval:
+          type: string
+          description: Time interval for grouping results
+          enum:
+            - HOUR
+            - DAY
+            - WEEK
+            - MONTH
+          example: DAY
+        groupBy:
+          type: array
+          description: Dimensions to group results by
+          items:
+            type: string
+          example:
+            - customerId
+        customerFilter:
+          type: array
+          description: List of customer IDs to filter by
+          items:
+            type: string
+        filter:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Key-value filter for dimension-based filtering
+    UsageQueryResponse:
+      type: object
+      description: Response from a usage data query
+      properties:
+        clientMeters:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/UsageRecord'
+          description: Map of meter API name to usage records
+    UsageRecord:
+      type: object
+      description: A usage record grouped by dimension values
+      properties:
+        groupInfo:
+          type: object
+          additionalProperties:
+            type: string
+          description: Group dimension values for this record
+        records:
+          type: array
+          description: Time-series usage data points
+          items:
+            type: object
+            additionalProperties:
+              type: number
+    FilteringRule:
+      type: object
+      description: A rule for filtering meter events before ingestion
+      required:
+        - meterApiName
+      properties:
+        meterApiName:
+          type: string
+          description: The meter API name this rule applies to
+          example: api-calls
+        ruleId:
+          type: string
+          description: Unique identifier for this filtering rule
+          example: rule-a1b2c3
+        dimensionName:
+          type: string
+          description: The dimension to filter on
+          example: region
+        dimensionValues:
+          type: array
+          description: Values to include or exclude
+          items:
+            type: string
+          example:
+            - us-east-1
+            - eu-west-1
+        action:
+          type: string
+          description: Whether to include or exclude matching events
+          enum:
+            - INCLUDE
+            - EXCLUDE
+          example: INCLUDE
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details

@@ -1,0 +1,185 @@
+{
+  "info": {
+    "_postman_id": "987214a5-642e-40f6-9ae1-d7294bbf3c98",
+    "name": "Amberflo Billing Customers Invoices API",
+    "description": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:35.000Z",
+    "updatedAt": "2026-07-28T00:59:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-987214a5-642e-40f6-9ae1-d7294bbf3c98"
+  },
+  "item": [
+    {
+      "name": "payments-billing-customer-product-invoice",
+      "item": [
+        {
+          "name": "Amberflo List Customer Invoices",
+          "id": "1ac8b791-eedc-429e-b2bf-b5ce21fb27a6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments-billing-customer-product-invoice?customerId=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments-billing-customer-product-invoice"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Customer ID to retrieve invoices for",
+                  "key": "customerId",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve a list of invoices for a specific customer."
+          },
+          "response": [
+            {
+              "id": "4e739631-a3d7-43c9-a91e-bc1675bf54e7",
+              "name": "Array of invoices",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payments-billing-customer-product-invoice?customerId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payments-billing-customer-product-invoice"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Customer ID to retrieve invoices for",
+                      "key": "customerId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"invoiceId\": \"<string>\",\n    \"customerId\": \"<string>\",\n    \"startTime\": \"<integer>\",\n    \"endTime\": \"<integer>\",\n    \"totalAmount\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"status\": \"DRAFT\"\n  },\n  {\n    \"invoiceId\": \"<string>\",\n    \"customerId\": \"<string>\",\n    \"startTime\": \"<integer>\",\n    \"endTime\": \"<integer>\",\n    \"totalAmount\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"status\": \"DRAFT\"\n  }\n]",
+              "createdAt": "2026-07-28T00:59:35.000Z",
+              "updatedAt": "2026-07-28T00:59:35.000Z",
+              "uid": "35240-4e739631-a3d7-43c9-a91e-bc1675bf54e7"
+            },
+            {
+              "id": "ad7b78b2-703a-400f-8722-e3a67854910e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payments-billing-customer-product-invoice?customerId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payments-billing-customer-product-invoice"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Customer ID to retrieve invoices for",
+                      "key": "customerId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:35.000Z",
+              "updatedAt": "2026-07-28T00:59:35.000Z",
+              "uid": "35240-ad7b78b2-703a-400f-8722-e3a67854910e"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:35.000Z",
+          "updatedAt": "2026-07-28T00:59:35.000Z",
+          "uid": "35240-1ac8b791-eedc-429e-b2bf-b5ce21fb27a6"
+        }
+      ],
+      "id": "bd631c45-a52c-419a-a405-bbaf165c4687",
+      "createdAt": "2026-07-28T00:59:35.000Z",
+      "updatedAt": "2026-07-28T00:59:35.000Z",
+      "uid": "35240-bd631c45-a52c-419a-a405-bbaf165c4687"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.amberflo.io"
+    }
+  ]
+}

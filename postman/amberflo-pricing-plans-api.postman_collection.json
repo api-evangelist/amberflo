@@ -1,0 +1,262 @@
+{
+  "info": {
+    "_postman_id": "5122be9b-128f-4725-886e-df0609b23497",
+    "name": "Amberflo Billing Customers Pricing Plans API",
+    "description": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:38.000Z",
+    "updatedAt": "2026-07-28T00:59:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5122be9b-128f-4725-886e-df0609b23497"
+  },
+  "item": [
+    {
+      "name": "payments-pricing-amberflo-customer-pricing",
+      "item": [
+        {
+          "name": "Amberflo Assign Pricing Plan to Customer",
+          "id": "eec44edf-e57b-4a23-a9e2-3b85bd8e49c0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"startTime\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/payments-pricing-amberflo-customer-pricing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments-pricing-amberflo-customer-pricing"
+              ]
+            },
+            "description": "Assign a pricing plan to a customer account."
+          },
+          "response": [
+            {
+              "id": "04772a10-6334-419c-90be-4aa30002c55d",
+              "name": "Pricing plan assigned successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"startTime\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payments-pricing-amberflo-customer-pricing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payments-pricing-amberflo-customer-pricing"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"customerId\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"startTime\": \"<long>\"\n}",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-04772a10-6334-419c-90be-4aa30002c55d"
+            },
+            {
+              "id": "4b8b1942-c47b-44bb-b8e0-8dbedf5cfe63",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"startTime\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payments-pricing-amberflo-customer-pricing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payments-pricing-amberflo-customer-pricing"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-4b8b1942-c47b-44bb-b8e0-8dbedf5cfe63"
+            },
+            {
+              "id": "763ba966-7556-4182-a027-554ea5c5c6d6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"startTime\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payments-pricing-amberflo-customer-pricing",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payments-pricing-amberflo-customer-pricing"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-763ba966-7556-4182-a027-554ea5c5c6d6"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:38.000Z",
+          "updatedAt": "2026-07-28T00:59:38.000Z",
+          "uid": "35240-eec44edf-e57b-4a23-a9e2-3b85bd8e49c0"
+        }
+      ],
+      "id": "a7b3cfd5-022e-4b6c-9f08-f5fae8b35936",
+      "createdAt": "2026-07-28T00:59:38.000Z",
+      "updatedAt": "2026-07-28T00:59:38.000Z",
+      "uid": "35240-a7b3cfd5-022e-4b6c-9f08-f5fae8b35936"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.amberflo.io"
+    }
+  ]
+}

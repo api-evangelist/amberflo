@@ -1,0 +1,634 @@
+openapi: 3.0.3
+info:
+  title: Amberflo Billing API
+  description: >-
+    The Amberflo Billing API manages customers, pricing plans, invoices,
+    prepaid orders, promotions, commitments, and billing analysis for
+    usage-based monetization workflows.
+  version: 1.0.0
+  contact:
+    name: Amberflo Support
+    url: https://www.amberflo.io/company/contact
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+  - url: https://app.amberflo.io
+    description: Amberflo Production API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Customers
+    description: Manage customer accounts and lifecycle
+  - name: Pricing Plans
+    description: Manage pricing plans and customer plan assignments
+  - name: Invoices
+    description: Retrieve customer invoices
+  - name: Prepaid Orders
+    description: Manage customer prepaid credit orders
+  - name: Promotions
+    description: Manage customer promotions and discounts
+paths:
+  /customers:
+    get:
+      operationId: listCustomers
+      summary: Amberflo List All Customers
+      description: Retrieve a list of all customers in the account.
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: Array of customer records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+              examples:
+                ListCustomers200Example:
+                  summary: Default listCustomers 200 response
+                  x-microcks-default: true
+                  value:
+                    - customerId: customer-123456
+                      customerName: Acme Corp
+                      customerEmail: billing@acme.com
+                      lifecycleStage: ACTIVE
+                      createTime: 1718153645993
+                      updateTime: 1718153645993
+                      test: false
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCustomer
+      summary: Amberflo Create a Customer
+      description: Create a new customer account in Amberflo.
+      tags:
+        - Customers
+      parameters:
+        - name: autoCreateCustomerInStripe
+          in: query
+          required: false
+          description: Whether to auto-create the customer in Stripe
+          schema:
+            type: string
+            enum:
+              - if_payment_provider
+          example: if_payment_provider
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+            examples:
+              CreateCustomerRequestExample:
+                summary: Default createCustomer request
+                x-microcks-default: true
+                value:
+                  customerId: customer-123456
+                  customerName: Acme Corp
+                  customerEmail: billing@acme.com
+                  lifecycleStage: ACTIVE
+                  test: false
+      responses:
+        '200':
+          description: Created customer record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+              examples:
+                CreateCustomer200Example:
+                  summary: Default createCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    customerId: customer-123456
+                    customerName: Acme Corp
+                    customerEmail: billing@acme.com
+                    lifecycleStage: ACTIVE
+                    createTime: 1718153645993
+                    updateTime: 1718153645993
+        '400':
+          description: Bad request — invalid data or duplicate customerId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateCustomer
+      summary: Amberflo Update a Customer
+      description: Update an existing customer's details.
+      tags:
+        - Customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Updated customer record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customerId}:
+    get:
+      operationId: getCustomerById
+      summary: Amberflo Get Customer by ID
+      description: Retrieve a specific customer by their unique identifier.
+      tags:
+        - Customers
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          description: Unique identifier of the customer
+          schema:
+            type: string
+          example: customer-123456
+      responses:
+        '200':
+          description: Customer record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteCustomer
+      summary: Amberflo Delete Customer by ID
+      description: Delete a customer account by their unique identifier.
+      tags:
+        - Customers
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          description: Unique identifier of the customer to delete
+          schema:
+            type: string
+          example: customer-123456
+      responses:
+        '200':
+          description: Customer deleted successfully
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /payments-billing-customer-product-invoice:
+    get:
+      operationId: listInvoices
+      summary: Amberflo List Customer Invoices
+      description: Retrieve a list of invoices for a specific customer.
+      tags:
+        - Invoices
+      parameters:
+        - name: customerId
+          in: query
+          required: true
+          description: Customer ID to retrieve invoices for
+          schema:
+            type: string
+          example: customer-123456
+      responses:
+        '200':
+          description: Array of invoices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+              examples:
+                ListInvoices200Example:
+                  summary: Default listInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    - invoiceId: inv-500123
+                      customerId: customer-123456
+                      startTime: 1718100000
+                      endTime: 1718186400
+                      totalAmount: 99.50
+                      currency: USD
+                      status: PAID
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /payments-pricing-amberflo-customer-prepaid:
+    post:
+      operationId: createPrepaidOrder
+      summary: Amberflo Create Prepaid Order
+      description: Create a prepaid credit order for a customer.
+      tags:
+        - Prepaid Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepaidOrderRequest'
+            examples:
+              CreatePrepaidOrderRequestExample:
+                summary: Default createPrepaidOrder request
+                x-microcks-default: true
+                value:
+                  customerId: customer-123456
+                  amount: 500.00
+                  currency: USD
+                  expirationTime: 1749686400000
+      responses:
+        '200':
+          description: Created prepaid order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepaidOrder'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /payments-pricing-amberflo-customer-pricing:
+    post:
+      operationId: assignPricingPlan
+      summary: Amberflo Assign Pricing Plan to Customer
+      description: Assign a pricing plan to a customer account.
+      tags:
+        - Pricing Plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingPlanAssignment'
+      responses:
+        '200':
+          description: Pricing plan assigned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlanAssignment'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API key for authentication
+  schemas:
+    Customer:
+      type: object
+      description: A customer account in Amberflo
+      required:
+        - customerId
+        - customerName
+      properties:
+        createTime:
+          type: integer
+          format: int64
+          description: Creation timestamp in Unix milliseconds
+          example: 1718153645993
+        updateTime:
+          type: integer
+          format: int64
+          description: Last update timestamp in Unix milliseconds
+          example: 1718153645993
+        deleteTime:
+          type: integer
+          format: int64
+          description: Deletion timestamp in Unix milliseconds
+          example: 1718153645993
+        customerId:
+          type: string
+          description: Unique customer identifier from your system
+          example: customer-123456
+        customerName:
+          type: string
+          description: Customer display name
+          example: Acme Corp
+        customerEmail:
+          type: string
+          format: email
+          description: Customer contact email
+          example: billing@acme.com
+        description:
+          type: string
+          description: Customer description
+          example: Enterprise customer account for Acme Corporation
+        enabled:
+          type: boolean
+          description: Deprecated — use lifecycleStage instead
+          deprecated: true
+        test:
+          type: boolean
+          description: Whether this is a test customer account
+          example: false
+        lifecycleStage:
+          type: string
+          description: Customer lifecycle stage
+          enum:
+            - ONBOARDING
+            - TRAIL
+            - ACTIVE
+            - OFFBOARDED
+          example: ACTIVE
+        deactivateTimeStamp:
+          type: integer
+          format: int64
+          description: Last deactivation timestamp in Unix milliseconds
+        traits:
+          type: object
+          additionalProperties:
+            type: string
+          description: Custom metadata for external system integration
+        address:
+          $ref: '#/components/schemas/Address'
+    CustomerRequest:
+      type: object
+      description: Request body for creating or updating a customer
+      required:
+        - customerId
+        - customerName
+      properties:
+        customerId:
+          type: string
+          description: Unique customer identifier
+          example: customer-123456
+        customerName:
+          type: string
+          description: Customer display name
+          example: Acme Corp
+        customerEmail:
+          type: string
+          format: email
+          description: Customer email address
+          example: billing@acme.com
+        description:
+          type: string
+          description: Customer description
+        test:
+          type: boolean
+          description: Marks customer as test
+          example: false
+        lifecycleStage:
+          type: string
+          description: Lifecycle stage
+          enum:
+            - ONBOARDING
+            - TRAIL
+            - ACTIVE
+            - OFFBOARDED
+          example: ACTIVE
+        traits:
+          type: object
+          additionalProperties:
+            type: string
+          description: Custom metadata
+        address:
+          $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      description: Tax address for a customer
+      required:
+        - line1
+        - city
+        - country
+      properties:
+        verified:
+          type: boolean
+          description: Whether the address has been verified
+        line1:
+          type: string
+          description: Address line 1
+          example: 123 Main Street
+        state:
+          type: string
+          description: State or province
+          example: CA
+        city:
+          type: string
+          description: City
+          example: San Francisco
+        postalCode:
+          type: string
+          description: Postal or ZIP code
+          example: '94105'
+        country:
+          type: string
+          description: ISO country code
+          example: US
+    Invoice:
+      type: object
+      description: A customer invoice
+      properties:
+        invoiceId:
+          type: string
+          description: Unique invoice identifier
+          example: inv-500123
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        startTime:
+          type: integer
+          description: Invoice period start in Unix seconds
+          example: 1718100000
+        endTime:
+          type: integer
+          description: Invoice period end in Unix seconds
+          example: 1718186400
+        totalAmount:
+          type: number
+          description: Total invoice amount
+          example: 99.50
+        currency:
+          type: string
+          description: Invoice currency code
+          example: USD
+        status:
+          type: string
+          description: Invoice payment status
+          enum:
+            - DRAFT
+            - PENDING
+            - PAID
+            - VOID
+          example: PAID
+    PrepaidOrder:
+      type: object
+      description: A prepaid credit order for a customer
+      properties:
+        orderId:
+          type: string
+          description: Unique prepaid order identifier
+          example: order-a1b2c3d4
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        amount:
+          type: number
+          description: Prepaid credit amount
+          example: 500.00
+        currency:
+          type: string
+          description: Currency code
+          example: USD
+        createTime:
+          type: integer
+          format: int64
+          description: Creation timestamp
+          example: 1718153645993
+        expirationTime:
+          type: integer
+          format: int64
+          description: Expiration timestamp in Unix milliseconds
+          example: 1749686400000
+    PrepaidOrderRequest:
+      type: object
+      description: Request body for creating a prepaid order
+      required:
+        - customerId
+        - amount
+      properties:
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        amount:
+          type: number
+          description: Prepaid credit amount
+          example: 500.00
+        currency:
+          type: string
+          description: Currency code
+          example: USD
+        expirationTime:
+          type: integer
+          format: int64
+          description: Expiration timestamp in Unix milliseconds
+          example: 1749686400000
+    PricingPlanAssignment:
+      type: object
+      description: Assignment of a pricing plan to a customer
+      properties:
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        productId:
+          type: string
+          description: Product or pricing plan identifier
+          example: plan-standard
+        startTime:
+          type: integer
+          format: int64
+          description: Plan start time in Unix milliseconds
+          example: 1718153645993
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Customer not found
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND

@@ -1,0 +1,262 @@
+{
+  "info": {
+    "_postman_id": "7feba741-013c-414d-a37f-8e2c2ae828ff",
+    "name": "Amberflo Billing Customers Event Ingestion API",
+    "description": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:33.000Z",
+    "updatedAt": "2026-07-28T00:59:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7feba741-013c-414d-a37f-8e2c2ae828ff"
+  },
+  "item": [
+    {
+      "name": "ingest",
+      "item": [
+        {
+          "name": "Amberflo Ingest Meter Events",
+          "id": "c0f62580-af38-421e-9e37-2fc53da13f69",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterTimeInMillis\": \"<long>\",\n  \"meterApiName\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"meterValue\": \"<number>\",\n  \"uniqueId\": \"<string>\",\n  \"dimensions\": {\n    \"exercitation_5\": \"<string>\"\n  },\n  \"values\": {\n    \"mollit_c_\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ingest",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ingest"
+              ]
+            },
+            "description": "Ingest one or more meter events for usage tracking. Supports both single event objects and arrays of events with idempotency via uniqueId."
+          },
+          "response": [
+            {
+              "id": "d4638013-dad0-4c6c-a105-8d8f0ea4c145",
+              "name": "Successful request \u2014 events accepted for ingestion",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterTimeInMillis\": \"<long>\",\n  \"meterApiName\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"meterValue\": \"<number>\",\n  \"uniqueId\": \"<string>\",\n  \"dimensions\": {\n    \"exercitation_5\": \"<string>\"\n  },\n  \"values\": {\n    \"mollit_c_\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ingest",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ingest"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-d4638013-dad0-4c6c-a105-8d8f0ea4c145"
+            },
+            {
+              "id": "51a53139-9a13-4f92-a420-7235a063762e",
+              "name": "Bad request \u2014 invalid event data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterTimeInMillis\": \"<long>\",\n  \"meterApiName\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"meterValue\": \"<number>\",\n  \"uniqueId\": \"<string>\",\n  \"dimensions\": {\n    \"exercitation_5\": \"<string>\"\n  },\n  \"values\": {\n    \"mollit_c_\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ingest",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ingest"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-51a53139-9a13-4f92-a420-7235a063762e"
+            },
+            {
+              "id": "e87ed1a2-a427-42c9-8655-997b799b2206",
+              "name": "Unauthorized \u2014 invalid or missing API key",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterTimeInMillis\": \"<long>\",\n  \"meterApiName\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"meterValue\": \"<number>\",\n  \"uniqueId\": \"<string>\",\n  \"dimensions\": {\n    \"exercitation_5\": \"<string>\"\n  },\n  \"values\": {\n    \"mollit_c_\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ingest",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ingest"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-e87ed1a2-a427-42c9-8655-997b799b2206"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:34.000Z",
+          "updatedAt": "2026-07-28T00:59:34.000Z",
+          "uid": "35240-c0f62580-af38-421e-9e37-2fc53da13f69"
+        }
+      ],
+      "id": "26e7a56a-f39a-408e-841e-e1d75d100d01",
+      "createdAt": "2026-07-28T00:59:34.000Z",
+      "updatedAt": "2026-07-28T00:59:34.000Z",
+      "uid": "35240-26e7a56a-f39a-408e-841e-e1d75d100d01"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.amberflo.io"
+    }
+  ]
+}

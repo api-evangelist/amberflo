@@ -1,0 +1,1028 @@
+{
+  "info": {
+    "_postman_id": "3bf8bc3a-5d82-41cc-92f8-6dc05bb76038",
+    "name": "Amberflo Billing Customers API",
+    "description": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:32.000Z",
+    "updatedAt": "2026-07-28T00:59:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3bf8bc3a-5d82-41cc-92f8-6dc05bb76038"
+  },
+  "item": [
+    {
+      "name": "customers",
+      "item": [
+        {
+          "name": "{customerId}",
+          "item": [
+            {
+              "name": "Amberflo Get Customer by ID",
+              "id": "0e3f2a00-eade-4563-9b5f-5eff03c72144",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers/:customerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d52ad5cd-0b11-4571-9fb6-24253cfce7e1",
+                      "key": "customerId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "description": "Retrieve a specific customer by their unique identifier."
+              },
+              "response": [
+                {
+                  "id": "bb989339-5240-4eeb-9cfb-9fc45e58436b",
+                  "name": "Customer record",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"createTime\": \"<long>\",\n  \"updateTime\": \"<long>\",\n  \"deleteTime\": \"<long>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"TRAIL\",\n  \"deactivateTimeStamp\": \"<long>\",\n  \"traits\": {\n    \"occaecat13e\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-bb989339-5240-4eeb-9cfb-9fc45e58436b"
+                },
+                {
+                  "id": "25dc479f-3b34-4dfd-8618-3c360146b05f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-25dc479f-3b34-4dfd-8618-3c360146b05f"
+                },
+                {
+                  "id": "bb818b9e-9ed1-4d83-b1a5-9eeeb9b88bc6",
+                  "name": "Customer not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-bb818b9e-9ed1-4d83-b1a5-9eeeb9b88bc6"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-0e3f2a00-eade-4563-9b5f-5eff03c72144"
+            },
+            {
+              "name": "Amberflo Delete Customer by ID",
+              "id": "c0a1ab6b-9373-41b6-865e-8cfdac1498c2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers/:customerId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "35e1b03f-250b-41fc-91a7-e1553a1de69c",
+                      "key": "customerId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the customer to delete"
+                    }
+                  ]
+                },
+                "description": "Delete a customer account by their unique identifier."
+              },
+              "response": [
+                {
+                  "id": "2b7d14aa-ff1b-469c-905e-ab4d40d48ad0",
+                  "name": "Customer deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-2b7d14aa-ff1b-469c-905e-ab4d40d48ad0"
+                },
+                {
+                  "id": "7ea13534-f8cc-4f70-9e32-33c05d99abfb",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-7ea13534-f8cc-4f70-9e32-33c05d99abfb"
+                },
+                {
+                  "id": "c56b7bf9-e89b-4b44-8542-b774a1acbd9b",
+                  "name": "Customer not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customerId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "customerId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-c56b7bf9-e89b-4b44-8542-b774a1acbd9b"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-c0a1ab6b-9373-41b6-865e-8cfdac1498c2"
+            }
+          ],
+          "id": "b01f3ed2-bc33-46cb-b5c1-155d376e067e",
+          "createdAt": "2026-07-28T00:59:33.000Z",
+          "updatedAt": "2026-07-28T00:59:33.000Z",
+          "uid": "35240-b01f3ed2-bc33-46cb-b5c1-155d376e067e"
+        },
+        {
+          "name": "Amberflo List All Customers",
+          "id": "2a0c0a20-5707-4b8e-8846-6556a9f81b19",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            },
+            "description": "Retrieve a list of all customers in the account."
+          },
+          "response": [
+            {
+              "id": "91d7580a-500d-44f2-bde8-593186cf237d",
+              "name": "Array of customer records",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"customerId\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"createTime\": \"<long>\",\n    \"updateTime\": \"<long>\",\n    \"deleteTime\": \"<long>\",\n    \"customerEmail\": \"<email>\",\n    \"description\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"test\": \"<boolean>\",\n    \"lifecycleStage\": \"TRAIL\",\n    \"deactivateTimeStamp\": \"<long>\",\n    \"traits\": {\n      \"Ut_579\": \"<string>\"\n    },\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"verified\": \"<boolean>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  },\n  {\n    \"customerId\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"createTime\": \"<long>\",\n    \"updateTime\": \"<long>\",\n    \"deleteTime\": \"<long>\",\n    \"customerEmail\": \"<email>\",\n    \"description\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"test\": \"<boolean>\",\n    \"lifecycleStage\": \"ACTIVE\",\n    \"deactivateTimeStamp\": \"<long>\",\n    \"traits\": {\n      \"tempor__ad\": \"<string>\",\n      \"Lorema_d\": \"<string>\",\n      \"in_b6\": \"<string>\"\n    },\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"verified\": \"<boolean>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<string>\"\n    }\n  }\n]",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-91d7580a-500d-44f2-bde8-593186cf237d"
+            },
+            {
+              "id": "7595a6a3-19a5-4815-b76d-f4e220586b10",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-7595a6a3-19a5-4815-b76d-f4e220586b10"
+            },
+            {
+              "id": "7e244592-e643-4140-a6cc-b65b33f68c41",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-7e244592-e643-4140-a6cc-b65b33f68c41"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:33.000Z",
+          "updatedAt": "2026-07-28T00:59:33.000Z",
+          "uid": "35240-2a0c0a20-5707-4b8e-8846-6556a9f81b19"
+        },
+        {
+          "name": "Amberflo Create a Customer",
+          "id": "f275367a-ab02-4906-b6b1-f65464589f1e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"ONBOARDING\",\n  \"traits\": {\n    \"do_56f\": \"<string>\",\n    \"sit6bb\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers?autoCreateCustomerInStripe=if_payment_provider",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ],
+              "query": [
+                {
+                  "description": "Whether to auto-create the customer in Stripe",
+                  "key": "autoCreateCustomerInStripe",
+                  "value": "if_payment_provider"
+                }
+              ]
+            },
+            "description": "Create a new customer account in Amberflo."
+          },
+          "response": [
+            {
+              "id": "0c96597f-fce7-4527-90c8-dd1f6a5d8f77",
+              "name": "Created customer record",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"ONBOARDING\",\n  \"traits\": {\n    \"do_56f\": \"<string>\",\n    \"sit6bb\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers?autoCreateCustomerInStripe=if_payment_provider",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Whether to auto-create the customer in Stripe",
+                      "key": "autoCreateCustomerInStripe",
+                      "value": "if_payment_provider"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"createTime\": \"<long>\",\n  \"updateTime\": \"<long>\",\n  \"deleteTime\": \"<long>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"TRAIL\",\n  \"deactivateTimeStamp\": \"<long>\",\n  \"traits\": {\n    \"occaecat13e\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-0c96597f-fce7-4527-90c8-dd1f6a5d8f77"
+            },
+            {
+              "id": "5aa51b33-be8e-4ffe-9810-08c86711e287",
+              "name": "Bad request \u2014 invalid data or duplicate customerId",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"ONBOARDING\",\n  \"traits\": {\n    \"do_56f\": \"<string>\",\n    \"sit6bb\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers?autoCreateCustomerInStripe=if_payment_provider",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Whether to auto-create the customer in Stripe",
+                      "key": "autoCreateCustomerInStripe",
+                      "value": "if_payment_provider"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-5aa51b33-be8e-4ffe-9810-08c86711e287"
+            },
+            {
+              "id": "199b76d3-8a15-405b-b9ed-a6a48b9eb12d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"ONBOARDING\",\n  \"traits\": {\n    \"do_56f\": \"<string>\",\n    \"sit6bb\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers?autoCreateCustomerInStripe=if_payment_provider",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ],
+                  "query": [
+                    {
+                      "description": "Whether to auto-create the customer in Stripe",
+                      "key": "autoCreateCustomerInStripe",
+                      "value": "if_payment_provider"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-199b76d3-8a15-405b-b9ed-a6a48b9eb12d"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:33.000Z",
+          "updatedAt": "2026-07-28T00:59:33.000Z",
+          "uid": "35240-f275367a-ab02-4906-b6b1-f65464589f1e"
+        },
+        {
+          "name": "Amberflo Update a Customer",
+          "id": "685879b8-7084-4b9c-85cf-42f73ec42c58",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"createTime\": \"<long>\",\n  \"updateTime\": \"<long>\",\n  \"deleteTime\": \"<long>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"TRAIL\",\n  \"deactivateTimeStamp\": \"<long>\",\n  \"traits\": {\n    \"occaecat13e\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            },
+            "description": "Update an existing customer's details."
+          },
+          "response": [
+            {
+              "id": "63bb623c-241d-444a-992c-074e1061c0ae",
+              "name": "Updated customer record",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"createTime\": \"<long>\",\n  \"updateTime\": \"<long>\",\n  \"deleteTime\": \"<long>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"TRAIL\",\n  \"deactivateTimeStamp\": \"<long>\",\n  \"traits\": {\n    \"occaecat13e\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"createTime\": \"<long>\",\n  \"updateTime\": \"<long>\",\n  \"deleteTime\": \"<long>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"TRAIL\",\n  \"deactivateTimeStamp\": \"<long>\",\n  \"traits\": {\n    \"occaecat13e\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-63bb623c-241d-444a-992c-074e1061c0ae"
+            },
+            {
+              "id": "dd75a910-fc9c-4ea9-9846-27114a1dc4d7",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"createTime\": \"<long>\",\n  \"updateTime\": \"<long>\",\n  \"deleteTime\": \"<long>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"TRAIL\",\n  \"deactivateTimeStamp\": \"<long>\",\n  \"traits\": {\n    \"occaecat13e\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-dd75a910-fc9c-4ea9-9846-27114a1dc4d7"
+            },
+            {
+              "id": "be00e3b1-c507-4806-97d0-68c7c44a92f3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"createTime\": \"<long>\",\n  \"updateTime\": \"<long>\",\n  \"deleteTime\": \"<long>\",\n  \"customerEmail\": \"<email>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"test\": \"<boolean>\",\n  \"lifecycleStage\": \"TRAIL\",\n  \"deactivateTimeStamp\": \"<long>\",\n  \"traits\": {\n    \"occaecat13e\": \"<string>\"\n  },\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"verified\": \"<boolean>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-be00e3b1-c507-4806-97d0-68c7c44a92f3"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:33.000Z",
+          "updatedAt": "2026-07-28T00:59:33.000Z",
+          "uid": "35240-685879b8-7084-4b9c-85cf-42f73ec42c58"
+        }
+      ],
+      "id": "b6d12344-8452-4752-aa2f-ed0ef1a19b90",
+      "createdAt": "2026-07-28T00:59:33.000Z",
+      "updatedAt": "2026-07-28T00:59:33.000Z",
+      "uid": "35240-b6d12344-8452-4752-aa2f-ed0ef1a19b90"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.amberflo.io"
+    }
+  ]
+}

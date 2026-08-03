@@ -1,0 +1,958 @@
+{
+  "info": {
+    "_postman_id": "e4dcce22-aee8-49fd-9a88-776994a6aa22",
+    "name": "Amberflo Billing Customers Meter Definitions API",
+    "description": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:36.000Z",
+    "updatedAt": "2026-07-28T00:59:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e4dcce22-aee8-49fd-9a88-776994a6aa22"
+  },
+  "item": [
+    {
+      "name": "meter-definition",
+      "item": [
+        {
+          "name": "{meterApiName}",
+          "item": [
+            {
+              "name": "Amberflo Get Meter Definition by ID",
+              "id": "298bb36e-76c4-42da-b173-a79c05e23eb0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4eea810c-3b70-4f5d-854c-ce0289c732a6",
+                      "key": "meterApiName",
+                      "value": "<string>",
+                      "description": "(Required) The API name of the meter definition"
+                    }
+                  ]
+                },
+                "description": "Retrieve a specific meter definition by its API name."
+              },
+              "response": [
+                {
+                  "id": "9a7ce820-c4b5-4e78-9efa-82f434124cc1",
+                  "name": "Meter definition",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meter-definition",
+                        ":meterApiName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "meterApiName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-07-28T00:59:36.000Z",
+                  "updatedAt": "2026-07-28T00:59:36.000Z",
+                  "uid": "35240-9a7ce820-c4b5-4e78-9efa-82f434124cc1"
+                },
+                {
+                  "id": "3e2ae29a-542d-40f6-88d4-baf3b2de9fb0",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meter-definition",
+                        ":meterApiName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "meterApiName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:36.000Z",
+                  "updatedAt": "2026-07-28T00:59:36.000Z",
+                  "uid": "35240-3e2ae29a-542d-40f6-88d4-baf3b2de9fb0"
+                },
+                {
+                  "id": "8d34864a-29dc-4a94-9335-15078a60649d",
+                  "name": "Meter definition not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meter-definition",
+                        ":meterApiName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "meterApiName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:36.000Z",
+                  "updatedAt": "2026-07-28T00:59:36.000Z",
+                  "uid": "35240-8d34864a-29dc-4a94-9335-15078a60649d"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-298bb36e-76c4-42da-b173-a79c05e23eb0"
+            },
+            {
+              "name": "Amberflo Delete Meter Definition",
+              "id": "a02cbb7f-4f8c-49e9-9b65-1d2e3899d6c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "de8bca82-d6ff-4287-bdc4-e383ebfe25f9",
+                      "key": "meterApiName",
+                      "value": "<string>",
+                      "description": "(Required) The API name of the meter definition to delete"
+                    }
+                  ]
+                },
+                "description": "Delete a meter definition by its API name."
+              },
+              "response": [
+                {
+                  "id": "30ecf3c1-3cf8-4da3-9999-d6de647cbfc8",
+                  "name": "Meter definition deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meter-definition",
+                        ":meterApiName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "meterApiName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T00:59:36.000Z",
+                  "updatedAt": "2026-07-28T00:59:36.000Z",
+                  "uid": "35240-30ecf3c1-3cf8-4da3-9999-d6de647cbfc8"
+                },
+                {
+                  "id": "2edff14e-2c5e-414d-ba98-77ff5630ac38",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meter-definition",
+                        ":meterApiName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "meterApiName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:36.000Z",
+                  "updatedAt": "2026-07-28T00:59:36.000Z",
+                  "uid": "35240-2edff14e-2c5e-414d-ba98-77ff5630ac38"
+                },
+                {
+                  "id": "78775c3b-1cdf-446c-9064-6e1c15653983",
+                  "name": "Meter definition not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/meter-definition/:meterApiName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "meter-definition",
+                        ":meterApiName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "meterApiName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:59:36.000Z",
+                  "updatedAt": "2026-07-28T00:59:36.000Z",
+                  "uid": "35240-78775c3b-1cdf-446c-9064-6e1c15653983"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-a02cbb7f-4f8c-49e9-9b65-1d2e3899d6c3"
+            }
+          ],
+          "id": "68ccb3af-1448-432e-a97c-d2bf99be8247",
+          "createdAt": "2026-07-28T00:59:36.000Z",
+          "updatedAt": "2026-07-28T00:59:36.000Z",
+          "uid": "35240-68ccb3af-1448-432e-a97c-d2bf99be8247"
+        },
+        {
+          "name": "Amberflo List Meter Definitions",
+          "id": "2c8eb478-1337-4898-bedc-0c8983b406e4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/meter-definition",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "meter-definition"
+              ]
+            },
+            "description": "List all meter definitions configured in the account."
+          },
+          "response": [
+            {
+              "id": "ae9322dd-bb1b-4f18-87b8-de98a6a9ca15",
+              "name": "Array of meter definitions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"meterApiName\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"type\": \"SUM_OF_ALL_USAGE\",\n    \"label\": \"<string>\",\n    \"meterTimeInMillis\": \"<long>\",\n    \"dimensions\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"meterApiName\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n    \"label\": \"<string>\",\n    \"meterTimeInMillis\": \"<long>\",\n    \"dimensions\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-ae9322dd-bb1b-4f18-87b8-de98a6a9ca15"
+            },
+            {
+              "id": "15f79292-6147-4439-bd01-d7449bd2ce49",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-15f79292-6147-4439-bd01-d7449bd2ce49"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:36.000Z",
+          "updatedAt": "2026-07-28T00:59:36.000Z",
+          "uid": "35240-2c8eb478-1337-4898-bedc-0c8983b406e4"
+        },
+        {
+          "name": "Amberflo Create Meter Definition",
+          "id": "a22aaf91-a7e7-451b-8531-1dcbbf55c27d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"MAX_IN_PERIOD\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/meter-definition",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "meter-definition"
+              ]
+            },
+            "description": "Create a new meter definition for tracking usage events."
+          },
+          "response": [
+            {
+              "id": "1ca460c1-8179-43e4-a146-a67da9978774",
+              "name": "Created meter definition",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"MAX_IN_PERIOD\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-1ca460c1-8179-43e4-a146-a67da9978774"
+            },
+            {
+              "id": "5624585c-4066-4a4e-93c6-3ef1f630dd93",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"MAX_IN_PERIOD\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-5624585c-4066-4a4e-93c6-3ef1f630dd93"
+            },
+            {
+              "id": "9c13a4fa-f80d-481a-9a25-d3b35d435889",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"MAX_IN_PERIOD\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-9c13a4fa-f80d-481a-9a25-d3b35d435889"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:36.000Z",
+          "updatedAt": "2026-07-28T00:59:36.000Z",
+          "uid": "35240-a22aaf91-a7e7-451b-8531-1dcbbf55c27d"
+        },
+        {
+          "name": "Amberflo Update Meter Definition",
+          "id": "af0cdcda-64df-4377-a9cc-a9e426d5a7c3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/meter-definition",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "meter-definition"
+              ]
+            },
+            "description": "Update an existing meter definition."
+          },
+          "response": [
+            {
+              "id": "5df5d5e2-85a3-4e82-98dd-3e7afa048e0c",
+              "name": "Updated meter definition",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-5df5d5e2-85a3-4e82-98dd-3e7afa048e0c"
+            },
+            {
+              "id": "20e6b34d-5a37-4e2b-9933-836d53221c6c",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-20e6b34d-5a37-4e2b-9933-836d53221c6c"
+            },
+            {
+              "id": "01858c5a-7132-45a9-b19e-68e692b8e878",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"UNIQUE_CUSTOMERS_COUNT\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/meter-definition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "meter-definition"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:36.000Z",
+              "updatedAt": "2026-07-28T00:59:36.000Z",
+              "uid": "35240-01858c5a-7132-45a9-b19e-68e692b8e878"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:36.000Z",
+          "updatedAt": "2026-07-28T00:59:36.000Z",
+          "uid": "35240-af0cdcda-64df-4377-a9cc-a9e426d5a7c3"
+        }
+      ],
+      "id": "55742dea-8648-4483-b6ed-45f40d652c31",
+      "createdAt": "2026-07-28T00:59:36.000Z",
+      "updatedAt": "2026-07-28T00:59:36.000Z",
+      "uid": "35240-55742dea-8648-4483-b6ed-45f40d652c31"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.amberflo.io"
+    }
+  ]
+}

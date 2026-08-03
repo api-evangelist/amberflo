@@ -1,0 +1,28 @@
+{
+  "provider": "amberflo",
+  "sources": [
+    "amberflo-customers-api-openapi.yml",
+    "amberflo-event-ingestion-api-openapi.yml",
+    "amberflo-filtering-rules-api-openapi.yml",
+    "amberflo-invoices-api-openapi.yml",
+    "amberflo-meter-definitions-api-openapi.yml",
+    "amberflo-prepaid-orders-api-openapi.yml",
+    "amberflo-pricing-plans-api-openapi.yml",
+    "amberflo-usage-queries-api-openapi.yml"
+  ],
+  "outputs": [
+    "amberflo-customers-api-openapi.yml",
+    "amberflo-event-ingestion-api-openapi.yml",
+    "amberflo-filtering-rules-api-openapi.yml",
+    "amberflo-invoices-api-openapi.yml",
+    "amberflo-meter-definitions-api-openapi.yml",
+    "amberflo-prepaid-orders-api-openapi.yml",
+    "amberflo-pricing-plans-api-openapi.yml",
+    "amberflo-usage-queries-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

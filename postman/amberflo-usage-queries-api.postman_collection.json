@@ -1,0 +1,262 @@
+{
+  "info": {
+    "_postman_id": "41651177-4387-4647-9e1f-6d58c735d46e",
+    "name": "Amberflo Billing Customers Usage Queries API",
+    "description": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:39.000Z",
+    "updatedAt": "2026-07-28T00:59:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-41651177-4387-4647-9e1f-6d58c735d46e"
+  },
+  "item": [
+    {
+      "name": "usage",
+      "item": [
+        {
+          "name": "Amberflo Query Usage Data",
+          "id": "401ab52d-aea2-47ab-a8da-54571b66c8ad",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"startTimeInSeconds\": \"<integer>\",\n  \"endTimeInSeconds\": \"<integer>\",\n  \"aggregation\": \"COUNT\",\n  \"timeGroupingInterval\": \"WEEK\",\n  \"groupBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerFilter\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"Ut_f\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usage",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usage"
+              ]
+            },
+            "description": "Query aggregated usage data for meters with time series, grouping, and filtering options."
+          },
+          "response": [
+            {
+              "id": "046ad30f-ab9c-42ea-99c2-9cd9126c17e4",
+              "name": "Usage query results",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"startTimeInSeconds\": \"<integer>\",\n  \"endTimeInSeconds\": \"<integer>\",\n  \"aggregation\": \"COUNT\",\n  \"timeGroupingInterval\": \"WEEK\",\n  \"groupBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerFilter\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"Ut_f\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usage"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"clientMeters\": {\n    \"Duis84f\": [\n      {\n        \"groupInfo\": {\n          \"labore_0\": \"<string>\",\n          \"Duis_6\": \"<string>\",\n          \"proident842\": \"<string>\"\n        },\n        \"records\": [\n          {\n            \"anim_4fb\": \"<number>\"\n          },\n          {\n            \"velit62\": \"<number>\",\n            \"aliquaa1a\": \"<number>\",\n            \"eu_a49\": \"<number>\",\n            \"cillum2\": \"<number>\"\n          }\n        ]\n      },\n      {\n        \"groupInfo\": {\n          \"utd\": \"<string>\"\n        },\n        \"records\": [\n          {\n            \"pariatur_ae5\": \"<number>\"\n          },\n          {\n            \"quif3b\": \"<number>\"\n          }\n        ]\n      }\n    ],\n    \"consectetur2\": [\n      {\n        \"groupInfo\": {\n          \"proident28\": \"<string>\"\n        },\n        \"records\": [\n          {\n            \"reprehenderiteec\": \"<number>\",\n            \"velit_0f8\": \"<number>\",\n            \"laborisa61\": \"<number>\"\n          },\n          {\n            \"ad_92\": \"<number>\",\n            \"eaa26\": \"<number>\",\n            \"Lorem_9\": \"<number>\",\n            \"sit_0\": \"<number>\"\n          }\n        ]\n      },\n      {\n        \"groupInfo\": {\n          \"elit_991\": \"<string>\"\n        },\n        \"records\": [\n          {\n            \"minim_8b\": \"<number>\",\n            \"occaecat5f3\": \"<number>\",\n            \"in_6c\": \"<number>\"\n          },\n          {\n            \"minim_9a0\": \"<number>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T00:59:40.000Z",
+              "updatedAt": "2026-07-28T00:59:40.000Z",
+              "uid": "35240-046ad30f-ab9c-42ea-99c2-9cd9126c17e4"
+            },
+            {
+              "id": "70f69a3c-86a2-4aef-8c74-958b3a39b75c",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"startTimeInSeconds\": \"<integer>\",\n  \"endTimeInSeconds\": \"<integer>\",\n  \"aggregation\": \"COUNT\",\n  \"timeGroupingInterval\": \"WEEK\",\n  \"groupBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerFilter\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"Ut_f\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usage"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:40.000Z",
+              "updatedAt": "2026-07-28T00:59:40.000Z",
+              "uid": "35240-70f69a3c-86a2-4aef-8c74-958b3a39b75c"
+            },
+            {
+              "id": "b56294d2-acaf-4e4c-a4a9-7e2a1f1c1b49",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"startTimeInSeconds\": \"<integer>\",\n  \"endTimeInSeconds\": \"<integer>\",\n  \"aggregation\": \"COUNT\",\n  \"timeGroupingInterval\": \"WEEK\",\n  \"groupBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerFilter\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"Ut_f\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usage"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T00:59:40.000Z",
+              "updatedAt": "2026-07-28T00:59:40.000Z",
+              "uid": "35240-b56294d2-acaf-4e4c-a4a9-7e2a1f1c1b49"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:40.000Z",
+          "updatedAt": "2026-07-28T00:59:40.000Z",
+          "uid": "35240-401ab52d-aea2-47ab-a8da-54571b66c8ad"
+        }
+      ],
+      "id": "3b96251e-c96f-42cf-a081-b2f58dc71249",
+      "createdAt": "2026-07-28T00:59:40.000Z",
+      "updatedAt": "2026-07-28T00:59:40.000Z",
+      "uid": "35240-3b96251e-c96f-42cf-a081-b2f58dc71249"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.amberflo.io"
+    }
+  ]
+}
