@@ -80,26 +80,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:amberflo-event-ingestion-api
   name: Amberflo Event Ingestion API
   description: Ingest meter events for usage tracking
@@ -114,26 +98,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:amberflo-filtering-rules-api
   name: Amberflo Filtering Rules API
   description: Manage meter event filtering rules
@@ -148,26 +116,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:amberflo-invoices-api
   name: Amberflo Invoices API
   description: Retrieve customer invoices
@@ -182,26 +134,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:amberflo-meter-definitions-api
   name: Amberflo Meter Definitions API
   description: Create, read, update, and delete meter definitions
@@ -216,26 +152,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:amberflo-prepaid-orders-api
   name: Amberflo Prepaid Orders API
   description: Manage customer prepaid credit orders
@@ -250,26 +170,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:amberflo-pricing-plans-api
   name: Amberflo Pricing Plans API
   description: Manage pricing plans and customer plan assignments
@@ -284,26 +188,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 - aid: amberflo:amberflo-usage-queries-api
   name: Amberflo Usage Queries API
   description: Query aggregated usage data and raw events
@@ -318,26 +206,10 @@ apis:
     url: https://docs.amberflo.io/reference/ingest-meters
   - type: APIReference
     url: https://docs.amberflo.io/reference/ingest-meters
-  - type: X-NaftikoCapability
-    url: capabilities/metering-event-ingestion.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-filtering-rules.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-meter-definitions.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/metering-usage-queries.yaml
   - type: Documentation
     url: https://docs.amberflo.io/reference/customers
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
-  - type: X-NaftikoCapability
-    url: capabilities/billing-customers.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-invoices.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-prepaid-orders.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/billing-pricing-plans.yaml
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amberflo/overview
