@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberflo Billing Customers Invoices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amberflo List Customer Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.amberflo.io/payments-billing-customer-product-invoice",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "customer-123456",
+                "type": "query",
+                "description": "Customer ID to retrieve invoices for"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of invoices for a specific customer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

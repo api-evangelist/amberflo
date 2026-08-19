@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberflo Billing Customers Event Ingestion API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Ingestion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amberflo Ingest Meter Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.amberflo.io/ingest",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ingest one or more meter events for usage tracking. Supports both single event objects and arrays of events with idempotency via uniqueId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

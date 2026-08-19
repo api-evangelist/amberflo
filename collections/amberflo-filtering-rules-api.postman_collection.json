@@ -1,0 +1,388 @@
+{
+  "item": [
+    {
+      "id": "9420b76f-fdb2-4d13-8587-6ce3be47bbe1",
+      "name": "Filtering Rules",
+      "description": {
+        "content": "Manage meter event filtering rules",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fd2ff164-c8c7-4bc2-8e0a-7f997f139aad",
+          "name": "Amberflo Create or Update Filtering Rule",
+          "request": {
+            "name": "Amberflo Create or Update Filtering Rule",
+            "description": {
+              "content": "Create or update a filtering rule for meter events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "meter-event-filtering-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"ruleId\": \"<string>\",\n  \"dimensionName\": \"<string>\",\n  \"dimensionValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"action\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b8acafd-6ed2-415b-b423-5fd58e31c542",
+              "name": "Filtering rule created or updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-event-filtering-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"ruleId\": \"rule-a1b2c3\",\n  \"dimensionName\": \"region\",\n  \"dimensionValues\": [\n    \"us-east-1\",\n    \"eu-west-1\"\n  ],\n  \"action\": \"INCLUDE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meterApiName\": \"api-calls\",\n  \"ruleId\": \"rule-a1b2c3\",\n  \"dimensionName\": \"region\",\n  \"dimensionValues\": [\n    \"us-east-1\",\n    \"eu-west-1\"\n  ],\n  \"action\": \"INCLUDE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83449d34-aa86-45dc-8ca9-bd5a1f32cc83",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-event-filtering-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"ruleId\": \"rule-a1b2c3\",\n  \"dimensionName\": \"region\",\n  \"dimensionValues\": [\n    \"us-east-1\",\n    \"eu-west-1\"\n  ],\n  \"action\": \"INCLUDE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83ba89d6-66ca-440c-8418-e83361965f4c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-event-filtering-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"ruleId\": \"rule-a1b2c3\",\n  \"dimensionName\": \"region\",\n  \"dimensionValues\": [\n    \"us-east-1\",\n    \"eu-west-1\"\n  ],\n  \"action\": \"INCLUDE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54a0293c-ecc0-4d86-a61f-fef4dc9c51eb",
+          "name": "Amberflo List Filtering Rules",
+          "request": {
+            "name": "Amberflo List Filtering Rules",
+            "description": {
+              "content": "List existing filtering rules for a meter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "meter-event-filtering-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "meterApiName",
+                  "value": "<string>",
+                  "description": "(Required) The meter API name to list filtering rules for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b908d173-9502-46d7-bfe0-63250860b300",
+              "name": "Array of filtering rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-event-filtering-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterApiName",
+                      "value": "api-calls"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"meterApiName\": \"api-calls\",\n    \"ruleId\": \"rule-a1b2c3\",\n    \"dimensionName\": \"region\",\n    \"dimensionValues\": [\n      \"us-east-1\",\n      \"eu-west-1\"\n    ],\n    \"action\": \"INCLUDE\"\n  },\n  {\n    \"meterApiName\": \"api-calls\",\n    \"ruleId\": \"rule-a1b2c3\",\n    \"dimensionName\": \"region\",\n    \"dimensionValues\": [\n      \"us-east-1\",\n      \"eu-west-1\"\n    ],\n    \"action\": \"INCLUDE\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98385007-b3b9-46e7-a33b-27bce889a54c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-event-filtering-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterApiName",
+                      "value": "api-calls"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.amberflo.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c49bcbe1-9860-4332-ad60-1bc7f65e6d47",
+    "name": "Amberflo Billing Customers Filtering Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberflo Billing Customers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amberflo List All Customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.amberflo.io/customers"
+          },
+          "docs": "Retrieve a list of all customers in the account."
+        },
+        {
+          "info": {
+            "name": "Amberflo Create a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.amberflo.io/customers",
+            "params": [
+              {
+                "name": "autoCreateCustomerInStripe",
+                "value": "if_payment_provider",
+                "type": "query",
+                "description": "Whether to auto-create the customer in Stripe"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new customer account in Amberflo."
+        },
+        {
+          "info": {
+            "name": "Amberflo Update a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.amberflo.io/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing customer's details."
+        },
+        {
+          "info": {
+            "name": "Amberflo Get Customer by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.amberflo.io/customers/:customerId",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "customer-123456",
+                "type": "path",
+                "description": "Unique identifier of the customer"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific customer by their unique identifier."
+        },
+        {
+          "info": {
+            "name": "Amberflo Delete Customer by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.amberflo.io/customers/:customerId",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "customer-123456",
+                "type": "path",
+                "description": "Unique identifier of the customer to delete"
+              }
+            ]
+          },
+          "docs": "Delete a customer account by their unique identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

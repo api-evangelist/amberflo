@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberflo Billing Customers Meter Definitions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Meter Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amberflo List Meter Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.amberflo.io/meter-definition"
+          },
+          "docs": "List all meter definitions configured in the account."
+        },
+        {
+          "info": {
+            "name": "Amberflo Create Meter Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.amberflo.io/meter-definition",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new meter definition for tracking usage events."
+        },
+        {
+          "info": {
+            "name": "Amberflo Update Meter Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.amberflo.io/meter-definition",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing meter definition."
+        },
+        {
+          "info": {
+            "name": "Amberflo Get Meter Definition by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.amberflo.io/meter-definition/:meterApiName",
+            "params": [
+              {
+                "name": "meterApiName",
+                "value": "api-calls",
+                "type": "path",
+                "description": "The API name of the meter definition"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific meter definition by its API name."
+        },
+        {
+          "info": {
+            "name": "Amberflo Delete Meter Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.amberflo.io/meter-definition/:meterApiName",
+            "params": [
+              {
+                "name": "meterApiName",
+                "value": "api-calls",
+                "type": "path",
+                "description": "The API name of the meter definition to delete"
+              }
+            ]
+          },
+          "docs": "Delete a meter definition by its API name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

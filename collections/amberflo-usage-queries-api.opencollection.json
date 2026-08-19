@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberflo Billing Customers Usage Queries API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amberflo Query Usage Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.amberflo.io/usage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query aggregated usage data for meters with time series, grouping, and filtering options."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

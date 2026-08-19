@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "f04fe796-0fa4-4f5a-b3f6-e5ca372ee47a",
+      "name": "Usage Queries",
+      "description": {
+        "content": "Query aggregated usage data and raw events",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "34224624-dbd7-4677-a3a7-3a1a380a13d7",
+          "name": "Amberflo Query Usage Data",
+          "request": {
+            "name": "Amberflo Query Usage Data",
+            "description": {
+              "content": "Query aggregated usage data for meters with time series, grouping, and filtering options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"startTimeInSeconds\": \"<integer>\",\n  \"endTimeInSeconds\": \"<integer>\",\n  \"aggregation\": \"<string>\",\n  \"timeGroupingInterval\": \"<string>\",\n  \"groupBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"customerFilter\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filter\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_2\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_3\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_4\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1758811a-05c9-4763-b7a3-1e4d5a994bce",
+              "name": "Usage query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"startTimeInSeconds\": 1718100000,\n  \"endTimeInSeconds\": 1718186400,\n  \"aggregation\": \"SUM\",\n  \"timeGroupingInterval\": \"DAY\",\n  \"groupBy\": [\n    \"customerId\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clientMeters\": {\n    \"api-calls\": [\n      {\n        \"groupInfo\": {\n          \"customerId\": \"customer-123456\"\n        },\n        \"records\": [\n          {\n            \"1718100000\": 42\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbad8419-12ab-45cc-b54c-c4b3357ab6a2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"startTimeInSeconds\": 1718100000,\n  \"endTimeInSeconds\": 1718186400,\n  \"aggregation\": \"SUM\",\n  \"timeGroupingInterval\": \"DAY\",\n  \"groupBy\": [\n    \"customerId\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2994e5e5-e77d-4199-97b4-cbedb11ec40a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"startTimeInSeconds\": 1718100000,\n  \"endTimeInSeconds\": 1718186400,\n  \"aggregation\": \"SUM\",\n  \"timeGroupingInterval\": \"DAY\",\n  \"groupBy\": [\n    \"customerId\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.amberflo.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "726d5cfc-3d3b-4afc-b26f-a3bdb60582da",
+    "name": "Amberflo Billing Customers Usage Queries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+      "type": "text/plain"
+    }
+  }
+}

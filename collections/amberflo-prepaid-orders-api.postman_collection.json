@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "4b307b8e-f06b-47b9-a0d7-5dc9ea6e52b0",
+      "name": "Prepaid Orders",
+      "description": {
+        "content": "Manage customer prepaid credit orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4250b81-70a4-41b9-95e9-e0bd16620ebd",
+          "name": "Amberflo Create Prepaid Order",
+          "request": {
+            "name": "Amberflo Create Prepaid Order",
+            "description": {
+              "content": "Create a prepaid credit order for a customer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments-pricing-amberflo-customer-prepaid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"expirationTime\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82c0d970-25ef-445e-81dd-b256695a5750",
+              "name": "Created prepaid order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments-pricing-amberflo-customer-prepaid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"customer-123456\",\n  \"amount\": 500,\n  \"currency\": \"USD\",\n  \"expirationTime\": 1749686400000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": \"order-a1b2c3d4\",\n  \"customerId\": \"customer-123456\",\n  \"amount\": 500,\n  \"currency\": \"USD\",\n  \"createTime\": 1718153645993,\n  \"expirationTime\": 1749686400000\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31339cae-81e0-430d-b880-b90dfa87cf05",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments-pricing-amberflo-customer-prepaid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"customer-123456\",\n  \"amount\": 500,\n  \"currency\": \"USD\",\n  \"expirationTime\": 1749686400000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Customer not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62eb25aa-875d-4599-817b-b33f0ac7c8bb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments-pricing-amberflo-customer-prepaid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"customer-123456\",\n  \"amount\": 500,\n  \"currency\": \"USD\",\n  \"expirationTime\": 1749686400000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Customer not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.amberflo.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "07f1017a-92f8-44a5-baad-d7c6fbeb6b8b",
+    "name": "Amberflo Billing Customers Prepaid Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+      "type": "text/plain"
+    }
+  }
+}

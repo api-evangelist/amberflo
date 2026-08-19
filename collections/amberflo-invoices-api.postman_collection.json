@@ -1,0 +1,187 @@
+{
+  "item": [
+    {
+      "id": "2c20970c-13a2-47b4-a279-122c3c1a2b1b",
+      "name": "Invoices",
+      "description": {
+        "content": "Retrieve customer invoices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "428e101a-49df-4279-867a-5f1d958b7e7a",
+          "name": "Amberflo List Customer Invoices",
+          "request": {
+            "name": "Amberflo List Customer Invoices",
+            "description": {
+              "content": "Retrieve a list of invoices for a specific customer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments-billing-customer-product-invoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "(Required) Customer ID to retrieve invoices for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "299fc518-f0c1-45a7-a258-1e995a845f5a",
+              "name": "Array of invoices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments-billing-customer-product-invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "customer-123456"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"invoiceId\": \"inv-500123\",\n    \"customerId\": \"customer-123456\",\n    \"startTime\": 1718100000,\n    \"endTime\": 1718186400,\n    \"totalAmount\": 99.5,\n    \"currency\": \"USD\",\n    \"status\": \"PAID\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "659893f0-d9a7-43ea-8422-c872371f2b01",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments-billing-customer-product-invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "customer-123456"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Customer not found\",\n  \"code\": \"NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.amberflo.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40bb2ab3-040e-404a-9366-622a7277b4ed",
+    "name": "Amberflo Billing Customers Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+      "type": "text/plain"
+    }
+  }
+}

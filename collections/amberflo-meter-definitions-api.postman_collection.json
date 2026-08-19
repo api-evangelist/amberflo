@@ -1,0 +1,968 @@
+{
+  "item": [
+    {
+      "id": "b5891f59-8ff0-4483-97e1-21765b6e88e6",
+      "name": "Meter Definitions",
+      "description": {
+        "content": "Create, read, update, and delete meter definitions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c205c6b6-7580-4348-9b3d-83d133e9e63e",
+          "name": "Amberflo List Meter Definitions",
+          "request": {
+            "name": "Amberflo List Meter Definitions",
+            "description": {
+              "content": "List all meter definitions configured in the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "meter-definition"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e893ce2e-d274-4fce-8087-1c27296b25e2",
+              "name": "Array of meter definitions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"meterApiName\": \"api-calls\",\n    \"displayName\": \"API Calls\",\n    \"label\": \"api-calls\",\n    \"type\": \"SUM_OF_ALL_USAGE\",\n    \"meterTimeInMillis\": 1718153645993\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a84882c8-7e36-48e8-82ae-8968dc4dcf05",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9c75f61-4889-48e6-8216-87a1ab37b689",
+          "name": "Amberflo Create Meter Definition",
+          "request": {
+            "name": "Amberflo Create Meter Definition",
+            "description": {
+              "content": "Create a new meter definition for tracking usage events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "meter-definition"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa0bac57-2eb5-4fbf-b7f6-965892a54e86",
+              "name": "Created meter definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"dimensions\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"label\": \"api-calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"meterTimeInMillis\": 1718153645993\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52bfec9a-ab83-476b-ab7e-f78ef9b71004",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"dimensions\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "043ae8ec-c9c9-49e7-a14a-92e235a9ab3e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"dimensions\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8ea4706-03f1-45f2-8ff3-8712e83e036c",
+          "name": "Amberflo Update Meter Definition",
+          "request": {
+            "name": "Amberflo Update Meter Definition",
+            "description": {
+              "content": "Update an existing meter definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "meter-definition"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterApiName\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"label\": \"<string>\",\n  \"meterTimeInMillis\": \"<long>\",\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "820fbf5c-c676-43d4-abd4-1138dfc09c22",
+              "name": "Updated meter definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"label\": \"api-calls\",\n  \"meterTimeInMillis\": 1718153645993,\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"label\": \"api-calls\",\n  \"meterTimeInMillis\": 1718153645993,\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfd5a24c-deaa-40b0-83a9-c30c0a0c7b7b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"label\": \"api-calls\",\n  \"meterTimeInMillis\": 1718153645993,\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfbc2813-7a23-4395-ad0c-aae9e2d962f7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"label\": \"api-calls\",\n  \"meterTimeInMillis\": 1718153645993,\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc3950aa-6e5b-4528-911e-99151788d660",
+          "name": "Amberflo Get Meter Definition by ID",
+          "request": {
+            "name": "Amberflo Get Meter Definition by ID",
+            "description": {
+              "content": "Retrieve a specific meter definition by its API name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "meter-definition",
+                ":meterApiName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "meterApiName",
+                  "description": "(Required) The API name of the meter definition"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12ddf675-ad88-4245-9996-5cfb85f2c46a",
+              "name": "Meter definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "meterApiName",
+                      "description": "(Required) The API name of the meter definition"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meterApiName\": \"api-calls\",\n  \"displayName\": \"API Calls\",\n  \"type\": \"SUM_OF_ALL_USAGE\",\n  \"label\": \"api-calls\",\n  \"meterTimeInMillis\": 1718153645993,\n  \"dimensions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba10f458-2fff-4e8d-960a-7ba76a4ed43d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "meterApiName",
+                      "description": "(Required) The API name of the meter definition"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd4e7c00-0a7f-4de7-9cd0-c527aa30470d",
+              "name": "Meter definition not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "meterApiName",
+                      "description": "(Required) The API name of the meter definition"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b709340-2bda-43eb-a03f-236cb4343b02",
+          "name": "Amberflo Delete Meter Definition",
+          "request": {
+            "name": "Amberflo Delete Meter Definition",
+            "description": {
+              "content": "Delete a meter definition by its API name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "meter-definition",
+                ":meterApiName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "meterApiName",
+                  "description": "(Required) The API name of the meter definition to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a8df84b-f5dc-4107-b55e-f2fba4f51735",
+              "name": "Meter definition deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "meterApiName",
+                      "description": "(Required) The API name of the meter definition to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "36bdfc42-b7ef-4f96-9e42-a8fb0c30eff7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "meterApiName",
+                      "description": "(Required) The API name of the meter definition to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "383f42f9-f43e-44ab-9af2-c29c04c7670f",
+              "name": "Meter definition not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "meter-definition",
+                    ":meterApiName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "meterApiName",
+                      "description": "(Required) The API name of the meter definition to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.amberflo.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "59721041-743a-4142-8c91-dcb9addac4e7",
+    "name": "Amberflo Billing Customers Meter Definitions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+      "type": "text/plain"
+    }
+  }
+}

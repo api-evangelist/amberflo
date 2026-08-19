@@ -1,0 +1,250 @@
+{
+  "item": [
+    {
+      "id": "87ba1af4-4726-40f1-bf1b-f93de2c40e24",
+      "name": "Event Ingestion",
+      "description": {
+        "content": "Ingest meter events for usage tracking",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3decff9a-193d-4180-b47e-82e4cdf83af7",
+          "name": "Amberflo Ingest Meter Events",
+          "request": {
+            "name": "Amberflo Ingest Meter Events",
+            "description": {
+              "content": "Ingest one or more meter events for usage tracking. Supports both single event objects and arrays of events with idempotency via uniqueId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meterTimeInMillis\": \"<long>\",\n  \"meterApiName\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"meterValue\": \"<number>\",\n  \"uniqueId\": \"<string>\",\n  \"dimensions\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"values\": {\n    \"key_0\": \"<number>\",\n    \"key_1\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67c03171-a476-432a-ae20-7b86e709b2a4",
+              "name": "Successful request — events accepted for ingestion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"customerId\": \"customer-123456\",\n  \"meterValue\": 1,\n  \"meterTimeInMillis\": 1718153645993,\n  \"uniqueId\": \"evt-a1b2c3d4\",\n  \"dimensions\": {\n    \"region\": \"us-east-1\",\n    \"tier\": \"premium\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"OK\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "add41b93-b685-4d56-a527-b76e389d5f38",
+              "name": "Bad request — invalid event data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"customerId\": \"customer-123456\",\n  \"meterValue\": 1,\n  \"meterTimeInMillis\": 1718153645993,\n  \"uniqueId\": \"evt-a1b2c3d4\",\n  \"dimensions\": {\n    \"region\": \"us-east-1\",\n    \"tier\": \"premium\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce2f1f1e-c2f3-495d-8504-1e043c4d2038",
+              "name": "Unauthorized — invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meterApiName\": \"api-calls\",\n  \"customerId\": \"customer-123456\",\n  \"meterValue\": 1,\n  \"meterTimeInMillis\": 1718153645993,\n  \"uniqueId\": \"evt-a1b2c3d4\",\n  \"dimensions\": {\n    \"region\": \"us-east-1\",\n    \"tier\": \"premium\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid API key provided\",\n  \"code\": \"UNAUTHORIZED\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.amberflo.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2e85d78d-b0a6-4d6a-84d6-674cf207dc29",
+    "name": "Amberflo Billing Customers Event Ingestion API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.\n\nContact Support:\n Name: Amberflo Support",
+      "type": "text/plain"
+    }
+  }
+}
