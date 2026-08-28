@@ -10,8 +10,14 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: billingApi
-  url: ../openapi/amberflo-billing-openapi.yaml
+- name: customersApi
+  url: ../openapi/amberflo-customers-api-openapi.yml
+  type: openapi
+- name: prepaidOrdersApi
+  url: ../openapi/amberflo-prepaid-orders-api-openapi.yml
+  type: openapi
+- name: pricingPlansApi
+  url: ../openapi/amberflo-pricing-plans-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-customer-billing

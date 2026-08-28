@@ -10,8 +10,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: meteringApi
-  url: ../openapi/amberflo-metering-openapi.yaml
+- name: meterDefinitionsApi
+  url: ../openapi/amberflo-meter-definitions-api-openapi.yml
+  type: openapi
+- name: usageQueriesApi
+  url: ../openapi/amberflo-usage-queries-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: discover-meter-and-query-usage

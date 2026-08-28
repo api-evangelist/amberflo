@@ -10,8 +10,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: meteringApi
-  url: ../openapi/amberflo-metering-openapi.yaml
+- name: eventIngestionApi
+  url: ../openapi/amberflo-event-ingestion-api-openapi.yml
+  type: openapi
+- name: usageQueriesApi
+  url: ../openapi/amberflo-usage-queries-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: ingest-and-query-usage

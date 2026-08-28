@@ -10,11 +10,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: meteringApi
-  url: ../openapi/amberflo-metering-openapi.yaml
+- name: eventIngestionApi
+  url: ../openapi/amberflo-event-ingestion-api-openapi.yml
   type: openapi
-- name: billingApi
-  url: ../openapi/amberflo-billing-openapi.yaml
+- name: prepaidOrdersApi
+  url: ../openapi/amberflo-prepaid-orders-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: meter-usage-and-topup-prepaid
