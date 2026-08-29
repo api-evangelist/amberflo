@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amberflo Billing Customers Meter Definitions API
   description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
@@ -210,35 +210,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MeterDefinitionRequest:
-      type: object
-      description: Request body for creating a meter definition
-      required:
-      - meterApiName
-      - displayName
-      - type
-      properties:
-        meterApiName:
-          type: string
-          description: Unique API name for the meter
-          example: api-calls
-        displayName:
-          type: string
-          description: Human-readable display name
-          example: API Calls
-        type:
-          type: string
-          description: Aggregation type for the meter
-          enum:
-          - SUM_OF_ALL_USAGE
-          - MAX_IN_PERIOD
-          - UNIQUE_CUSTOMERS_COUNT
-          example: SUM_OF_ALL_USAGE
-        dimensions:
-          type: array
-          description: Dimension names for this meter
-          items:
-            type: string
     MeterDefinition:
       type: object
       description: A meter definition that specifies how usage events are tracked and aggregated
@@ -292,6 +263,35 @@ components:
         details:
           type: string
           description: Additional error details
+    MeterDefinitionRequest:
+      type: object
+      description: Request body for creating a meter definition
+      required:
+      - meterApiName
+      - displayName
+      - type
+      properties:
+        meterApiName:
+          type: string
+          description: Unique API name for the meter
+          example: api-calls
+        displayName:
+          type: string
+          description: Human-readable display name
+          example: API Calls
+        type:
+          type: string
+          description: Aggregation type for the meter
+          enum:
+          - SUM_OF_ALL_USAGE
+          - MAX_IN_PERIOD
+          - UNIQUE_CUSTOMERS_COUNT
+          example: SUM_OF_ALL_USAGE
+        dimensions:
+          type: array
+          description: Dimension names for this meter
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

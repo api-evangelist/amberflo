@@ -23,6 +23,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "amberflo-customers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amberflo-event-ingestion-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amberflo-filtering-rules-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amberflo-invoices-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amberflo-meter-definitions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amberflo-prepaid-orders-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amberflo-pricing-plans-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amberflo-usage-queries-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

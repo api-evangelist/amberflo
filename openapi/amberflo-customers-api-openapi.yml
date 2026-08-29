@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amberflo Billing Customers API
   description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
@@ -230,37 +230,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Address:
-      type: object
-      description: Tax address for a customer
-      required:
-      - line1
-      - city
-      - country
-      properties:
-        verified:
-          type: boolean
-          description: Whether the address has been verified
-        line1:
-          type: string
-          description: Address line 1
-          example: 123 Main Street
-        state:
-          type: string
-          description: State or province
-          example: CA
-        city:
-          type: string
-          description: City
-          example: San Francisco
-        postalCode:
-          type: string
-          description: Postal or ZIP code
-          example: '94105'
-        country:
-          type: string
-          description: ISO country code
-          example: US
     CustomerRequest:
       type: object
       description: Request body for creating or updating a customer
@@ -304,6 +273,18 @@ components:
           description: Custom metadata
         address:
           $ref: '#/components/schemas/Address'
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Customer not found
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND
     Customer:
       type: object
       description: A customer account in Amberflo
@@ -371,18 +352,37 @@ components:
           description: Custom metadata for external system integration
         address:
           $ref: '#/components/schemas/Address'
-    ErrorResponse:
+    Address:
       type: object
-      description: Error response
+      description: Tax address for a customer
+      required:
+      - line1
+      - city
+      - country
       properties:
-        message:
+        verified:
+          type: boolean
+          description: Whether the address has been verified
+        line1:
           type: string
-          description: Human-readable error message
-          example: Customer not found
-        code:
+          description: Address line 1
+          example: 123 Main Street
+        state:
           type: string
-          description: Error code
-          example: NOT_FOUND
+          description: State or province
+          example: CA
+        city:
+          type: string
+          description: City
+          example: San Francisco
+        postalCode:
+          type: string
+          description: Postal or ZIP code
+          example: '94105'
+        country:
+          type: string
+          description: ISO country code
+          example: US
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
