@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Amberflo Billing Customers Usage Queries API
-  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  title: Amberflo Metering Usage Queries API
+  description: The Amberflo Metering API provides meter definition management, high-throughput event ingestion, usage queries, raw event queries, and filtering rules for usage-based billing and cost management.
   version: 1.0.0
   contact:
     name: Amberflo Support
@@ -77,17 +77,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UsageQueryResponse:
+    UsageRecord:
       type: object
-      description: Response from a usage data query
+      description: A usage record grouped by dimension values
       properties:
-        clientMeters:
+        groupInfo:
           type: object
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/UsageRecord'
-          description: Map of meter API name to usage records
+            type: string
+          description: Group dimension values for this record
+        records:
+          type: array
+          description: Time-series usage data points
+          items:
+            type: object
+            additionalProperties:
+              type: number
     ErrorResponse:
       type: object
       description: Error response returned by the API
@@ -103,6 +108,17 @@ components:
         details:
           type: string
           description: Additional error details
+    UsageQueryResponse:
+      type: object
+      description: Response from a usage data query
+      properties:
+        clientMeters:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/UsageRecord'
+          description: Map of meter API name to usage records
     UsageQueryRequest:
       type: object
       description: Request body for querying usage data
@@ -161,25 +177,9 @@ components:
             items:
               type: string
           description: Key-value filter for dimension-based filtering
-    UsageRecord:
-      type: object
-      description: A usage record grouped by dimension values
-      properties:
-        groupInfo:
-          type: object
-          additionalProperties:
-            type: string
-          description: Group dimension values for this record
-        records:
-          type: array
-          description: Time-series usage data points
-          items:
-            type: object
-            additionalProperties:
-              type: number
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: X-API-KEY
-      description: API key for authentication
+      description: API key for authentication, accessible from Amberflo Settings > Account Configuration > API Keys

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Amberflo Billing Customers Event Ingestion API
-  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  title: Amberflo Metering Event Ingestion API
+  description: The Amberflo Metering API provides meter definition management, high-throughput event ingestion, usage queries, raw event queries, and filtering rules for usage-based billing and cost management.
   version: 1.0.0
   contact:
     name: Amberflo Support
@@ -76,6 +76,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
     MeterEvent:
       type: object
       description: A single meter event representing a unit of usage
@@ -116,24 +131,9 @@ components:
           additionalProperties:
             type: number
           description: Map of meterApiName to meterValue for multi-meter ingestion
-    ErrorResponse:
-      type: object
-      description: Error response returned by the API
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid API key provided
-        code:
-          type: string
-          description: Error code for programmatic handling
-          example: UNAUTHORIZED
-        details:
-          type: string
-          description: Additional error details
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
       in: header
       name: X-API-KEY
-      description: API key for authentication
+      description: API key for authentication, accessible from Amberflo Settings > Account Configuration > API Keys

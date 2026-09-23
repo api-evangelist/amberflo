@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Amberflo Billing Customers Filtering Rules API
-  description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+  title: Amberflo Metering Filtering Rules API
+  description: The Amberflo Metering API provides meter definition management, high-throughput event ingestion, usage queries, raw event queries, and filtering rules for usage-based billing and cost management.
   version: 1.0.0
   contact:
     name: Amberflo Support
@@ -139,4 +139,4 @@ components:
       type: apiKey
       in: header
       name: X-API-KEY
-      description: API key for authentication
+      description: API key for authentication, accessible from Amberflo Settings > Account Configuration > API Keys

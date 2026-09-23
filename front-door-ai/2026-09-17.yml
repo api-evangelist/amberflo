@@ -1,0 +1,30 @@
+# Front Door AI Index — amberflo — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: amberflo
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.amberflo.io
+  final_host: amberflo.io
+  ownership: own
+  owner: amberflo
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 46
+  host_score: 46
+  density: 45.73
+  words: 1006
+  tiers:
+    agentic: 6
+    core: 38
+    model: 2
+  ambiguous: 0
+  top_terms:
+    AI: 28
+    LLMs: 10
+    MCP: 3
+    Anthropic: 2
+    prompts: 2
+    agentic: 1

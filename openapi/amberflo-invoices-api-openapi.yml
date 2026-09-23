@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amberflo Billing Customers Invoices API
+  title: Amberflo Billing Invoices API
   description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
   version: 1.0.0
   contact:
@@ -64,6 +64,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Customer not found
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND
     Invoice:
       type: object
       description: A customer invoice
@@ -101,18 +113,6 @@ components:
           - PAID
           - VOID
           example: PAID
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Customer not found
-        code:
-          type: string
-          description: Error code
-          example: NOT_FOUND
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

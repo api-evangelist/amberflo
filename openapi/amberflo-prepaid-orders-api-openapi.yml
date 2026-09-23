@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amberflo Billing Customers Prepaid Orders API
+  title: Amberflo Billing Prepaid Orders API
   description: The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
   version: 1.0.0
   contact:
@@ -63,30 +63,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PrepaidOrderRequest:
+    ErrorResponse:
       type: object
-      description: Request body for creating a prepaid order
-      required:
-      - customerId
-      - amount
+      description: Error response
       properties:
-        customerId:
+        message:
           type: string
-          description: Customer identifier
-          example: customer-123456
-        amount:
-          type: number
-          description: Prepaid credit amount
-          example: 500.0
-        currency:
+          description: Human-readable error message
+          example: Customer not found
+        code:
           type: string
-          description: Currency code
-          example: USD
-        expirationTime:
-          type: integer
-          format: int64
-          description: Expiration timestamp in Unix milliseconds
-          example: 1749686400000
+          description: Error code
+          example: NOT_FOUND
     PrepaidOrder:
       type: object
       description: A prepaid credit order for a customer
@@ -117,18 +105,30 @@ components:
           format: int64
           description: Expiration timestamp in Unix milliseconds
           example: 1749686400000
-    ErrorResponse:
+    PrepaidOrderRequest:
       type: object
-      description: Error response
+      description: Request body for creating a prepaid order
+      required:
+      - customerId
+      - amount
       properties:
-        message:
+        customerId:
           type: string
-          description: Human-readable error message
-          example: Customer not found
-        code:
+          description: Customer identifier
+          example: customer-123456
+        amount:
+          type: number
+          description: Prepaid credit amount
+          example: 500.0
+        currency:
           type: string
-          description: Error code
-          example: NOT_FOUND
+          description: Currency code
+          example: USD
+        expirationTime:
+          type: integer
+          format: int64
+          description: Expiration timestamp in Unix milliseconds
+          example: 1749686400000
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

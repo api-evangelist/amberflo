@@ -230,6 +230,37 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Address:
+      type: object
+      description: Tax address for a customer
+      required:
+      - line1
+      - city
+      - country
+      properties:
+        verified:
+          type: boolean
+          description: Whether the address has been verified
+        line1:
+          type: string
+          description: Address line 1
+          example: 123 Main Street
+        state:
+          type: string
+          description: State or province
+          example: CA
+        city:
+          type: string
+          description: City
+          example: San Francisco
+        postalCode:
+          type: string
+          description: Postal or ZIP code
+          example: '94105'
+        country:
+          type: string
+          description: ISO country code
+          example: US
     CustomerRequest:
       type: object
       description: Request body for creating or updating a customer
@@ -352,37 +383,6 @@ components:
           description: Custom metadata for external system integration
         address:
           $ref: '#/components/schemas/Address'
-    Address:
-      type: object
-      description: Tax address for a customer
-      required:
-      - line1
-      - city
-      - country
-      properties:
-        verified:
-          type: boolean
-          description: Whether the address has been verified
-        line1:
-          type: string
-          description: Address line 1
-          example: 123 Main Street
-        state:
-          type: string
-          description: State or province
-          example: CA
-        city:
-          type: string
-          description: City
-          example: San Francisco
-        postalCode:
-          type: string
-          description: Postal or ZIP code
-          example: '94105'
-        country:
-          type: string
-          description: ISO country code
-          example: US
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
