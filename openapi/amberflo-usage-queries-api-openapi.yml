@@ -77,48 +77,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UsageRecord:
-      type: object
-      description: A usage record grouped by dimension values
-      properties:
-        groupInfo:
-          type: object
-          additionalProperties:
-            type: string
-          description: Group dimension values for this record
-        records:
-          type: array
-          description: Time-series usage data points
-          items:
-            type: object
-            additionalProperties:
-              type: number
-    ErrorResponse:
-      type: object
-      description: Error response returned by the API
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid API key provided
-        code:
-          type: string
-          description: Error code for programmatic handling
-          example: UNAUTHORIZED
-        details:
-          type: string
-          description: Additional error details
-    UsageQueryResponse:
-      type: object
-      description: Response from a usage data query
-      properties:
-        clientMeters:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/UsageRecord'
-          description: Map of meter API name to usage records
     UsageQueryRequest:
       type: object
       description: Request body for querying usage data
@@ -177,6 +135,48 @@ components:
             items:
               type: string
           description: Key-value filter for dimension-based filtering
+    UsageQueryResponse:
+      type: object
+      description: Response from a usage data query
+      properties:
+        clientMeters:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/UsageRecord'
+          description: Map of meter API name to usage records
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
+    UsageRecord:
+      type: object
+      description: A usage record grouped by dimension values
+      properties:
+        groupInfo:
+          type: object
+          additionalProperties:
+            type: string
+          description: Group dimension values for this record
+        records:
+          type: array
+          description: Time-series usage data points
+          items:
+            type: object
+            additionalProperties:
+              type: number
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

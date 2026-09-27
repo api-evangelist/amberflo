@@ -64,18 +64,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Customer not found
-        code:
-          type: string
-          description: Error code
-          example: NOT_FOUND
     Invoice:
       type: object
       description: A customer invoice
@@ -113,6 +101,18 @@ components:
           - PAID
           - VOID
           example: PAID
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Customer not found
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
