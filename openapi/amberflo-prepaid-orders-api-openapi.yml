@@ -63,6 +63,30 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PrepaidOrderRequest:
+      type: object
+      description: Request body for creating a prepaid order
+      required:
+      - customerId
+      - amount
+      properties:
+        customerId:
+          type: string
+          description: Customer identifier
+          example: customer-123456
+        amount:
+          type: number
+          description: Prepaid credit amount
+          example: 500.0
+        currency:
+          type: string
+          description: Currency code
+          example: USD
+        expirationTime:
+          type: integer
+          format: int64
+          description: Expiration timestamp in Unix milliseconds
+          example: 1749686400000
     PrepaidOrder:
       type: object
       description: A prepaid credit order for a customer
@@ -88,30 +112,6 @@ components:
           format: int64
           description: Creation timestamp
           example: 1718153645993
-        expirationTime:
-          type: integer
-          format: int64
-          description: Expiration timestamp in Unix milliseconds
-          example: 1749686400000
-    PrepaidOrderRequest:
-      type: object
-      description: Request body for creating a prepaid order
-      required:
-      - customerId
-      - amount
-      properties:
-        customerId:
-          type: string
-          description: Customer identifier
-          example: customer-123456
-        amount:
-          type: number
-          description: Prepaid credit amount
-          example: 500.0
-        currency:
-          type: string
-          description: Currency code
-          example: USD
         expirationTime:
           type: integer
           format: int64

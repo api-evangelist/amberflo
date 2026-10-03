@@ -261,6 +261,18 @@ components:
           type: string
           description: ISO country code
           example: US
+    ErrorResponse:
+      type: object
+      description: Error response
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Customer not found
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND
     Customer:
       type: object
       description: A customer account in Amberflo
@@ -371,18 +383,6 @@ components:
           description: Custom metadata
         address:
           $ref: '#/components/schemas/Address'
-    ErrorResponse:
-      type: object
-      description: Error response
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Customer not found
-        code:
-          type: string
-          description: Error code
-          example: NOT_FOUND
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

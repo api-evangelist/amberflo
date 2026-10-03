@@ -76,6 +76,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
     MeterEvent:
       type: object
       description: A single meter event representing a unit of usage
@@ -116,21 +131,6 @@ components:
           additionalProperties:
             type: number
           description: Map of meterApiName to meterValue for multi-meter ingestion
-    ErrorResponse:
-      type: object
-      description: Error response returned by the API
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid API key provided
-        code:
-          type: string
-          description: Error code for programmatic handling
-          example: UNAUTHORIZED
-        details:
-          type: string
-          description: Additional error details
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
