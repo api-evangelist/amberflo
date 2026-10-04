@@ -77,17 +77,37 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UsageQueryResponse:
+    ErrorResponse:
       type: object
-      description: Response from a usage data query
+      description: Error response returned by the API
       properties:
-        clientMeters:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
+    UsageRecord:
+      type: object
+      description: A usage record grouped by dimension values
+      properties:
+        groupInfo:
           type: object
           additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/UsageRecord'
-          description: Map of meter API name to usage records
+            type: string
+          description: Group dimension values for this record
+        records:
+          type: array
+          description: Time-series usage data points
+          items:
+            type: object
+            additionalProperties:
+              type: number
     UsageQueryRequest:
       type: object
       description: Request body for querying usage data
@@ -146,37 +166,17 @@ components:
             items:
               type: string
           description: Key-value filter for dimension-based filtering
-    ErrorResponse:
+    UsageQueryResponse:
       type: object
-      description: Error response returned by the API
+      description: Response from a usage data query
       properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid API key provided
-        code:
-          type: string
-          description: Error code for programmatic handling
-          example: UNAUTHORIZED
-        details:
-          type: string
-          description: Additional error details
-    UsageRecord:
-      type: object
-      description: A usage record grouped by dimension values
-      properties:
-        groupInfo:
+        clientMeters:
           type: object
           additionalProperties:
-            type: string
-          description: Group dimension values for this record
-        records:
-          type: array
-          description: Time-series usage data points
-          items:
-            type: object
-            additionalProperties:
-              type: number
+            type: array
+            items:
+              $ref: '#/components/schemas/UsageRecord'
+          description: Map of meter API name to usage records
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

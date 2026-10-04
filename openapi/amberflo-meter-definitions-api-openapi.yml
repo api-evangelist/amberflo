@@ -210,35 +210,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MeterDefinitionRequest:
+    ErrorResponse:
       type: object
-      description: Request body for creating a meter definition
-      required:
-      - meterApiName
-      - displayName
-      - type
+      description: Error response returned by the API
       properties:
-        meterApiName:
+        message:
           type: string
-          description: Unique API name for the meter
-          example: api-calls
-        displayName:
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
           type: string
-          description: Human-readable display name
-          example: API Calls
-        type:
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
           type: string
-          description: Aggregation type for the meter
-          enum:
-          - SUM_OF_ALL_USAGE
-          - MAX_IN_PERIOD
-          - UNIQUE_CUSTOMERS_COUNT
-          example: SUM_OF_ALL_USAGE
-        dimensions:
-          type: array
-          description: Dimension names for this meter
-          items:
-            type: string
+          description: Additional error details
     MeterDefinition:
       type: object
       description: A meter definition that specifies how usage events are tracked and aggregated
@@ -277,21 +263,35 @@ components:
           description: List of dimension names for this meter
           items:
             type: string
-    ErrorResponse:
+    MeterDefinitionRequest:
       type: object
-      description: Error response returned by the API
+      description: Request body for creating a meter definition
+      required:
+      - meterApiName
+      - displayName
+      - type
       properties:
-        message:
+        meterApiName:
           type: string
-          description: Human-readable error message
-          example: Invalid API key provided
-        code:
+          description: Unique API name for the meter
+          example: api-calls
+        displayName:
           type: string
-          description: Error code for programmatic handling
-          example: UNAUTHORIZED
-        details:
+          description: Human-readable display name
+          example: API Calls
+        type:
           type: string
-          description: Additional error details
+          description: Aggregation type for the meter
+          enum:
+          - SUM_OF_ALL_USAGE
+          - MAX_IN_PERIOD
+          - UNIQUE_CUSTOMERS_COUNT
+          example: SUM_OF_ALL_USAGE
+        dimensions:
+          type: array
+          description: Dimension names for this meter
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
