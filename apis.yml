@@ -224,6 +224,12 @@ apis:
   - type: APIReference
     url: https://docs.amberflo.io/reference/customers
 common:
+- type: Plans
+  url: plans/amberflo-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/amberflo-rate-limits.yml
+- type: FinOps
+  url: finops/amberflo-finops.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amberflo/overview
 - type: AgenticAccess
