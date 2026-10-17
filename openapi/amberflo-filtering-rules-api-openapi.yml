@@ -86,21 +86,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response returned by the API
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid API key provided
-        code:
-          type: string
-          description: Error code for programmatic handling
-          example: UNAUTHORIZED
-        details:
-          type: string
-          description: Additional error details
     FilteringRule:
       type: object
       description: A rule for filtering meter events before ingestion
@@ -134,6 +119,21 @@ components:
           - INCLUDE
           - EXCLUDE
           example: INCLUDE
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

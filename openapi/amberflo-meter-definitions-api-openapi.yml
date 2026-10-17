@@ -210,21 +210,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response returned by the API
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid API key provided
-        code:
-          type: string
-          description: Error code for programmatic handling
-          example: UNAUTHORIZED
-        details:
-          type: string
-          description: Additional error details
     MeterDefinition:
       type: object
       description: A meter definition that specifies how usage events are tracked and aggregated
@@ -292,6 +277,21 @@ components:
           description: Dimension names for this meter
           items:
             type: string
+    ErrorResponse:
+      type: object
+      description: Error response returned by the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid API key provided
+        code:
+          type: string
+          description: Error code for programmatic handling
+          example: UNAUTHORIZED
+        details:
+          type: string
+          description: Additional error details
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
