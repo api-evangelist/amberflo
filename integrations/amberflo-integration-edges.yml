@@ -21,6 +21,23 @@ edges:
   seller_name: Amberflo.io
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Kong (own)
+  partner: kong
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://developer.konghq.com/plugins/amberflo/
+  mirror_of: kong/integrations/kong-integration-edges.yml
+  apps:
+  - Amberflo.io API Metering
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Kong Plugin Hub
 - partner_name: Twilio Segment
   partner: segment
   partner_match: aggregator
@@ -48,21 +65,4 @@ edges:
       - Track
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
-- partner_name: Kong (own)
-  partner: kong
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://developer.konghq.com/plugins/amberflo/
-  mirror_of: kong/integrations/kong-integration-edges.yml
-  apps:
-  - Amberflo.io API Metering
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Kong Plugin Hub
 source: https://www.twilio.com/docs/segment/connections/destinations/catalog/amberflo
