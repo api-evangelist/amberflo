@@ -1,4 +1,4 @@
-# Amberflo (amberflo)
+# Amberflo
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,195 +66,249 @@
 
 Amberflo is a cloud metering, usage-based billing, and AI cost management platform. It provides real-time event ingestion, customer billing automation, AI gateway capabilities, and FinOps visibility for API-driven and AI-powered businesses. The platform supports usage-based, token-based, seat-based, and outcome-based pricing models with automated invoicing and embeddable billing dashboards.
 
-**URL:** [https://www.amberflo.io/](https://www.amberflo.io/)
+**Areas:** Usage-Based Billing · Metering · FinOps · AI Cost Management · Billing · Monetization
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Amberflo on APIs.io
 
-## Tags
+Everything profiled for Amberflo is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amberflo/](https://apis.io/providers/amberflo/)** — or go straight to one of the APIs or properties below.
 
- - Usage-Based Billing, Metering, FinOps, AI Cost Management, Billing, Monetization
+### APIs (10)
 
-## Timestamps
+- [Amberflo Cost Tracking API](https://apis.io/apis/amberflo/cost-tracking-api/) — The Amberflo Cost Tracking API provides AI and cloud cost management capabilities including cloud provider integrations, business unit management, cost…
+- [Amberflo AI Gateway API](https://apis.io/apis/amberflo/ai-gateway-api/) — The Amberflo AI Gateway provides a unified API for routing requests to 1,500+ LLM models with intelligent model routing, cost optimization, built-in…
+- [Amberflo Customers API](https://apis.io/apis/amberflo/amberflo-customers-api/) — Manage customer accounts and lifecycle
+- [Amberflo Event Ingestion API](https://apis.io/apis/amberflo/amberflo-event-ingestion-api/) — Ingest meter events for usage tracking
+- [Amberflo Filtering Rules API](https://apis.io/apis/amberflo/amberflo-filtering-rules-api/) — Manage meter event filtering rules
+- [Amberflo Invoices API](https://apis.io/apis/amberflo/amberflo-invoices-api/) — Retrieve customer invoices
+- [Amberflo Meter Definitions API](https://apis.io/apis/amberflo/amberflo-meter-definitions-api/) — Create, read, update, and delete meter definitions
+- [Amberflo Prepaid Orders API](https://apis.io/apis/amberflo/amberflo-prepaid-orders-api/) — Manage customer prepaid credit orders
+- [Amberflo Pricing Plans API](https://apis.io/apis/amberflo/amberflo-pricing-plans-api/) — Manage pricing plans and customer plan assignments
+- [Amberflo Usage Queries API](https://apis.io/apis/amberflo/amberflo-usage-queries-api/) — Query aggregated usage data and raw events
 
-- **Created:** 2026-03-27
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Amberflo Metering API
+#### Arazzo workflows (12)
 
-The Amberflo Metering API provides meter definition management, high-throughput event ingestion, usage queries, raw event queries, and filtering rules. It supports real-time metering for API calls, tokens, and custom events with automatic aggregation and deduplication.
+Multi-step workflows that chain operations into a business task.
 
-**Human URL:** [https://docs.amberflo.io/reference/ingest-meters](https://docs.amberflo.io/reference/ingest-meters)
+- [Amberflo Create Customer and Assign Plan](https://apis.io/arazzos/amberflo/amberflo-create-customer-and-assign-plan-workflow/)
+- [Amberflo Create Meter and Ingest Event](https://apis.io/arazzos/amberflo/amberflo-create-meter-and-ingest-event-workflow/)
+- [Amberflo Discover Meter and Query Usage](https://apis.io/arazzos/amberflo/amberflo-discover-meter-and-query-usage-workflow/)
+- [Amberflo Get Customer Invoices](https://apis.io/arazzos/amberflo/amberflo-get-customer-invoices-workflow/)
+- [Amberflo Ingest and Query Usage](https://apis.io/arazzos/amberflo/amberflo-ingest-and-query-usage-workflow/)
+- [Amberflo Launch Usage Based Product](https://apis.io/arazzos/amberflo/amberflo-launch-usage-based-product-workflow/)
+- [Amberflo Meter Usage and Top Up Prepaid](https://apis.io/arazzos/amberflo/amberflo-meter-usage-and-topup-prepaid-workflow/)
+- [Amberflo Meter with Filtering Rule](https://apis.io/arazzos/amberflo/amberflo-meter-with-filtering-rule-workflow/)
+- [Amberflo Offboard Customer If No Invoices](https://apis.io/arazzos/amberflo/amberflo-offboard-customer-if-no-invoices-workflow/)
+- [Amberflo Onboard Customer and Meter Usage](https://apis.io/arazzos/amberflo/amberflo-onboard-customer-and-meter-usage-workflow/)
+- [Amberflo Provision Customer Billing](https://apis.io/arazzos/amberflo/amberflo-provision-customer-billing-workflow/)
+- [Amberflo Upsert Customer](https://apis.io/arazzos/amberflo/amberflo-upsert-customer-workflow/)
 
-#### Tags
+#### Agentic access (1)
 
- - Metering, Event Ingestion, Usage Tracking
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Amberflo Agentic Access](https://apis.io/agentic-access/amberflo/amberflo-agentic-access/)
 
-- [Documentation](https://docs.amberflo.io/reference/ingest-meters)
-- [APIReference](https://docs.amberflo.io/reference/ingest-meters)
-- [OpenAPI](openapi/amberflo-metering-openapi.yaml)
+#### JSON Schema (14)
 
-### Amberflo Billing API
+The data models the API reads and writes.
 
-The Amberflo Billing API manages customers, pricing plans, invoices, prepaid orders, promotions, commitments, and billing analysis for usage-based monetization workflows.
+- [Address](https://apis.io/schemas/amberflo/billing-address/)
+- [Customer](https://apis.io/schemas/amberflo/billing-customer/)
+- [CustomerRequest](https://apis.io/schemas/amberflo/billing-customer-request/)
+- [Invoice](https://apis.io/schemas/amberflo/billing-invoice/)
+- [PrepaidOrder](https://apis.io/schemas/amberflo/billing-prepaid-order/)
+- [PrepaidOrderRequest](https://apis.io/schemas/amberflo/billing-prepaid-order-request/)
+- [PricingPlanAssignment](https://apis.io/schemas/amberflo/billing-pricing-plan-assignment/)
+- [FilteringRule](https://apis.io/schemas/amberflo/metering-filtering-rule/)
+- [MeterDefinition](https://apis.io/schemas/amberflo/metering-meter-definition/)
+- [MeterDefinitionRequest](https://apis.io/schemas/amberflo/metering-meter-definition-request/)
+- [MeterEvent](https://apis.io/schemas/amberflo/metering-meter-event/)
+- [UsageQueryRequest](https://apis.io/schemas/amberflo/metering-usage-query-request/)
+- [UsageQueryResponse](https://apis.io/schemas/amberflo/metering-usage-query-response/)
+- [UsageRecord](https://apis.io/schemas/amberflo/metering-usage-record/)
 
-**Human URL:** [https://docs.amberflo.io/reference/customers](https://docs.amberflo.io/reference/customers)
+#### JSON Structure (14)
 
-#### Tags
+Data models expressed in JSON Structure.
 
- - Billing, Customers, Invoicing, Pricing Plans
+- [Billing Address Structure](https://apis.io/json-structure/amberflo/billing-address-structure/)
+- [Billing Customer Request Structure](https://apis.io/json-structure/amberflo/billing-customer-request-structure/)
+- [Billing Customer Structure](https://apis.io/json-structure/amberflo/billing-customer-structure/)
+- [Billing Invoice Structure](https://apis.io/json-structure/amberflo/billing-invoice-structure/)
+- [Billing Prepaid Order Request Structure](https://apis.io/json-structure/amberflo/billing-prepaid-order-request-structure/)
+- [Billing Prepaid Order Structure](https://apis.io/json-structure/amberflo/billing-prepaid-order-structure/)
+- [Billing Pricing Plan Assignment Structure](https://apis.io/json-structure/amberflo/billing-pricing-plan-assignment-structure/)
+- [Metering Filtering Rule Structure](https://apis.io/json-structure/amberflo/metering-filtering-rule-structure/)
+- [Metering Meter Definition Request Structure](https://apis.io/json-structure/amberflo/metering-meter-definition-request-structure/)
+- [Metering Meter Definition Structure](https://apis.io/json-structure/amberflo/metering-meter-definition-structure/)
+- [Metering Meter Event Structure](https://apis.io/json-structure/amberflo/metering-meter-event-structure/)
+- [Metering Usage Query Request Structure](https://apis.io/json-structure/amberflo/metering-usage-query-request-structure/)
+- [Metering Usage Query Response Structure](https://apis.io/json-structure/amberflo/metering-usage-query-response-structure/)
+- [Metering Usage Record Structure](https://apis.io/json-structure/amberflo/metering-usage-record-structure/)
 
-#### Properties
+#### JSON-LD (8)
 
-- [Documentation](https://docs.amberflo.io/reference/customers)
-- [APIReference](https://docs.amberflo.io/reference/customers)
-- [OpenAPI](openapi/amberflo-billing-openapi.yaml)
+Linked-data contexts for the provider's vocabulary.
 
-### Amberflo Cost Tracking API
+- [Amberflo Billing Address Context](https://apis.io/jsonld/amberflo/amberflo-billing-address-context/)
+- [Amberflo Billing Customer Context](https://apis.io/jsonld/amberflo/amberflo-billing-customer-context/)
+- [Amberflo Billing Invoice Context](https://apis.io/jsonld/amberflo/amberflo-billing-invoice-context/)
+- [Amberflo Billing Prepaid Context](https://apis.io/jsonld/amberflo/amberflo-billing-prepaid-context/)
+- [Amberflo Billing Pricing Context](https://apis.io/jsonld/amberflo/amberflo-billing-pricing-context/)
+- [Amberflo Metering Filtering Context](https://apis.io/jsonld/amberflo/amberflo-metering-filtering-context/)
+- [Amberflo Metering Meter Context](https://apis.io/jsonld/amberflo/amberflo-metering-meter-context/)
+- [Amberflo Metering Usage Context](https://apis.io/jsonld/amberflo/amberflo-metering-usage-context/)
 
-The Amberflo Cost Tracking API provides AI and cloud cost management capabilities including cloud provider integrations, business unit management, cost allocation rules, budget management, and cost query analytics.
+#### Vocabulary (1)
 
-**Human URL:** [https://docs.amberflo.io/reference/cloud-cost-tracking](https://docs.amberflo.io/reference/cloud-cost-tracking)
+The provider's domain terms, defined.
 
-#### Tags
+- [Amberflo Vocabulary](https://apis.io/vocabularies/amberflo/amberflo-vocabulary/)
 
- - Cost Tracking, FinOps, Cloud Cost Management, Budgets
+#### Examples (14)
 
-#### Properties
+Example requests and responses.
 
-- [Documentation](https://docs.amberflo.io/reference/cloud-cost-tracking)
-- [APIReference](https://docs.amberflo.io/reference/cloud-cost-tracking)
+- [Billing Address Example](https://apis.io/examples/amberflo/billing-address-example/)
+- [Billing Customer Example](https://apis.io/examples/amberflo/billing-customer-example/)
+- [Billing Customer Request Example](https://apis.io/examples/amberflo/billing-customer-request-example/)
+- [Billing Invoice Example](https://apis.io/examples/amberflo/billing-invoice-example/)
+- [Billing Prepaid Order Example](https://apis.io/examples/amberflo/billing-prepaid-order-example/)
+- [Billing Prepaid Order Request Example](https://apis.io/examples/amberflo/billing-prepaid-order-request-example/)
+- [Billing Pricing Plan Assignment Example](https://apis.io/examples/amberflo/billing-pricing-plan-assignment-example/)
+- [Metering Filtering Rule Example](https://apis.io/examples/amberflo/metering-filtering-rule-example/)
+- [Metering Meter Definition Example](https://apis.io/examples/amberflo/metering-meter-definition-example/)
+- [Metering Meter Definition Request Example](https://apis.io/examples/amberflo/metering-meter-definition-request-example/)
+- [Metering Meter Event Example](https://apis.io/examples/amberflo/metering-meter-event-example/)
+- [Metering Usage Query Request Example](https://apis.io/examples/amberflo/metering-usage-query-request-example/)
+- [Metering Usage Query Response Example](https://apis.io/examples/amberflo/metering-usage-query-response-example/)
+- [Metering Usage Record Example](https://apis.io/examples/amberflo/metering-usage-record-example/)
 
-### Amberflo AI Gateway API
+#### Collections (16)
 
-The Amberflo AI Gateway provides a unified API for routing requests to 1,500+ LLM models with intelligent model routing, cost optimization, built-in fallbacks, and MCP server traffic monitoring.
+Postman and Open Collection request collections.
 
-**Human URL:** [https://docs.amberflo.io/docs/ai-gateway](https://docs.amberflo.io/docs/ai-gateway)
+- [Amberflo Billing Customers API](https://apis.io/collections/amberflo/open-amberflo-customers-api/)
+- [Amberflo Billing Customers Event Ingestion API](https://apis.io/collections/amberflo/open-amberflo-event-ingestion-api/)
+- [Amberflo Billing Customers Filtering Rules API](https://apis.io/collections/amberflo/open-amberflo-filtering-rules-api/)
+- [Amberflo Billing Customers Invoices API](https://apis.io/collections/amberflo/open-amberflo-invoices-api/)
+- [Amberflo Billing Customers Meter Definitions API](https://apis.io/collections/amberflo/open-amberflo-meter-definitions-api/)
+- [Amberflo Billing Customers Prepaid Orders API](https://apis.io/collections/amberflo/open-amberflo-prepaid-orders-api/)
+- [Amberflo Billing Customers Pricing Plans API](https://apis.io/collections/amberflo/open-amberflo-pricing-plans-api/)
+- [Amberflo Billing Customers Usage Queries API](https://apis.io/collections/amberflo/open-amberflo-usage-queries-api/)
+- [Amberflo Billing Customers API](https://apis.io/collections/amberflo/postman-amberflo-customers-api/)
+- [Amberflo Billing Customers Event Ingestion API](https://apis.io/collections/amberflo/postman-amberflo-event-ingestion-api/)
+- [Amberflo Billing Customers Filtering Rules API](https://apis.io/collections/amberflo/postman-amberflo-filtering-rules-api/)
+- [Amberflo Billing Customers Invoices API](https://apis.io/collections/amberflo/postman-amberflo-invoices-api/)
+- [Amberflo Billing Customers Meter Definitions API](https://apis.io/collections/amberflo/postman-amberflo-meter-definitions-api/)
+- [Amberflo Billing Customers Prepaid Orders API](https://apis.io/collections/amberflo/postman-amberflo-prepaid-orders-api/)
+- [Amberflo Billing Customers Pricing Plans API](https://apis.io/collections/amberflo/postman-amberflo-pricing-plans-api/)
+- [Amberflo Billing Customers Usage Queries API](https://apis.io/collections/amberflo/postman-amberflo-usage-queries-api/)
 
-#### Tags
+#### Governance rules (2)
 
- - AI Gateway, LLM, Model Routing, AI Cost Management
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [Amberflo — jsonschema rules](https://apis.io/rules/amberflo/amberflo-jsonschema-spectral-rules/)
+- [Amberflo API Rules](https://apis.io/rules/amberflo/amberflo-spectral-rules/)
 
-- [Documentation](https://docs.amberflo.io/docs/ai-gateway)
+#### Security (3)
 
-## Common Properties
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amberflo Authentication](https://apis.io/security/amberflo/amberflo-authentication/)
+- [Amberflo Domain Security](https://apis.io/security/amberflo/amberflo-domain-security/)
+- [Amberflo Trust Center](https://apis.io/security/amberflo/amberflo-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amberflo Plans Pricing](https://apis.io/plans/amberflo/amberflo-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amberflo Rate Limits](https://apis.io/rate-limits/amberflo/amberflo-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amberflo Finops](https://apis.io/finops/amberflo/amberflo-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.amberflo.io/)
 - [Documentation](https://docs.amberflo.io/)
-- [DeveloperPortal](https://docs.amberflo.io/)
-- [GettingStarted](https://docs.amberflo.io/docs/quick-start)
-- [APIReference](https://docs.amberflo.io/reference/)
-- [SignUp](https://ui.amberflo.io/cGxnLXNpZ251cA==)
-- [Login](https://ui.amberflo.io/login)
+- [Getting started](https://docs.amberflo.io/docs/quick-start)
+- [API reference](https://docs.amberflo.io/reference/)
 - [Pricing](https://www.amberflo.io/pricing)
 - [Blog](https://www.amberflo.io/resources/blog)
-- [TermsOfService](https://www.amberflo.io/legal/terms-and-condition)
-- [PrivacyPolicy](https://www.amberflo.io/legal/privacy-policy)
-- [TrustCenter](https://trust.amberflo.io/)
-- [GitHubOrganization](https://github.com/amberflo)
-- [SDK - Python SDK](https://pypi.org/project/amberflo-metering-python/)
-- [SDK - TypeScript SDK](https://github.com/amberflo/metering-typescript)
-- [SDK - Go SDK](https://github.com/amberflo/metering-go)
+- [Compliance](https://trust.amberflo.io/)
+- [Trust centre](https://trust.amberflo.io/)
+- [Terms of service](https://www.amberflo.io/legal/terms-and-condition)
+- [Privacy policy](https://www.amberflo.io/legal/privacy-policy)
+- [GitHub](https://github.com/amberflo)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Real-Time Event Ingestion | Ingest millions to billions of high-cardinality usage events in real time with idempotency, deduplication, and automatic aggregation. |
-| AI Cost Management | Unified LLM access and control across 1,500+ models with per-unit costs, rollups, budgets, Cost Guards, and margin analysis per customer. |
-| AI Gateway and Model Routing | Single API for multiple LLM providers with intelligent cost optimization, automatic retries, fallbacks, and MCP server traffic monitoring. |
-| Usage-Based Billing | Flexible billing models including usage-based, token-based, seat-based, fixed fee, and outcome-based pricing with multi-currency support and automated invoicing. |
-| Embeddable Billing Dashboards | Customer-facing billing portals and dashboards via a React.js UI Kit with custom domain support and SSO integration. |
-| Revenue Operations | Revenue recognition automation, RevRec ledger tracking, tax management, and integrations with Stripe and NetSuite. |
-| Budget Management | Spending limits, threshold alerts, Cost Guards, and automated notifications for cloud and AI cost governance. |
-| Chargeback and Showback | Chargeback rates, quotes, and invoices for internal cost allocation and showback reporting across business units. |
+**Kin Score 46.5** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 25.2 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 58.3 |
+| Access clarity | 61.8 |
 
-| Name | Description |
-|------|-------------|
-| API Monetization | Meter API usage and automatically bill customers based on calls, tokens, or custom events with flexible pricing models. |
-| AI Cost Governance | Track and govern LLM spending across teams and customers with budgets, alerts, and per-customer cost attribution. |
-| SaaS Billing Automation | Automate end-to-end billing for SaaS products with usage-based pricing plans, invoicing, and customer portals. |
-| Cloud FinOps | Allocate and showback cloud costs to business units and customers using automated cost allocation rules and chargeback workflows. |
-| Customer Cost Transparency | Provide customers with real-time visibility into their usage and costs via embedded dashboards and billing portals. |
-| Usage Analytics and Reporting | Query and analyze usage data in real time with batch and sparse query modes, raw event queries, and revenue calculation analytics. |
+**Agent readiness 29.2** — agent-ready
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
 
-| Name | Description |
-|------|-------------|
-| Stripe | Native integration with Stripe for payment processing and revenue operations workflows. |
-| NetSuite | Integration with NetSuite for revenue recognition and financial reporting. |
-| Kong | Official Kong plugin for metering API requests handled by Kong instances and monetizing APIs. |
-| AWS SaaS Builder Toolkit | Integration with AWS SaaS Builder Toolkit for SaaS billing and metering best practices on AWS. |
-| LiteLLM | Logging callback for LiteLLM to meter LLM usage and monitor AI costs. |
-| AWS Lambda | Examples and utilities for metering AWS Lambda function invocations. |
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amberflo/](https://apis.io/providers/amberflo/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Amberflo Metering API](openapi/amberflo-metering-openapi.yaml)
-- [Amberflo Billing API](openapi/amberflo-billing-openapi.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amberflo: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [metering-api-meter-event-schema.json](json-schema/metering-api-meter-event-schema.json)
-- [metering-api-meter-definition-schema.json](json-schema/metering-api-meter-definition-schema.json)
-- [metering-api-usage-query-request-schema.json](json-schema/metering-api-usage-query-request-schema.json)
-- [metering-api-usage-query-response-schema.json](json-schema/metering-api-usage-query-response-schema.json)
-- [billing-api-customer-schema.json](json-schema/billing-api-customer-schema.json)
-- [billing-api-invoice-schema.json](json-schema/billing-api-invoice-schema.json)
-- [billing-api-prepaid-order-schema.json](json-schema/billing-api-prepaid-order-schema.json)
-- [and 7 more...](json-schema/)
-
-### JSON Structure
-
-- [14 JSON Structure files](json-structure/)
-
-### JSON-LD
-
-- [amberflo-metering-api-context.jsonld](json-ld/amberflo-metering-api-context.jsonld)
-- [amberflo-billing-api-context.jsonld](json-ld/amberflo-billing-api-context.jsonld)
-- [and 6 more...](json-ld/)
-
-### Examples
-
-- [14 example JSON files](examples/)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Amberflo Metering API](capabilities/shared/metering-api.yaml) — 4 operations for event ingestion and usage queries
-- [Amberflo Billing API](capabilities/shared/billing-api.yaml) — 4 operations for customer and billing management
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Usage-Based Monetization](capabilities/usage-based-monetization.yaml) | Metering API, Billing API | 8 | Product Manager, Finance Team, API Developer |
-
-## Vocabulary
-
-- [Amberflo Vocabulary](vocabulary/amberflo-vocabulary.yaml) — Unified taxonomy mapping 9 resources, 9 actions, 1 workflow, and 3 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Amberflo Spectral Rules](rules/amberflo-spectral-rules.yml) — 25 rules across 10 categories enforcing Amberflo API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amberflo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
