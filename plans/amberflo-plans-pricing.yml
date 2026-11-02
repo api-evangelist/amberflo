@@ -1,0 +1,254 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Amberflo
+providerId: amberflo
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - Usage-Based Billing
+  - Metering
+  - FinOps
+  - AI Cost Management
+  - Billing
+  - Monetization
+description: Amberflo prices its usage-based billing platform on a tiered subscription that scales with
+  monthly billing volume processed and metered events ingested. Free 30-day trial; paid tiers from $99/mo
+  Startups to $599+/mo Growth, with $1M+ billing volume requiring custom Enterprise pricing. Overage
+  applies to billing volume and meter events beyond the included pool.
+sources:
+  - https://www.amberflo.io/pricing
+plans:
+  - id: amberflo-trial
+    name: Free Trial
+    type: freemium
+    description: 30-day evaluation across the platform.
+    entries:
+      - label: Trial duration
+        name: trial_days
+        type: quota
+        metric: day
+        limit: 30
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Full platform access
+      - name: Time-limited evaluation
+  - id: amberflo-startups
+    name: Startups
+    type: subscription
+    description: Entry paid plan for early-stage usage-based billing customers.
+    entries:
+      - label: Monthly subscription
+        name: startups_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '99.00'
+        userMultiplied: false
+      - label: Billing volume included
+        name: startups_volume
+        type: quota
+        metric: usd
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Meter events included
+        name: startups_events
+        type: quota
+        metric: event
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Up to $10,000 monthly billing volume
+      - name: Up to 10,000 meter events / month
+      - name: Standard support
+  - id: amberflo-growth
+    name: Growth
+    type: tiered
+    description: Mid-market plan with tiered request volumes and meter-event pools. Monthly fee scales
+      with included request count.
+    entries:
+      - label: Growth base (250K requests)
+        name: growth_base
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '599.00'
+        userMultiplied: false
+      - label: Growth 500K requests
+        name: growth_500k
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '699.00'
+        userMultiplied: false
+      - label: Growth 1M requests
+        name: growth_1m
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '999.00'
+        userMultiplied: false
+      - label: Growth custom higher tier
+        name: growth_custom
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '1499.00'
+        userMultiplied: false
+      - label: Billing volume included
+        name: growth_volume
+        type: quota
+        metric: usd
+        limit: 100000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Meter events included
+        name: growth_events
+        type: quota
+        metric: event
+        limit: 500000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Additional billing volume %
+        name: growth_overage_volume
+        type: metered
+        metric: usd_billed
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 0.54%
+        userMultiplied: false
+      - label: Additional meter events
+        name: growth_overage_events
+        type: metered
+        metric: event
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 10000
+        price: '5.00'
+        userMultiplied: false
+    elements:
+      - name: Up to $100,000 monthly billing volume
+      - name: Up to 500,000 meter events / month
+      - name: 0.54% on billing-volume overage
+      - name: $5 per additional 10,000 meter events
+  - id: amberflo-enterprise
+    name: Enterprise
+    type: enterprise
+    description: For $1M+ monthly billing volume; unlimited workflows, SSO, RBAC, bulk discounts. Custom
+      pricing.
+    entries:
+      - label: Custom contract
+        name: enterprise_contract
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: $1M+ billing volume
+      - name: Unlimited meter events
+      - name: Bulk discounts
+      - name: Unlimited workflows
+      - name: SSO and role-based access
+      - name: Premium support
+maintainers:
+  - name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  - name: Amberflo
+    email: support@amberflo.io
+    url: https://www.amberflo.io
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  - tiered
+  units:
+  - message
+  - money
+  - negotiated
+  - period
+  plans:
+  - name: Free Trial
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - period
+    periods:
+    - per-use
+  - name: Startups
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - message
+    - money
+    - period
+    periods:
+    - month
+  - name: Growth
+    access: other
+    model: tiered
+    model_how: stated
+    units:
+    - message
+    - money
+    - other
+    - period
+    periods:
+    - month
+    - per-use
+  - name: Enterprise
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
